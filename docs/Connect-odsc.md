@@ -29,7 +29,7 @@ The **Connect-odsc** function authenticates and creates a session to the Microso
 
 ### Example 1: Connect using a client secret
 ```powershell
-PS C:\> Connect-odsc -TenantId "00000000-0000-0000-0000-000000000000" -ClientId "00000000-0000-0000-0000-000000000000" 000-0000-000000000000" -ClientSecret (ConvertTo-SecureString -String "000000000000000000000000000" -AsPlainText -Force)
+PS C:\> Connect-odsc -TenantId "00000000-0000-0000-0000-000000000000" -ClientId "00000000-0000-0000-0000-000000000000" -ClientSecret (ConvertTo-SecureString -String "000000000000000000000000000" -AsPlainText -Force)
 ```
 
 This command connects to the Microsoft Graph API using a client secret configured in the Azure AD application.
