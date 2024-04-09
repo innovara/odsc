@@ -56,6 +56,6 @@ function Invoke-ODSApiRequest {
 	}
 
 	end {
-		
+
 	}
 }
