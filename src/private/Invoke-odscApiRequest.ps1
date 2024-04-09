@@ -1,4 +1,4 @@
-function Invoke-ODSApiRequest {
+function Invoke-odscApiRequest {
 	[CmdletBinding()]
 	param(
 		[Parameter(Mandatory = $true)]
@@ -21,7 +21,7 @@ function Invoke-ODSApiRequest {
 		(!$Token.AccessToken) -or
 		($Token.ExpiresOn -le (Get-Date))) {
 			Write-Verbose "Token: ${Token}"
-			Write-Error "Please run Connect-ODS first." -ErrorAction Stop
+			Write-Error "Please run Connect-odsc first." -ErrorAction Stop
 		}
 	}
 

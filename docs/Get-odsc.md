@@ -1,11 +1,11 @@
 ---
-external help file: OneDriveShortcuts-help.xml
-Module Name: OneDriveShortcuts
-online version: https://github.com/derpenstiltskin/onedriveshortcuts/blob/main/docs/Get-OneDriveShortcut.md
+external help file: odsc-help.xml
+Module Name: odsc
+online version: https://github.com/innovara/odsc/blob/main/docs/Get-odsc.md
 schema: 2.0.0
 ---
 
-# Get-OneDriveShortcut
+# Get-odsc
 
 ## SYNOPSIS
 Get metadata for a OneDrive shortcut to SharePoint.
@@ -14,22 +14,22 @@ Get metadata for a OneDrive shortcut to SharePoint.
 
 ### UserPrincipalName (Default)
 ```
-Get-OneDriveShortcut -ShortcutName <String> -UserPrincipalName <String> [<CommonParameters>]
+Get-odsc -ShortcutName <String> -UserPrincipalName <String> [<CommonParameters>]
 ```
 
 ### UserObjectId
 ```
-Get-OneDriveShortcut -ShortcutName <String> -UserObjectId <String> [<CommonParameters>]
+Get-odsc -ShortcutName <String> -UserObjectId <String> [<CommonParameters>]
 ```
 
 ## DESCRIPTION
-The **Get-OneDriveShortcut** function gets the metadata for a shortcut in a user's OneDrive that points to a SharePoint/Teams document library or sub-folder.
+The **Get-odsc** function gets the metadata for a shortcut in a user's OneDrive that points to a SharePoint/Teams document library or sub-folder.
 
 ## EXAMPLES
 
 ### Example 1: Get a OneDrive shortcut
 ```powershell
-PS C:\> Get-Shortcut -ShortcutName "Working Folder" -UserPrincipalName "user@contoso.com"
+PS C:\> Get-odsc -ShortcutName "Working Folder" -UserPrincipalName "user@contoso.com"
 ```
 
 This command gets the shortcut called "Working Folder" for the user "user@contoso.com".

@@ -1,11 +1,11 @@
 ---
-external help file: OneDriveShortcuts-help.xml
-Module Name: OneDriveShortcuts
-online version: https://github.com/derpenstiltskin/onedriveshortcuts/blob/main/docs/Disconnect-ODS.md
+external help file: odsc-help.xml
+Module Name: odsc
+online version: https://github.com/innovara/odsc/blob/main/docs/Disconnect-odsc.md
 schema: 2.0.0
 ---
 
-# Disconnect-ODS
+# Disconnect-odsc
 
 ## SYNOPSIS
 Disconnects the session for the Microsoft Graph API.
@@ -13,17 +13,17 @@ Disconnects the session for the Microsoft Graph API.
 ## SYNTAX
 
 ```
-Disconnect-ODS [<CommonParameters>]
+Disconnect-odsc [<CommonParameters>]
 ```
 
 ## DESCRIPTION
-The **Disconnect-ODS** function clears the session for the Microsoft Graph API.
+The **Disconnect-odsc** function clears the session for the Microsoft Graph API.
 
 ## EXAMPLES
 
 ### Example 1: Disconnect
 ```powershell
-PS C:\> Disconnect-ODS
+PS C:\> Disconnect-odsc
 ```
 
 This command clears the saved session.

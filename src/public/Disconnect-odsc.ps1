@@ -1,4 +1,4 @@
-function Disconnect-ODS {
+function Disconnect-odsc {
 	[CmdletBinding()]
 	param()
 

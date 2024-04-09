@@ -1,4 +1,4 @@
-function New-OneDriveShortcut {
+function New-odsc {
 	[CmdletBinding(DefaultParameterSetName = 'UserPrincipalName', SupportsShouldProcess)]
 	param(
 	[Parameter(Mandatory = $true, ParameterSetName = 'UserPrincipalName')]
@@ -45,7 +45,7 @@ function New-OneDriveShortcut {
 			Method = [Microsoft.PowerShell.Commands.WebRequestMethod]::Get
 		}
 
-		$SiteResponse = Invoke-ODSApiRequest @SiteRequest
+		$SiteResponse = Invoke-odscApiRequest @SiteRequest
 
 		if (!($SiteResponse)) {
 			Write-Verbose "Request: ${SiteRequest}"
@@ -63,7 +63,7 @@ function New-OneDriveShortcut {
 			Method = [Microsoft.PowerShell.Commands.WebRequestMethod]::Get
 		}
 
-		$DocumentLibraryResponse = Invoke-ODSApiRequest @DocumentLibraryRequest
+		$DocumentLibraryResponse = Invoke-odscApiRequest @DocumentLibraryRequest
 
 		if (!($DocumentLibraryResponse) -or ($DocumentLibraryResponse.value.Count -eq 0)) {
 			Write-Verbose "Request: ${DocumentLibraryRequest}"
@@ -86,7 +86,7 @@ function New-OneDriveShortcut {
 			Method = [Microsoft.PowerShell.Commands.WebRequestMethod]::Get
 			}
 			
-			$ItemUniqueIdResponse = Invoke-ODSApiRequest @ItemUniqueIdRequest
+			$ItemUniqueIdResponse = Invoke-odscApiRequest @ItemUniqueIdRequest
 
 			if (!($ItemUniqueIdResponse) -or ($ItemUniqueIdResponse.value.Count -eq 0)) {
 			Write-Verbose "Request: ${ItemUniqueIdRequest}"
@@ -105,7 +105,7 @@ function New-OneDriveShortcut {
 					DoNotUsePrefer = $true
 				}
 		
-				$ItemUniqueNameResponse = Invoke-ODSApiRequest @ItemUniqueNameRequest
+				$ItemUniqueNameResponse = Invoke-odscApiRequest @ItemUniqueNameRequest
 
 				if (!($ItemUniqueNameResponse)) {
 					Write-Verbose "Request: ${ItemUniqueNameRequest}"
@@ -139,7 +139,7 @@ function New-OneDriveShortcut {
 		}
 
 		if ($PSCmdlet.ShouldProcess("${User}'s OneDrive", "Creating shortcut '$($ShortcutName)'")) {
-			$ShortcutResponse = Invoke-ODSApiRequest @ShortcutRequest
+			$ShortcutResponse = Invoke-odscApiRequest @ShortcutRequest
 
 			if (!($ShortcutResponse)) {
 				Write-Verbose "Request: ${ShortcutRequest}"
@@ -157,7 +157,7 @@ function New-OneDriveShortcut {
 				} | ConvertTo-Json
 			}
 
-			$RenameResponse = Invoke-ODSApiRequest @RenameRequest
+			$RenameResponse = Invoke-odscApiRequest @RenameRequest
 
 			return $RenameResponse
 		} else {

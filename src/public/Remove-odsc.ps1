@@ -1,4 +1,4 @@
-function Remove-OneDriveShortcut {
+function Remove-odsc {
     [CmdletBinding(DefaultParameterSetName = 'UserPrincipalName', SupportsShouldProcess)]
     param(
         [Parameter(Mandatory = $true, ParameterSetName = 'UserPrincipalName')]
@@ -34,7 +34,7 @@ function Remove-OneDriveShortcut {
         }
 
         if ($PSCmdlet.ShouldProcess("${User}'s OneDrive", "Removing shortcut '$($ShortcutName)'")) {
-            $ShortcutResponse = Invoke-ODSApiRequest @ShortcutRequest
+            $ShortcutResponse = Invoke-odscApiRequest @ShortcutRequest
 
 #            if (!($ShortcutResponse)) {
 #                Write-Verbose "Request: ${ShortcutRequest}"

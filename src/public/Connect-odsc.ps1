@@ -1,4 +1,4 @@
-function Connect-ODS {
+function Connect-odsc {
 	[CmdletBinding(DefaultParameterSetName = 'ClientSecret')]
 	param(
 		[Parameter(Mandatory = $true, ParameterSetName = 'ClientSecret')]

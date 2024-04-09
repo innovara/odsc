@@ -1,4 +1,4 @@
-function Get-OneDriveShortcut {
+function Get-odsc {
 	[CmdletBinding(DefaultParameterSetName = 'UserPrincipalName')]
 	param(
 		[Parameter(Mandatory = $true, ParameterSetName = 'UserPrincipalName')]
@@ -33,7 +33,7 @@ function Get-OneDriveShortcut {
 			Method = [Microsoft.PowerShell.Commands.WebRequestMethod]::Get
 		}
 
-		$ShortcutResponse = Invoke-ODSApiRequest @ShortcutRequest
+		$ShortcutResponse = Invoke-odscApiRequest @ShortcutRequest
 
 		if (!($ShortcutResponse)) {
 			Write-Verbose "Request: ${ShortcutRequest}"

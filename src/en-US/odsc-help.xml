@@ -2,7 +2,7 @@
 <helpItems schema="maml" xmlns="http://msh">
   <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
     <command:details>
-      <command:name>Connect-ODS</command:name>
+      <command:name>Connect-odsc</command:name>
       <command:verb>Connect</command:verb>
       <command:noun>ODS</command:noun>
       <maml:description>
@@ -10,11 +10,11 @@
       </maml:description>
     </command:details>
     <maml:description>
-      <maml:para>The Connect-ODS function authenticates and creates a session to the Microsoft Graph API.</maml:para>
+      <maml:para>The Connect-odsc function authenticates and creates a session to the Microsoft Graph API.</maml:para>
     </maml:description>
     <command:syntax>
       <command:syntaxItem>
-        <maml:name>Connect-ODS</maml:name>
+        <maml:name>Connect-odsc</maml:name>
         <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
           <maml:name>ClientCertificate</maml:name>
           <maml:description>
@@ -53,7 +53,7 @@
         </command:parameter>
       </command:syntaxItem>
       <command:syntaxItem>
-        <maml:name>Connect-ODS</maml:name>
+        <maml:name>Connect-odsc</maml:name>
         <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
           <maml:name>ClientId</maml:name>
           <maml:description>
@@ -170,14 +170,14 @@
     <command:examples>
       <command:example>
         <maml:title>----------- Example 1: Connect using a client secret -----------</maml:title>
-        <dev:code>PS C:\&gt; Connect-ODS -TenantId "00000000-0000-0000-0000-000000000000" -ClientId "00000000-0000-0000-0000-000000000000" 000-0000-000000000000" -ClientSecret (ConvertTo-SecureString -String "000000000000000000000000000" -Force)</dev:code>
+        <dev:code>PS C:\&gt; Connect-odsc -TenantId "00000000-0000-0000-0000-000000000000" -ClientId "00000000-0000-0000-0000-000000000000" 000-0000-000000000000" -ClientSecret (ConvertTo-SecureString -String "000000000000000000000000000" -Force)</dev:code>
         <dev:remarks>
           <maml:para>This command connects to the Microsoft Graph API using a client secret configured in the Azure AD application.</maml:para>
         </dev:remarks>
       </command:example>
       <command:example>
         <maml:title>-------- Example 2: Connect using a client certificate --------</maml:title>
-        <dev:code>PS C:\&gt; Connect-ODS -TenantId "00000000-0000-0000-0000-000000000000" -ClientId "00000000-0000-0000-0000-000000000000" -ClientCertificate (Get-Item -Path 'Cert:\CurrentUser\My\0000000000000000000000000000000000000000')</dev:code>
+        <dev:code>PS C:\&gt; Connect-odsc -TenantId "00000000-0000-0000-0000-000000000000" -ClientId "00000000-0000-0000-0000-000000000000" -ClientCertificate (Get-Item -Path 'Cert:\CurrentUser\My\0000000000000000000000000000000000000000')</dev:code>
         <dev:remarks>
           <maml:para>This command connects to the Microsoft Graph API using a client certificate configured in the Azure AD application.</maml:para>
         </dev:remarks>
@@ -186,13 +186,13 @@
     <command:relatedLinks>
       <maml:navigationLink>
         <maml:linkText>Online Version:</maml:linkText>
-        <maml:uri>https://github.com/derpenstiltskin/onedriveshortcuts/blob/main/docs/Connect-ODS.md</maml:uri>
+        <maml:uri>https://github.com/innovara/odsc/blob/main/docs/Connect-odsc.md</maml:uri>
       </maml:navigationLink>
     </command:relatedLinks>
   </command:command>
   <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
     <command:details>
-      <command:name>Disconnect-ODS</command:name>
+      <command:name>Disconnect-odsc</command:name>
       <command:verb>Disconnect</command:verb>
       <command:noun>ODS</command:noun>
       <maml:description>
@@ -200,11 +200,11 @@
       </maml:description>
     </command:details>
     <maml:description>
-      <maml:para>The Disconnect-ODS function clears the session for the Microsoft Graph API.</maml:para>
+      <maml:para>The Disconnect-odsc function clears the session for the Microsoft Graph API.</maml:para>
     </maml:description>
     <command:syntax>
       <command:syntaxItem>
-        <maml:name>Disconnect-ODS</maml:name>
+        <maml:name>Disconnect-odsc</maml:name>
       </command:syntaxItem>
     </command:syntax>
     <command:parameters />
@@ -236,7 +236,7 @@
     <command:examples>
       <command:example>
         <maml:title>-------------------- Example 1: Disconnect --------------------</maml:title>
-        <dev:code>PS C:\&gt; Disconnect-ODS</dev:code>
+        <dev:code>PS C:\&gt; Disconnect-odsc</dev:code>
         <dev:remarks>
           <maml:para>This command clears the saved session.</maml:para>
         </dev:remarks>
@@ -245,25 +245,25 @@
     <command:relatedLinks>
       <maml:navigationLink>
         <maml:linkText>Online Version:</maml:linkText>
-        <maml:uri>https://github.com/derpenstiltskin/onedriveshortcuts/blob/main/docs/Disconnect-ODS.md</maml:uri>
+        <maml:uri>https://github.com/innovara/odsc/blob/main/docs/Disconnect-odsc.md</maml:uri>
       </maml:navigationLink>
     </command:relatedLinks>
   </command:command>
   <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
     <command:details>
-      <command:name>Get-OneDriveShortcut</command:name>
+      <command:name>Get-odsc</command:name>
       <command:verb>Get</command:verb>
-      <command:noun>OneDriveShortcut</command:noun>
+      <command:noun>odsc</command:noun>
       <maml:description>
         <maml:para>Get metadata for a OneDrive shortcut to SharePoint.</maml:para>
       </maml:description>
     </command:details>
     <maml:description>
-      <maml:para>The Get-OneDriveShortcut function gets the metadata for a shortcut in a user's OneDrive that points to a SharePoint/Teams document library or sub-folder.</maml:para>
+      <maml:para>The Get-odsc function gets the metadata for a shortcut in a user's OneDrive that points to a SharePoint/Teams document library or sub-folder.</maml:para>
     </maml:description>
     <command:syntax>
       <command:syntaxItem>
-        <maml:name>Get-OneDriveShortcut</maml:name>
+        <maml:name>Get-odsc</maml:name>
         <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
           <maml:name>ShortcutName</maml:name>
           <maml:description>
@@ -290,7 +290,7 @@
         </command:parameter>
       </command:syntaxItem>
       <command:syntaxItem>
-        <maml:name>Get-OneDriveShortcut</maml:name>
+        <maml:name>Get-odsc</maml:name>
         <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
           <maml:name>ShortcutName</maml:name>
           <maml:description>
@@ -392,25 +392,25 @@
     <command:relatedLinks>
       <maml:navigationLink>
         <maml:linkText>Online Version:</maml:linkText>
-        <maml:uri>https://github.com/derpenstiltskin/onedriveshortcuts/blob/main/docs/Get-OneDriveShortcut.md</maml:uri>
+        <maml:uri>https://github.com/innovara/odsc/blob/main/docs/Get-odsc.md</maml:uri>
       </maml:navigationLink>
     </command:relatedLinks>
   </command:command>
   <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
     <command:details>
-      <command:name>New-OneDriveShortcut</command:name>
+      <command:name>New-odsc</command:name>
       <command:verb>New</command:verb>
-      <command:noun>OneDriveShortcut</command:noun>
+      <command:noun>odsc</command:noun>
       <maml:description>
         <maml:para>Create OneDrive shortcut to SharePoint.</maml:para>
       </maml:description>
     </command:details>
     <maml:description>
-      <maml:para>The New-OneDriveShortcut function creates a shortcut in a user's OneDrive that points to a SharePoint/Teams document library or sub-folder.</maml:para>
+      <maml:para>The New-odsc function creates a shortcut in a user's OneDrive that points to a SharePoint/Teams document library or sub-folder.</maml:para>
     </maml:description>
     <command:syntax>
       <command:syntaxItem>
-        <maml:name>New-OneDriveShortcut</maml:name>
+        <maml:name>New-odsc</maml:name>
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="cf">
           <maml:name>Confirm</maml:name>
           <maml:description>
@@ -495,7 +495,7 @@
         </command:parameter>
       </command:syntaxItem>
       <command:syntaxItem>
-        <maml:name>New-OneDriveShortcut</maml:name>
+        <maml:name>New-odsc</maml:name>
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="cf">
           <maml:name>Confirm</maml:name>
           <maml:description>
@@ -706,28 +706,28 @@
     <command:examples>
       <command:example>
         <maml:title>Example 1: Create a shortcut to the root of a document library</maml:title>
-        <dev:code>PS C:\&gt; New-OneDriveShortcut -SiteUrl "https://contoso.sharepoint.com/site/WorkingSite" -DocumentLibrary "Working Document Library" -UserPrincipalName "user@contoso.com"</dev:code>
+        <dev:code>PS C:\&gt; New-odsc -SiteUrl "https://contoso.sharepoint.com/site/WorkingSite" -DocumentLibrary "Working Document Library" -UserPrincipalName "user@contoso.com"</dev:code>
         <dev:remarks>
           <maml:para>This command creates a shortcut called "Working Document Library" for the user "user@contoso.com" that points to the Document Library called "Working Document Library" on the SharePoint site "https://contoso.sharepoint.com/site/WorkingSite".</maml:para>
         </dev:remarks>
       </command:example>
       <command:example>
         <maml:title>Example 2: Create a shortcut to the root of a document library with a custom name</maml:title>
-        <dev:code>PS C:\&gt; New-OneDriveShortcut -SiteUrl "https://contoso.sharepoint.com/site/WorkingSite" -DocumentLibrary "Working Document Library" -UserPrincipalName "user@contoso.com" -ShortcutName "Working DL"</dev:code>
+        <dev:code>PS C:\&gt; New-odsc -SiteUrl "https://contoso.sharepoint.com/site/WorkingSite" -DocumentLibrary "Working Document Library" -UserPrincipalName "user@contoso.com" -ShortcutName "Working DL"</dev:code>
         <dev:remarks>
           <maml:para>This command creates a shortcut called "Working DL" for the user "user@contoso.com" that points to the Document Library called "Working Document Library" on the SharePoint site "https://contoso.sharepoint.com/site/WorkingSite".</maml:para>
         </dev:remarks>
       </command:example>
       <command:example>
         <maml:title>Example 3: Create a shortcut to a sub-folder of a document library</maml:title>
-        <dev:code>PS C:\&gt; New-OneDriveShortcut -SiteUrl "https://contoso.sharepoint.com/site/WorkingSite" -DocumentLibrary "Working Document Library" -FolderPath "Working Folder" -UserPrincipalName "user@contoso.com"</dev:code>
+        <dev:code>PS C:\&gt; New-odsc -SiteUrl "https://contoso.sharepoint.com/site/WorkingSite" -DocumentLibrary "Working Document Library" -FolderPath "Working Folder" -UserPrincipalName "user@contoso.com"</dev:code>
         <dev:remarks>
           <maml:para>This command creates a shortcut called "Working Folder" for the user "user@contoso.com" that points to the sub-folder "Working Folder" of the Document Library called "Working Document Library" on the SharePoint site "https://contoso.sharepoint.com/site/WorkingSite".</maml:para>
         </dev:remarks>
       </command:example>
       <command:example>
         <maml:title>Example 4: Create a shortcut to a sub-folder of a document library with a custom name</maml:title>
-        <dev:code>PS C:\&gt; New-OneDriveShortcut -SiteUrl "https://contoso.sharepoint.com/site/WorkingSite" -DocumentLibrary "Working Document Library" -FolderPath "Working Folder" -UserPrincipalName "user@contoso.com" -ShortcutName "Working"</dev:code>
+        <dev:code>PS C:\&gt; New-odsc -SiteUrl "https://contoso.sharepoint.com/site/WorkingSite" -DocumentLibrary "Working Document Library" -FolderPath "Working Folder" -UserPrincipalName "user@contoso.com" -ShortcutName "Working"</dev:code>
         <dev:remarks>
           <maml:para>This command creates a shortcut called "Working" for the user "user@contoso.com" that points to the sub-folder "Working Folder" of the Document Library called "Working Document Library" on the SharePoint site "https://contoso.sharepoint.com/site/WorkingSite".</maml:para>
         </dev:remarks>
@@ -736,25 +736,25 @@
     <command:relatedLinks>
       <maml:navigationLink>
         <maml:linkText>Online Version:</maml:linkText>
-        <maml:uri>https://github.com/derpenstiltskin/onedriveshortcuts/blob/main/docs/New-OneDriveShortcut.md</maml:uri>
+        <maml:uri>https://github.com/innovara/odsc/blob/main/docs/New-odsc.md</maml:uri>
       </maml:navigationLink>
     </command:relatedLinks>
   </command:command>
   <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
     <command:details>
-      <command:name>Remove-OneDriveShortcut</command:name>
+      <command:name>Remove-odsc</command:name>
       <command:verb>Remove</command:verb>
-      <command:noun>OneDriveShortcut</command:noun>
+      <command:noun>odsc</command:noun>
       <maml:description>
         <maml:para>Removes OneDrive shortcut to SharePoint.</maml:para>
       </maml:description>
     </command:details>
     <maml:description>
-      <maml:para>The Remove-OneDriveShortcut function removes a shortcut in a user's OneDrive that points to a SharePoint/Teams document library or sub-folder.</maml:para>
+      <maml:para>The Remove-odsc function removes a shortcut in a user's OneDrive that points to a SharePoint/Teams document library or sub-folder.</maml:para>
     </maml:description>
     <command:syntax>
       <command:syntaxItem>
-        <maml:name>Remove-OneDriveShortcut</maml:name>
+        <maml:name>Remove-odsc</maml:name>
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="cf">
           <maml:name>Confirm</maml:name>
           <maml:description>
@@ -803,7 +803,7 @@
         </command:parameter>
       </command:syntaxItem>
       <command:syntaxItem>
-        <maml:name>Remove-OneDriveShortcut</maml:name>
+        <maml:name>Remove-odsc</maml:name>
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="cf">
           <maml:name>Confirm</maml:name>
           <maml:description>
@@ -951,7 +951,7 @@
     <command:relatedLinks>
       <maml:navigationLink>
         <maml:linkText>Online Version:</maml:linkText>
-        <maml:uri>https://github.com/derpenstiltskin/onedriveshortcuts/blob/main/docs/Remove-OneDriveShortcut.md</maml:uri>
+        <maml:uri>https://github.com/innovara/odsc/blob/main/docs/Remove-odsc.md</maml:uri>
       </maml:navigationLink>
     </command:relatedLinks>
   </command:command>

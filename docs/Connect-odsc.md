@@ -1,11 +1,11 @@
 ---
-external help file: OneDriveShortcuts-help.xml
-Module Name: OneDriveShortcuts
-online version: https://github.com/derpenstiltskin/onedriveshortcuts/blob/main/docs/Connect-ODS.md
+external help file: odsc-help.xml
+Module Name: odsc
+online version: https://github.com/innovara/odsc/blob/main/docs/Connect-odsc.md
 schema: 2.0.0
 ---
 
-# Connect-ODS
+# Connect-odsc
 
 ## SYNOPSIS
 Connects and creates a session to the Microsoft Graph API.
@@ -14,29 +14,29 @@ Connects and creates a session to the Microsoft Graph API.
 
 ### ClientSecret (Default)
 ```
-Connect-ODS -TenantId <String> -ClientId <String> -ClientSecret <SecureString> -AzureCloudInstance <Integer> [<CommonParameters>]
+Connect-odsc -TenantId <String> -ClientId <String> -ClientSecret <SecureString> -AzureCloudInstance <Integer> [<CommonParameters>]
 ```
 
 ### ClientCertificate
 ```
-Connect-ODS -TenantId <String> -ClientId <String> -ClientCertificate <X509Certificate2> -AzureCloudInstance <Integer> [<CommonParameters>]
+Connect-odsc -TenantId <String> -ClientId <String> -ClientCertificate <X509Certificate2> -AzureCloudInstance <Integer> [<CommonParameters>]
 ```
 
 ## DESCRIPTION
-The **Connect-ODS** function authenticates and creates a session to the Microsoft Graph API.
+The **Connect-odsc** function authenticates and creates a session to the Microsoft Graph API.
 
 ## EXAMPLES
 
 ### Example 1: Connect using a client secret
 ```powershell
-PS C:\> Connect-ODS -TenantId "00000000-0000-0000-0000-000000000000" -ClientId "00000000-0000-0000-0000-000000000000" 000-0000-000000000000" -ClientSecret (ConvertTo-SecureString -String "000000000000000000000000000" -AsPlainText -Force)
+PS C:\> Connect-odsc -TenantId "00000000-0000-0000-0000-000000000000" -ClientId "00000000-0000-0000-0000-000000000000" 000-0000-000000000000" -ClientSecret (ConvertTo-SecureString -String "000000000000000000000000000" -AsPlainText -Force)
 ```
 
 This command connects to the Microsoft Graph API using a client secret configured in the Azure AD application.
 
 ### Example 2: Connect using a client certificate
 ```powershell
-PS C:\> Connect-ODS -TenantId "00000000-0000-0000-0000-000000000000" -ClientId "00000000-0000-0000-0000-000000000000" -ClientCertificate (Get-Item -Path 'Cert:\CurrentUser\My\0000000000000000000000000000000000000000')
+PS C:\> Connect-odsc -TenantId "00000000-0000-0000-0000-000000000000" -ClientId "00000000-0000-0000-0000-000000000000" -ClientCertificate (Get-Item -Path 'Cert:\CurrentUser\My\0000000000000000000000000000000000000000')
 ```
 
 This command connects to the Microsoft Graph API using a client certificate configured in the Azure AD application.

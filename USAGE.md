@@ -35,53 +35,53 @@ To use this module you need to create an Azure AD application. Once you have cre
 ### Connecting with a Client Secret
 
 ```powershell
-Connect-ODS -TenantId "00000000-0000-0000-0000-000000000000" -ClientId "00000000-0000-0000-0000-000000000000" -ClientSecret (ConvertTo-SecureString -String "000000000000000000000000000" -AsPlainText -Force)
+Connect-odsc -TenantId "00000000-0000-0000-0000-000000000000" -ClientId "00000000-0000-0000-0000-000000000000" -ClientSecret (ConvertTo-SecureString -String "000000000000000000000000000" -AsPlainText -Force)
 ```
 
 ### Connecting with a Client Certificate
 
 ```powershell
-Connect-ODS -TenantId "00000000-0000-0000-0000-000000000000" -ClientId "00000000-0000-0000-0000-000000000000" -ClientCertificate (Get-Item -Path 'Cert:\CurrentUser\My\0000000000000000000000000000000000000000)
+Connect-odsc -TenantId "00000000-0000-0000-0000-000000000000" -ClientId "00000000-0000-0000-0000-000000000000" -ClientCertificate (Get-Item -Path 'Cert:\CurrentUser\My\0000000000000000000000000000000000000000)
 ```
 
 ### Disconnecting
 
 ```powershell
-Disconnect-ODS
+Disconnect-odsc
 ```
 
 ### Creating a new Shortcut to a Document Library
 
 ```powershell
-New-OneDriveShortcut -Uri "https://contoso.sharepoint.com/sites/WorkingSite" -DocumentLibrary "Working Document Library" -UserPrincipalName "user@contoso.com"
+New-odsc -Uri "https://contoso.sharepoint.com/sites/WorkingSite" -DocumentLibrary "Working Document Library" -UserPrincipalName "user@contoso.com"
 ```
 
 ### Creating a new Shortcut to a Document Library with a custom Name
 
 ```powershell
-New-OneDriveShortcut -Uri "https://contoso.sharepoint.com/sites/WorkingSite" -DocumentLibrary "Working Document Library" -UserPrincipalName "user@contoso.com" -ShortcutName "Working DL"
+New-odsc -Uri "https://contoso.sharepoint.com/sites/WorkingSite" -DocumentLibrary "Working Document Library" -UserPrincipalName "user@contoso.com" -ShortcutName "Working DL"
 ```
 
 ### Creating a new Shortcut to a Sub-Folder in a Document Library
 
 ```powershell
-New-OneDriveShortcut -Uri "https://contoso.sharepoint.com/sites/WorkingSite" -DocumentLibrary "Working Document Library" -FolderPath "Working Folder" -UserPrincipalName "user@contoso.com"
+New-odsc -Uri "https://contoso.sharepoint.com/sites/WorkingSite" -DocumentLibrary "Working Document Library" -FolderPath "Working Folder" -UserPrincipalName "user@contoso.com"
 ```
 
 ### Creating a new Shortcut to a Sub-Folder in a Document Library with a custom Name
 
 ```powershell
-New-OneDriveShortcut -Uri "https://contoso.sharepoint.com/sites/WorkingSite" -DocumentLibrary "Working Document Library" -FolderPath "Working Folder" -UserPrincipalName "user@contoso.com" -ShortcutName "Working"
+New-odsc -Uri "https://contoso.sharepoint.com/sites/WorkingSite" -DocumentLibrary "Working Document Library" -FolderPath "Working Folder" -UserPrincipalName "user@contoso.com" -ShortcutName "Working"
 ```
 
 ### Getting an existing Shortcut by Name
 
 ```powershell
-Get-OneDriveShortcut -ShortcutName "Working Folder" -UserPrincipalName "user@contoso.com"
+Get-odsc -ShortcutName "Working Folder" -UserPrincipalName "user@contoso.com"
 ```
 
 ### Removing an existing Shortcut by Name
 
 ```powershell
-Remove-OneDriveShortcut -ShortcutName "Working Folder" -UserPrincipalName "user@contoso.com"
+Remove-odsc -ShortcutName "Working Folder" -UserPrincipalName "user@contoso.com"
 ```
