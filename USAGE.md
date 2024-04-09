@@ -24,7 +24,7 @@ To use this module you need to create an Azure AD application. Once you have cre
 *   Get the Client ID (Application ID) of the application
 *   Get the Tenant ID of the Azure AD environment
 *   Create a Client Secret or Client Certificate for the application
-*   Add the following Microsoft Graph Application Permissions to the application: Files.ReadWrite.All, Sites.ReadWrite.All, Users.Read.All
+*   Add the following Microsoft Graph Application Permissions to the application: `Files.ReadWrite.All`, `Sites.ReadWrite.All`, `User.Read.All`
 *   If you are using a Client Certificate you must have it stored on your workstation or loaded in your workstation's certificate store
 
 ----------
