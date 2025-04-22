@@ -121,7 +121,7 @@ function New-odsc {
 		}
 
 		$ShortcutRequest = @{
-			Resource = "drives/${User}/root/children"
+			Resource = "users/$($User)/drive/root/children"
 			Method = [Microsoft.PowerShell.Commands.WebRequestMethod]::Post
 			Body = @{
 			name = $ShortcutName

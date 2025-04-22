@@ -29,7 +29,7 @@ function Remove-odsc {
         }
 
         $ShortcutRequest = @{
-            Resource = "drives/$($User)/root:/$([uri]::EscapeDataString($ShortcutName))"
+            Resource = "users/$($User)/drive/root:/$([uri]::EscapeDataString($ShortcutName))"
             Method = [Microsoft.PowerShell.Commands.WebRequestMethod]::Delete
         }
 
