@@ -48,6 +48,6 @@ function Remove-odsc {
     }
 
     end {
-        
+
     }
 }

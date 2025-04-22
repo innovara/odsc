@@ -1,16 +1,16 @@
 function Disconnect-odsc {
-	[CmdletBinding()]
-	param()
+    [CmdletBinding()]
+    param()
 
-	begin {
+    begin {
 
-	}
+    }
 
-	process {
-		$PsCmdlet.SessionState.PSVariable.Set('_ODSToken', $null)
-	}
+    process {
+        $PsCmdlet.SessionState.PSVariable.Set('_ODSToken', $null)
+    }
 
-	end {
-		Write-Host "Disconnected."
-	}
+    end {
+        Write-Host "Disconnected."
+    }
 }

@@ -1,171 +1,171 @@
 function New-odsc {
-	[CmdletBinding(DefaultParameterSetName = 'UserPrincipalName', SupportsShouldProcess)]
-	param(
-	[Parameter(Mandatory = $true, ParameterSetName = 'UserPrincipalName')]
-	[Parameter(Mandatory = $true, ParameterSetName = 'UserObjectId')]
-	[string] $Uri,
+    [CmdletBinding(DefaultParameterSetName = 'UserPrincipalName', SupportsShouldProcess)]
+    param(
+    [Parameter(Mandatory = $true, ParameterSetName = 'UserPrincipalName')]
+    [Parameter(Mandatory = $true, ParameterSetName = 'UserObjectId')]
+    [string] $Uri,
 
-	[Parameter(Mandatory = $true, ParameterSetName = 'UserPrincipalName')]
-	[Parameter(Mandatory = $true, ParameterSetName = 'UserObjectId')]
-	[string] $DocumentLibrary,
+    [Parameter(Mandatory = $true, ParameterSetName = 'UserPrincipalName')]
+    [Parameter(Mandatory = $true, ParameterSetName = 'UserObjectId')]
+    [string] $DocumentLibrary,
 
-	[Parameter(Mandatory = $false, ParameterSetName = 'UserPrincipalName')]
-	[Parameter(Mandatory = $false, ParameterSetName = 'UserObjectId')]
-	[string] $FolderPath,
+    [Parameter(Mandatory = $false, ParameterSetName = 'UserPrincipalName')]
+    [Parameter(Mandatory = $false, ParameterSetName = 'UserObjectId')]
+    [string] $FolderPath,
 
-	[Parameter(Mandatory = $false, ParameterSetName = 'UserPrincipalName')]
-	[Parameter(Mandatory = $false, ParameterSetName = 'UserObjectId')]
-	[string] $ShortcutName,
+    [Parameter(Mandatory = $false, ParameterSetName = 'UserPrincipalName')]
+    [Parameter(Mandatory = $false, ParameterSetName = 'UserObjectId')]
+    [string] $ShortcutName,
 
-	[Parameter(Mandatory = $true, ParameterSetName = 'UserPrincipalName')]
-	[string] $UserPrincipalName,
+    [Parameter(Mandatory = $true, ParameterSetName = 'UserPrincipalName')]
+    [string] $UserPrincipalName,
 
-	[Parameter(Mandatory = $true, ParameterSetName = 'UserObjectId')]
-	[string] $UserObjectId
-	)
+    [Parameter(Mandatory = $true, ParameterSetName = 'UserObjectId')]
+    [string] $UserObjectId
+    )
 
-	begin {
+    begin {
 
-	}
+    }
 
-	process {
-		switch ($PSCmdlet.ParameterSetName) {
-			'UserPrincipalName' {
-				$User = $UserPrincipalName
-			}
-			'UserObjectId' {
-				$User = $UserObjectId
-			}
-		}
-		$SiteDomain = ([uri]$Uri).Authority
-		$SiteResource = ([uri]$Uri).AbsolutePath
+    process {
+        switch ($PSCmdlet.ParameterSetName) {
+            'UserPrincipalName' {
+                $User = $UserPrincipalName
+            }
+            'UserObjectId' {
+                $User = $UserObjectId
+            }
+        }
+        $SiteDomain = ([uri]$Uri).Authority
+        $SiteResource = ([uri]$Uri).AbsolutePath
 
-		$SiteRequest = @{
-			Resource = "sites/${SiteDomain}:${SiteResource}"
-			Method = [Microsoft.PowerShell.Commands.WebRequestMethod]::Get
-		}
+        $SiteRequest = @{
+            Resource = "sites/${SiteDomain}:${SiteResource}"
+            Method = [Microsoft.PowerShell.Commands.WebRequestMethod]::Get
+        }
 
-		$SiteResponse = Invoke-odscApiRequest @SiteRequest
+        $SiteResponse = Invoke-odscApiRequest @SiteRequest
 
-		if (!($SiteResponse)) {
-			Write-Verbose "Request: ${SiteRequest}"
-			Write-Verbose "Response: ${SiteResponse}"
-			Write-Error "Error retrieving SharePoint Site." -ErrorAction Stop
-		}
+        if (!($SiteResponse)) {
+            Write-Verbose "Request: ${SiteRequest}"
+            Write-Verbose "Response: ${SiteResponse}"
+            Write-Error "Error retrieving SharePoint Site." -ErrorAction Stop
+        }
 
-		$SiteIdRaw = $SiteResponse.id
-		$SiteIdSplit = $SiteIdRaw.split(",")
-		$SiteId = $SiteIdSplit[1]
-		$WebId = $SiteIdSplit[2]
+        $SiteIdRaw = $SiteResponse.id
+        $SiteIdSplit = $SiteIdRaw.split(",")
+        $SiteId = $SiteIdSplit[1]
+        $WebId = $SiteIdSplit[2]
 
-		$DocumentLibraryRequest = @{
-			Resource = "sites/${SiteIdRaw}/lists?`$filter=startsWith(displayName,'${DocumentLibrary}')"
-			Method = [Microsoft.PowerShell.Commands.WebRequestMethod]::Get
-		}
+        $DocumentLibraryRequest = @{
+            Resource = "sites/${SiteIdRaw}/lists?`$filter=startsWith(displayName,'${DocumentLibrary}')"
+            Method = [Microsoft.PowerShell.Commands.WebRequestMethod]::Get
+        }
 
-		$DocumentLibraryResponse = Invoke-odscApiRequest @DocumentLibraryRequest
+        $DocumentLibraryResponse = Invoke-odscApiRequest @DocumentLibraryRequest
 
-		if (!($DocumentLibraryResponse) -or ($DocumentLibraryResponse.value.Count -eq 0)) {
-			Write-Verbose "Request: ${DocumentLibraryRequest}"
-			Write-Verbose "Response: ${DocumentLibraryResponse}"
-			Write-Error "Error retrieving SharePoint Document Library." -ErrorAction Stop
-		}
+        if (!($DocumentLibraryResponse) -or ($DocumentLibraryResponse.value.Count -eq 0)) {
+            Write-Verbose "Request: ${DocumentLibraryRequest}"
+            Write-Verbose "Response: ${DocumentLibraryResponse}"
+            Write-Error "Error retrieving SharePoint Document Library." -ErrorAction Stop
+        }
 
-		$DocumentLibraryId = $DocumentLibraryResponse.value[0].id
-		$DocumentLibraryName = $DocumentLibraryResponse.value[0].name
+        $DocumentLibraryId = $DocumentLibraryResponse.value[0].id
+        $DocumentLibraryName = $DocumentLibraryResponse.value[0].name
 
-		$ItemUniqueId = 'root'
-		$ItemUniqueName = $null
+        $ItemUniqueId = 'root'
+        $ItemUniqueName = $null
 
-		if ($FolderPath) {
-			$ItemUniqueIdUri = "$($Uri)/$($DocumentLibraryName)/$($FolderPath)"
-			$ItemUniqueIdUri = $ItemUniqueIdUri.replace(' ', '%20')
-			$ItemUniqueIdUri = $ItemUniqueIdUri.replace('%', '%25')
-			$ItemUniqueIdRequest = @{
-			Resource = "sites/${SiteIdRaw}/lists/${DocumentLibraryId}/items?`$expand=fields&`$filter=contains(webUrl,'${ItemUniqueIdUri}')"
-			Method = [Microsoft.PowerShell.Commands.WebRequestMethod]::Get
-			}
-			
-			$ItemUniqueIdResponse = Invoke-odscApiRequest @ItemUniqueIdRequest
+        if ($FolderPath) {
+            $ItemUniqueIdUri = "$($Uri)/$($DocumentLibraryName)/$($FolderPath)"
+            $ItemUniqueIdUri = $ItemUniqueIdUri.replace(' ', '%20')
+            $ItemUniqueIdUri = $ItemUniqueIdUri.replace('%', '%25')
+            $ItemUniqueIdRequest = @{
+            Resource = "sites/${SiteIdRaw}/lists/${DocumentLibraryId}/items?`$expand=fields&`$filter=contains(webUrl,'${ItemUniqueIdUri}')"
+            Method = [Microsoft.PowerShell.Commands.WebRequestMethod]::Get
+            }
 
-			if (!($ItemUniqueIdResponse) -or ($ItemUniqueIdResponse.value.Count -eq 0)) {
-			Write-Verbose "Request: ${ItemUniqueIdRequest}"
-			Write-Verbose "Response: ${ItemUniqueIdResponse}"
-			Write-Error "Error retrieving Document Library Item."-ErrorAction Stop
-			}
+            $ItemUniqueIdResponse = Invoke-odscApiRequest @ItemUniqueIdRequest
 
-			$ItemUniqueId = (Select-String "[\da-zA-Z]{8}-([\da-zA-Z]{4}-){3}[\da-zA-Z]{12}" -InputObject $ItemUniqueIdResponse.value[0].eTag).Matches[0].Value
-		}
+            if (!($ItemUniqueIdResponse) -or ($ItemUniqueIdResponse.value.Count -eq 0)) {
+            Write-Verbose "Request: ${ItemUniqueIdRequest}"
+            Write-Verbose "Response: ${ItemUniqueIdResponse}"
+            Write-Error "Error retrieving Document Library Item."-ErrorAction Stop
+            }
 
-		if (!($ShortcutName)) {
-			if ($FolderPath) {
-				$ItemUniqueNameRequest = @{
-					Resource = "sites/${SiteIdRaw}/lists/${DocumentLibraryId}/items/${ItemUniqueId}?`$expand=fields"
-					Method = [Microsoft.PowerShell.Commands.WebRequestMethod]::Get
-					DoNotUsePrefer = $true
-				}
-		
-				$ItemUniqueNameResponse = Invoke-odscApiRequest @ItemUniqueNameRequest
+            $ItemUniqueId = (Select-String "[\da-zA-Z]{8}-([\da-zA-Z]{4}-){3}[\da-zA-Z]{12}" -InputObject $ItemUniqueIdResponse.value[0].eTag).Matches[0].Value
+        }
 
-				if (!($ItemUniqueNameResponse)) {
-					Write-Verbose "Request: ${ItemUniqueNameRequest}"
-					Write-Verbose "Response: ${ItemUniqueNameResponse}"
-					Write-Error "Error retrieving Document Library Item Name." -ErrorAction Stop
-				}
+        if (!($ShortcutName)) {
+            if ($FolderPath) {
+                $ItemUniqueNameRequest = @{
+                    Resource = "sites/${SiteIdRaw}/lists/${DocumentLibraryId}/items/${ItemUniqueId}?`$expand=fields"
+                    Method = [Microsoft.PowerShell.Commands.WebRequestMethod]::Get
+                    DoNotUsePrefer = $true
+                }
 
-				$ItemUniqueName = $ItemUniqueNameResponse.fields.LinkFilename
-				$ShortcutName = $ItemUniqueName
-			} else {
-				$ShortcutName = $DocumentLibrary
-			}
-		}
+                $ItemUniqueNameResponse = Invoke-odscApiRequest @ItemUniqueNameRequest
 
-		$ShortcutRequest = @{
-			Resource = "users/${User}/drive/root/children"
-			Method = [Microsoft.PowerShell.Commands.WebRequestMethod]::Post
-			Body = @{
-			name = $ShortcutName
-			remoteItem = @{
-				sharepointIds = @{
-				listId = $DocumentLibraryId
-				listItemUniqueId = $ItemUniqueId
-				siteId = $SiteId
-				siteUrl = $Uri
-				webId = $WebId
-				}
-			}
-			'@microsoft.graph.conflictBehavior' = 'rename'
-			} | ConvertTo-Json
-		}
+                if (!($ItemUniqueNameResponse)) {
+                    Write-Verbose "Request: ${ItemUniqueNameRequest}"
+                    Write-Verbose "Response: ${ItemUniqueNameResponse}"
+                    Write-Error "Error retrieving Document Library Item Name." -ErrorAction Stop
+                }
 
-		if ($PSCmdlet.ShouldProcess("${User}'s OneDrive", "Creating shortcut '$($ShortcutName)'")) {
-			$ShortcutResponse = Invoke-odscApiRequest @ShortcutRequest
+                $ItemUniqueName = $ItemUniqueNameResponse.fields.LinkFilename
+                $ShortcutName = $ItemUniqueName
+            } else {
+                $ShortcutName = $DocumentLibrary
+            }
+        }
 
-			if (!($ShortcutResponse)) {
-				Write-Verbose "Request: ${ShortcutRequest}"
-				Write-Verbose "Response: ${ShortcutResponse}"
-				Write-Error "Error creating OneDrive Shortcut." -ErrorAction Stop
-			}
+        $ShortcutRequest = @{
+            Resource = "users/${User}/drive/root/children"
+            Method = [Microsoft.PowerShell.Commands.WebRequestMethod]::Post
+            Body = @{
+            name = $ShortcutName
+            remoteItem = @{
+                sharepointIds = @{
+                listId = $DocumentLibraryId
+                listItemUniqueId = $ItemUniqueId
+                siteId = $SiteId
+                siteUrl = $Uri
+                webId = $WebId
+                }
+            }
+            '@microsoft.graph.conflictBehavior' = 'rename'
+            } | ConvertTo-Json
+        }
 
-			$ItemId = $ShortcutResponse.id
+        if ($PSCmdlet.ShouldProcess("${User}'s OneDrive", "Creating shortcut '$($ShortcutName)'")) {
+            $ShortcutResponse = Invoke-odscApiRequest @ShortcutRequest
 
-			$RenameRequest = @{
-				Resource = "users/${User}/drive/items/${ItemId}"
-				Method = [Microsoft.PowerShell.Commands.WebRequestMethod]::Patch
-				Body = @{
-					name = $ShortcutName
-				} | ConvertTo-Json
-			}
+            if (!($ShortcutResponse)) {
+                Write-Verbose "Request: ${ShortcutRequest}"
+                Write-Verbose "Response: ${ShortcutResponse}"
+                Write-Error "Error creating OneDrive Shortcut." -ErrorAction Stop
+            }
 
-			$RenameResponse = Invoke-odscApiRequest @RenameRequest
+            $ItemId = $ShortcutResponse.id
 
-			return $RenameResponse
-		} else {
-			return
-		}
-	}
+            $RenameRequest = @{
+                Resource = "users/${User}/drive/items/${ItemId}"
+                Method = [Microsoft.PowerShell.Commands.WebRequestMethod]::Patch
+                Body = @{
+                    name = $ShortcutName
+                } | ConvertTo-Json
+            }
 
-	end {
-	
-	}
+            $RenameResponse = Invoke-odscApiRequest @RenameRequest
+
+            return $RenameResponse
+        } else {
+            return
+        }
+    }
+
+    end {
+    
+    }
 }
