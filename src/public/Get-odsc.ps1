@@ -29,7 +29,7 @@ function Get-odsc {
 		}
 
 		$ShortcutRequest = @{
-			Resource = "users/$($User)/drive/root:/$([uri]::EscapeDataString($ShortcutName))"
+			Resource = "users/${User}/drive/root:/$([uri]::EscapeDataString($ShortcutName))"
 			Method = [Microsoft.PowerShell.Commands.WebRequestMethod]::Get
 		}
 
