@@ -50,7 +50,7 @@ function New-odsc {
         if (!($SiteResponse)) {
             Write-Verbose "Request: ${SiteRequest}"
             Write-Verbose "Response: ${SiteResponse}"
-            Write-Error "Error retrieving SharePoint Site." -ErrorAction Stop
+            Write-Error "Error retrieving SharePoint Site."
         }
 
         $SiteIdRaw = $SiteResponse.id
@@ -68,7 +68,7 @@ function New-odsc {
         if (!($DocumentLibraryResponse) -or ($DocumentLibraryResponse.value.Count -eq 0)) {
             Write-Verbose "Request: ${DocumentLibraryRequest}"
             Write-Verbose "Response: ${DocumentLibraryResponse}"
-            Write-Error "Error retrieving SharePoint Document Library." -ErrorAction Stop
+            Write-Error "Error retrieving SharePoint Document Library."
         }
 
         $DocumentLibraryId = $DocumentLibraryResponse.value[0].id
@@ -91,7 +91,7 @@ function New-odsc {
             if (!($ItemUniqueIdResponse) -or ($ItemUniqueIdResponse.value.Count -eq 0)) {
             Write-Verbose "Request: ${ItemUniqueIdRequest}"
             Write-Verbose "Response: ${ItemUniqueIdResponse}"
-            Write-Error "Error retrieving Document Library Item."-ErrorAction Stop
+            Write-Error "Error retrieving Document Library Item."
             }
 
             $ItemUniqueId = (Select-String "[\da-zA-Z]{8}-([\da-zA-Z]{4}-){3}[\da-zA-Z]{12}" -InputObject $ItemUniqueIdResponse.value[0].eTag).Matches[0].Value
@@ -110,7 +110,7 @@ function New-odsc {
                 if (!($ItemUniqueNameResponse)) {
                     Write-Verbose "Request: ${ItemUniqueNameRequest}"
                     Write-Verbose "Response: ${ItemUniqueNameResponse}"
-                    Write-Error "Error retrieving Document Library Item Name." -ErrorAction Stop
+                    Write-Error "Error retrieving Document Library Item Name."
                 }
 
                 $ItemUniqueName = $ItemUniqueNameResponse.fields.LinkFilename
@@ -144,7 +144,7 @@ function New-odsc {
             if (!($ShortcutResponse)) {
                 Write-Verbose "Request: ${ShortcutRequest}"
                 Write-Verbose "Response: ${ShortcutResponse}"
-                Write-Error "Error creating OneDrive Shortcut." -ErrorAction Stop
+                Write-Error "Error creating OneDrive Shortcut '$($ShortcutName)' for ${User}."
             }
 
             $ItemId = $ShortcutResponse.id

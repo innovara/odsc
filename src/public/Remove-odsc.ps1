@@ -39,7 +39,7 @@ function Remove-odsc {
 #            if (!($ShortcutResponse)) {
 #                Write-Verbose "Request: ${ShortcutRequest}"
 #                Write-Verbose "Response: ${ShortcutResponse}"
-#                Write-Error "Error creating OneDrive Shortcut." -ErrorAction Stop
+#                Write-Error "Error removing OneDrive Shortcut '$($ShortcutName)' for ${User}.."
 #            }
             return $ShortcutResponse
         } else {

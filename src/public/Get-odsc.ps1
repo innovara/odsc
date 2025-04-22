@@ -38,7 +38,7 @@ function Get-odsc {
         if (!($ShortcutResponse)) {
             Write-Verbose "Request: ${ShortcutRequest}"
             Write-Verbose "Response: ${ShortcutResponse}"
-            Write-Error "Error getting OneDrive Shortcut." -ErrorAction Stop
+            Write-Error "Error getting OneDrive Shortcut '$($ShortcutName)' for ${User}."
         }
 
         return $ShortcutResponse
