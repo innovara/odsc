@@ -7,7 +7,7 @@ function Disconnect-odsc {
     }
 
     process {
-        $PsCmdlet.SessionState.PSVariable.Set('_ODSToken', $null)
+        $script:ODSToken = $null
     }
 
     end {

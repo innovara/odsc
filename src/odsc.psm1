@@ -3,6 +3,8 @@
 $Public = @(Get-ChildItem -Path (Join-Path -Path $PSScriptRoot -ChildPath "\public\*.ps1") -ErrorAction SilentlyContinue)
 $Private = @(Get-ChildItem -Path (Join-Path -Path $PSScriptRoot -ChildPath "\private\*.ps1") -ErrorAction SilentlyContinue)
 
+$script:ODSToken = $null
+
 foreach ($Import in @($Public + $Private)) {
     try {
         Write-Verbose "Importing file: $($Import.FullName)"
@@ -14,4 +16,11 @@ foreach ($Import in @($Public + $Private)) {
 
 foreach ($File in $Public) {
     Export-ModuleMember -Function $File.BaseName
+}
+
+# Register module removal event handler
+$MyInvocation.MyCommand.ScriptBlock.Module.OnRemove = {
+    # Clear sensitive data when module is removed
+    Write-Verbose "Clearing ODSC authentication token"
+    $script:ODSToken = $null
 }
