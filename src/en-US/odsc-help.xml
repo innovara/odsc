@@ -4,7 +4,7 @@
     <command:details>
       <command:name>Connect-odsc</command:name>
       <command:verb>Connect</command:verb>
-      <command:noun>ODS</command:noun>
+      <command:noun>odsc</command:noun>
       <maml:description>
         <maml:para>Connects and creates a session to the Microsoft Graph API.</maml:para>
       </maml:description>
@@ -194,7 +194,7 @@
     <command:details>
       <command:name>Disconnect-odsc</command:name>
       <command:verb>Disconnect</command:verb>
-      <command:noun>ODS</command:noun>
+      <command:noun>odsc</command:noun>
       <maml:description>
         <maml:para>Disconnects the session for the Microsoft Graph API.</maml:para>
       </maml:description>
