@@ -50,6 +50,12 @@ Connect-odsc -TenantId "00000000-0000-0000-0000-000000000000" -ClientId "0000000
 Disconnect-odsc
 ```
 
+### Retrieving the properties of a Drive resource
+
+```powershell
+Get-odscDrive -UserPrincipalName "user@contoso.com"
+```
+
 ### Creating a new Shortcut to a Document Library
 
 ```powershell
