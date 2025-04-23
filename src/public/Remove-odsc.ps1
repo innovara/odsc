@@ -30,20 +30,31 @@ function Remove-odsc {
 
         $ShortcutRequest = @{
             Resource = "users/${User}/drive/root:/$([uri]::EscapeDataString($ShortcutName))"
-            Method = [Microsoft.PowerShell.Commands.WebRequestMethod]::Delete
+            Method = [Microsoft.PowerShell.Commands.WebRequestMethod]::Get
         }
 
-        if ($PSCmdlet.ShouldProcess("${User}'s OneDrive", "Removing shortcut '$($ShortcutName)'")) {
-            $ShortcutResponse = Invoke-odscApiRequest @ShortcutRequest
+        $ShortcutResponse = Invoke-odscApiRequest @ShortcutRequest
 
-#            if (!($ShortcutResponse)) {
-#                Write-Verbose "Request: ${ShortcutRequest}"
-#                Write-Verbose "Response: ${ShortcutResponse}"
-#                Write-Error "Error removing OneDrive Shortcut '$($ShortcutName)' for ${User}.."
-#            }
-            return $ShortcutResponse
+        if ($ShortcutResponse.remoteItem) {
+            $ShortcutRequest = @{
+                Resource = "users/${User}/drive/root:/$([uri]::EscapeDataString($ShortcutName))"
+                Method = [Microsoft.PowerShell.Commands.WebRequestMethod]::Delete
+            }
+
+            if ($PSCmdlet.ShouldProcess("${User}'s OneDrive", "Removing shortcut '$($ShortcutName)'")) {
+                $ShortcutResponse = Invoke-odscApiRequest @ShortcutRequest
+
+                return $ShortcutResponse
+
+            } else {
+                return
+            }
+
         } else {
-            return
+            Write-Verbose "Request: ${ShortcutRequest}"
+            Write-Verbose "Response: ${ShortcutResponse}"
+            Write-Error "Error removing OneDrive Shortcut '$($ShortcutName)' for ${User}. Resource type is not remoteItem."
+        return
         }
     }
 
