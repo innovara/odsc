@@ -22,7 +22,7 @@ function Connect-odsc {
     )
 
     begin {
-        $Token = $null
+
     }
 
     process {
@@ -30,7 +30,7 @@ function Connect-odsc {
             'ClientSecret' {
                 try {
                     $Token = Get-MsalToken -ClientId $ClientId -TenantId $TenantId -ClientSecret $ClientSecret -AzureCloudInstance $AzureCloudInstance
-                    $PsCmdlet.SessionState.PSVariable.Set('_ODSToken', $Token)
+                    $script:ODSToken = $Token
                 } catch {
                     Write-Verbose $_
                     Write-Error "Token request using ClientSecret failed." -ErrorAction Stop
@@ -39,7 +39,7 @@ function Connect-odsc {
             'ClientCertificate' {
                 try {
                     $Token = Get-MsalToken -ClientId $ClientId -TenantId $TenantId -ClientCertificate $ClientCertificate -AzureCloudInstance $AzureCloudInstance
-                    $PsCmdlet.SessionState.PSVariable.Set('_ODSToken', $Token)
+                    $script:ODSToken = $Token
                 } catch {
                     Write-Verbose $_
                     Write-Error "Token request using ClientCertificate failed." -ErrorAction Stop

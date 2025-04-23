@@ -15,7 +15,7 @@ function Invoke-odscApiRequest {
     )
 
     begin {
-        $Token = $PsCmdlet.SessionState.PSVariable.GetValue('_ODSToken')
+        $Token = $script:ODSToken
 
         if ((!$Token.ExpiresOn) -or 
         (!$Token.AccessToken) -or
