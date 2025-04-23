@@ -18,9 +18,7 @@ foreach ($File in $Public) {
     Export-ModuleMember -Function $File.BaseName
 }
 
-# Register module removal event handler
 $MyInvocation.MyCommand.ScriptBlock.Module.OnRemove = {
-    # Clear sensitive data when module is removed
-    Write-Verbose "Clearing ODSC authentication token"
+    Write-Verbose "Clearing odsc authentication token"
     $script:ODSToken = $null
 }

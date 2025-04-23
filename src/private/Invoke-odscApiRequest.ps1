@@ -21,7 +21,7 @@ function Invoke-odscApiRequest {
         (!$Token.AccessToken) -or
         ($Token.ExpiresOn -le (Get-Date))) {
             Write-Verbose "Token: ${Token}"
-            Write-Error "Please run Connect-ODSC first." -ErrorAction Stop
+            Write-Error "Please run Connect-odsc first." -ErrorAction Stop
         }
     }
 
