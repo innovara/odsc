@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 0.4.0
+
+* Add feature to create / get / remove shortcuts in OneDrive's subfolder
+
 ## 0.3.0
 
 * Change endpoint `/drives/{idOrUserPrincipalName}` to `/users/{idOrUserPrincipalName}/drive`
