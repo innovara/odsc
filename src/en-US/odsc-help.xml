@@ -850,37 +850,37 @@
     <command:examples>
       <command:example>
         <maml:title>Example 1: Create a shortcut to the root of a document library</maml:title>
-        <dev:code>PS C:\&gt; New-odsc -SiteUrl "https://contoso.sharepoint.com/site/WorkingSite" -DocumentLibrary "Working Document Library" -UserPrincipalName "user@contoso.com"</dev:code>
+        <dev:code>PS C:\&gt; New-odsc -SiteUrl "https://contoso.sharepoint.com/sites/WorkingSite" -DocumentLibrary "Working Document Library" -UserPrincipalName "user@contoso.com"</dev:code>
         <dev:remarks>
-          <maml:para>This command creates a shortcut called "Working Document Library" for the user "user@contoso.com" that points to the Document Library called "Working Document Library" on the SharePoint site "https://contoso.sharepoint.com/site/WorkingSite".</maml:para>
+          <maml:para>This command creates a shortcut called "Working Document Library" for the user "user@contoso.com" that points to the Document Library called "Working Document Library" on the SharePoint site "https://contoso.sharepoint.com/sites/WorkingSite".</maml:para>
         </dev:remarks>
       </command:example>
       <command:example>
         <maml:title>Example 2: Create a shortcut to the root of a document library with a custom name</maml:title>
-        <dev:code>PS C:\&gt; New-odsc -SiteUrl "https://contoso.sharepoint.com/site/WorkingSite" -DocumentLibrary "Working Document Library" -UserPrincipalName "user@contoso.com" -ShortcutName "Working DL"</dev:code>
+        <dev:code>PS C:\&gt; New-odsc -SiteUrl "https://contoso.sharepoint.com/sites/WorkingSite" -DocumentLibrary "Working Document Library" -UserPrincipalName "user@contoso.com" -ShortcutName "Working DL"</dev:code>
         <dev:remarks>
-          <maml:para>This command creates a shortcut called "Working DL" for the user "user@contoso.com" that points to the Document Library called "Working Document Library" on the SharePoint site "https://contoso.sharepoint.com/site/WorkingSite".</maml:para>
+          <maml:para>This command creates a shortcut called "Working DL" for the user "user@contoso.com" that points to the Document Library called "Working Document Library" on the SharePoint site "https://contoso.sharepoint.com/sites/WorkingSite".</maml:para>
         </dev:remarks>
       </command:example>
       <command:example>
         <maml:title>Example 3: Create a shortcut to a subfolder of a document library</maml:title>
-        <dev:code>PS C:\&gt; New-odsc -SiteUrl "https://contoso.sharepoint.com/site/WorkingSite" -DocumentLibrary "Working Document Library" -FolderPath "Working Folder" -UserPrincipalName "user@contoso.com"</dev:code>
+        <dev:code>PS C:\&gt; New-odsc -SiteUrl "https://contoso.sharepoint.com/sites/WorkingSite" -DocumentLibrary "Working Document Library" -FolderPath "Working Folder" -UserPrincipalName "user@contoso.com"</dev:code>
         <dev:remarks>
-          <maml:para>This command creates a shortcut called "Working Folder" for the user "user@contoso.com" that points to the subfolder "Working Folder" of the Document Library called "Working Document Library" on the SharePoint site "https://contoso.sharepoint.com/site/WorkingSite".</maml:para>
+          <maml:para>This command creates a shortcut called "Working Folder" for the user "user@contoso.com" that points to the subfolder "Working Folder" of the Document Library called "Working Document Library" on the SharePoint site "https://contoso.sharepoint.com/sites/WorkingSite".</maml:para>
         </dev:remarks>
       </command:example>
       <command:example>
         <maml:title>Example 4: Create a shortcut to a subfolder of a document library with a custom name</maml:title>
-        <dev:code>PS C:\&gt; New-odsc -SiteUrl "https://contoso.sharepoint.com/site/WorkingSite" -DocumentLibrary "Working Document Library" -FolderPath "Working Folder"  -ShortcutName "Working" -UserPrincipalName "user@contoso.com"</dev:code>
+        <dev:code>PS C:\&gt; New-odsc -SiteUrl "https://contoso.sharepoint.com/sites/WorkingSite" -DocumentLibrary "Working Document Library" -FolderPath "Working Folder"  -ShortcutName "Working" -UserPrincipalName "user@contoso.com"</dev:code>
         <dev:remarks>
-          <maml:para>This command creates a shortcut called "Working" for the user "user@contoso.com" that points to the subfolder "Working Folder" of the Document Library called "Working Document Library" on the SharePoint site "https://contoso.sharepoint.com/site/WorkingSite".</maml:para>
+          <maml:para>This command creates a shortcut called "Working" for the user "user@contoso.com" that points to the subfolder "Working Folder" of the Document Library called "Working Document Library" on the SharePoint site "https://contoso.sharepoint.com/sites/WorkingSite".</maml:para>
         </dev:remarks>
       </command:example>
       <command:example>
         <maml:title>Example 5: Create a shortcut to the root of a document library in a subfolder of the user's OneDrive</maml:title>
-        <dev:code>PS C:\&gt; New-odsc -SiteUrl "https://contoso.sharepoint.com/site/WorkingSite" -DocumentLibrary "Working Document Library" -RelativePath "subfolder1/subfolder2" -UserPrincipalName "user@contoso.com"</dev:code>
+        <dev:code>PS C:\&gt; New-odsc -SiteUrl "https://contoso.sharepoint.com/sites/WorkingSite" -DocumentLibrary "Working Document Library" -RelativePath "subfolder1/subfolder2" -UserPrincipalName "user@contoso.com"</dev:code>
         <dev:remarks>
-          <maml:para>This command creates a shortcut in the subfolder "subfolder1/subfolder2" for the user "user@contoso.com" that points to the Document Library called "Working Document Library" on the SharePoint site "https://contoso.sharepoint.com/site/WorkingSite".</maml:para>
+          <maml:para>This command creates a shortcut in the subfolder "subfolder1/subfolder2" for the user "user@contoso.com" that points to the Document Library called "Working Document Library" on the SharePoint site "https://contoso.sharepoint.com/sites/WorkingSite".</maml:para>
         </dev:remarks>
       </command:example>
     </command:examples>
