@@ -1,6 +1,10 @@
 function Remove-odsc {
     [CmdletBinding(DefaultParameterSetName = 'UserPrincipalName', SupportsShouldProcess)]
     param(
+        [Parameter(Mandatory = $false, ParameterSetName = 'UserPrincipalName')]
+        [Parameter(Mandatory = $false, ParameterSetName = 'UserObjectId')]
+        [string] $RelativePath,
+
         [Parameter(Mandatory = $true, ParameterSetName = 'UserPrincipalName')]
         [Parameter(Mandatory = $true, ParameterSetName = 'UserObjectId')]
         [string] $ShortcutName,
@@ -29,7 +33,7 @@ function Remove-odsc {
         }
 
         $ShortcutRequest = @{
-            Resource = "users/${User}/drive/root:/$([uri]::EscapeDataString($ShortcutName))"
+            Resource = "users/${User}/drive/root:/$([uri]::EscapeDataString($RelativePath))/$([uri]::EscapeDataString($ShortcutName))"
             Method = [Microsoft.PowerShell.Commands.WebRequestMethod]::Get
         }
 
@@ -37,7 +41,7 @@ function Remove-odsc {
 
         if ($ShortcutResponse.remoteItem) {
             $ShortcutRequest = @{
-                Resource = "users/${User}/drive/root:/$([uri]::EscapeDataString($ShortcutName))"
+                Resource = "users/${User}/drive/root:/$([uri]::EscapeDataString($RelativePath))/$([uri]::EscapeDataString($ShortcutName))"
                 Method = [Microsoft.PowerShell.Commands.WebRequestMethod]::Delete
             }
 

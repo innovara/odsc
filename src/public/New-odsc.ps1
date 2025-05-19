@@ -13,6 +13,10 @@ function New-odsc {
     [Parameter(Mandatory = $false, ParameterSetName = 'UserObjectId')]
     [string] $FolderPath,
 
+	[Parameter(Mandatory = $false, ParameterSetName = 'UserPrincipalName')]
+    [Parameter(Mandatory = $false, ParameterSetName = 'UserObjectId')]
+    [string] $RelativePath,
+
     [Parameter(Mandatory = $false, ParameterSetName = 'UserPrincipalName')]
     [Parameter(Mandatory = $false, ParameterSetName = 'UserObjectId')]
     [string] $ShortcutName,
@@ -149,6 +153,68 @@ function New-odsc {
 
             $ItemId = $ShortcutResponse.id
 
+			if ($RelativePath) {
+				$FolderRequest = @{
+					Resource = "users/${User}/drive/root:/$([uri]::EscapeDataString($RelativePath))"
+					Method = [Microsoft.PowerShell.Commands.WebRequestMethod]::Get
+				}
+				
+				$FolderResponse = Invoke-odscApiRequest @FolderRequest
+
+				if (!($FolderResponse)) {
+					$Folders = $RelativePath.split("/")
+					foreach ($Folder in $Folders) {
+						$FolderRequest = @{
+							Resource = "users/${User}/drive/root/children"
+							Method = [Microsoft.PowerShell.Commands.WebRequestMethod]::Post
+							Body = @{
+								name = $Folder
+								folder = @{
+								}
+								'@microsoft.graph.conflictBehavior' = 'rename'
+							} | ConvertTo-Json
+						}
+
+						$FolderResponse = Invoke-odscApiRequest @FolderRequest
+						$FolderId = $FolderResponse.id
+
+						if ($ParentId) {
+							$MoveRequest = @{
+								Resource = "users/${User}/drive/items/${FolderId}"
+								Method = [Microsoft.PowerShell.Commands.WebRequestMethod]::Patch
+								DoNotUsePrefer = $true
+								Body = @{
+									parentReference = @{
+										id = $ParentId
+									}
+								} | ConvertTo-Json
+							}
+
+							$MoveResponse = Invoke-odscApiRequest @MoveRequest
+
+						} else {
+							$ParentId = $FolderId
+						}
+					}
+				}
+
+				$FolderId = $FolderResponse.id
+
+				$MoveRequest = @{
+					Resource = "users/${User}/drive/items/${ItemId}"
+					Method = [Microsoft.PowerShell.Commands.WebRequestMethod]::Patch
+					DoNotUsePrefer = $true
+					Body = @{
+						parentReference = @{
+							id = $FolderId
+						}
+					} | ConvertTo-Json
+				}
+
+				$MoveResponse = Invoke-odscApiRequest @MoveRequest
+
+			}
+
             $RenameRequest = @{
                 Resource = "users/${User}/drive/items/${ItemId}"
                 Method = [Microsoft.PowerShell.Commands.WebRequestMethod]::Patch
@@ -159,7 +225,8 @@ function New-odsc {
 
             $RenameResponse = Invoke-odscApiRequest @RenameRequest
 
-            return $RenameResponse
+			return $RenameResponse
+
         } else {
             return
         }

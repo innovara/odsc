@@ -14,26 +14,33 @@ Removes OneDrive shortcut to SharePoint.
 
 ### UserPrincipalName (Default)
 ```
-Remove-odsc -ShortcutName <String> -UserPrincipalName <String> [-WhatIf] [-Confirm]
+Remove-odsc -ShortcutName <String> [-RelativePath <String>] -UserPrincipalName <String> [-WhatIf] [-Confirm]
  [<CommonParameters>]
 ```
 
 ### UserObjectId
 ```
-Remove-odsc -ShortcutName <String> -UserObjectId <String> [-WhatIf] [-Confirm] [<CommonParameters>]
+Remove-odsc -ShortcutName <String> [-RelativePath <String>] -UserObjectId <String> [-WhatIf] [-Confirm] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
-The **Remove-odsc** function removes a shortcut in a user's OneDrive that points to a SharePoint/Teams document library or sub-folder.
+The **Remove-odsc** function removes a shortcut in a user's OneDrive that points to a SharePoint/Teams document library or subfolder.
 
 ## EXAMPLES
 
-### Example 1: Remove shortcut with ShortcutName and UserPrincipalName
+### Example 1: Remove a OneDrive shortcut
 ```powershell
 PS C:\> Remove-odsc -ShortcutName "Working Folder" -UserPrincipalName "user@contoso.com"
 ```
 
 This command removes the shortcut called "Working Folder" for the user "user@contoso.com".
+
+### Example 2: Remove a OneDrive shortcut in subfolder
+```powershell
+PS C:\> Remove-odsc -ShortcutName "Working Folder" -RelativePath "subfolder1/subfolder2" -UserPrincipalName "user@contoso.com"
+```
+
+This command removes the shortcut called "Working Folder" under "subfolder1/subfolder2" for the user "user@contoso.com".
 
 ## PARAMETERS
 
@@ -44,6 +51,21 @@ Prompts you for confirmation before running the cmdlet.
 Type: SwitchParameter
 Parameter Sets: (All)
 Aliases: cf
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -RelativePath
+Specifies a string that contains the folder path inside of the user's OneDrive where the shortcut is placed.
+
+```yaml
+Type: String
+Parameter Sets: (All)
+Aliases:
 
 Required: False
 Position: Named

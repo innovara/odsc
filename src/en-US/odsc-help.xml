@@ -169,14 +169,14 @@
     </maml:alertSet>
     <command:examples>
       <command:example>
-        <maml:title>----------- Example 1: Connect using a client secret -----------</maml:title>
+        <maml:title>Example 1: Connect using a client secret</maml:title>
         <dev:code>PS C:\&gt; Connect-odsc -TenantId "00000000-0000-0000-0000-000000000000" -ClientId "00000000-0000-0000-0000-000000000000" 000-0000-000000000000" -ClientSecret (ConvertTo-SecureString -String "000000000000000000000000000" -Force)</dev:code>
         <dev:remarks>
           <maml:para>This command connects to the Microsoft Graph API using a client secret configured in the Azure AD application.</maml:para>
         </dev:remarks>
       </command:example>
       <command:example>
-        <maml:title>-------- Example 2: Connect using a client certificate --------</maml:title>
+        <maml:title>Example 2: Connect using a client certificate</maml:title>
         <dev:code>PS C:\&gt; Connect-odsc -TenantId "00000000-0000-0000-0000-000000000000" -ClientId "00000000-0000-0000-0000-000000000000" -ClientCertificate (Get-Item -Path 'Cert:\CurrentUser\My\0000000000000000000000000000000000000000')</dev:code>
         <dev:remarks>
           <maml:para>This command connects to the Microsoft Graph API using a client certificate configured in the Azure AD application.</maml:para>
@@ -235,7 +235,7 @@
     </maml:alertSet>
     <command:examples>
       <command:example>
-        <maml:title>-------------------- Example 1: Disconnect --------------------</maml:title>
+        <maml:title>Example 1: Disconnect</maml:title>
         <dev:code>PS C:\&gt; Disconnect-odsc</dev:code>
         <dev:remarks>
           <maml:para>This command clears the saved session.</maml:para>
@@ -370,7 +370,7 @@
       </maml:description>
     </command:details>
     <maml:description>
-      <maml:para>The Get-odsc function gets the metadata for a shortcut in a user's OneDrive that points to a SharePoint/Teams document library or sub-folder.</maml:para>
+      <maml:para>The Get-odsc function gets the metadata for a shortcut in a user's OneDrive that points to a SharePoint/Teams document library or subfolder.</maml:para>
     </maml:description>
     <command:syntax>
       <command:syntaxItem>
@@ -493,10 +493,19 @@
     </maml:alertSet>
     <command:examples>
       <command:example>
-        <maml:title>-------------- Example 1: Get a OneDrive shortcut --------------</maml:title>
-        <dev:code>PS C:\&gt; Get-Shortcut -ShortcutName "Working Folder" -UserPrincipalName "user@contoso.com"</dev:code>
+        <maml:title>Example 1: Get a OneDrive shortcut</maml:title>
+        <dev:code>PS C:\&gt; Get-odsc -ShortcutName "Working Folder" -UserPrincipalName "user@contoso.com"</dev:code>
         <dev:remarks>
           <maml:para>This command gets the shortcut called "Working Folder" for the user "user@contoso.com".</maml:para>
+        </dev:remarks>
+      </command:example>
+    </command:examples>
+    <command:examples>
+      <command:example>
+        <maml:title>Example 2: Get a OneDrive shortcut placed in subfolder</maml:title>
+        <dev:code>PS C:\&gt; Get-odsc -ShortcutName "Working Folder" -RelativePath "subfolder1/subfolder2" -UserPrincipalName "user@contoso.com"</dev:code>
+        <dev:remarks>
+          <maml:para>This command gets the shortcut called "Working Folder" under "subfolder1/subfolder2" for the user "user@contoso.com".</maml:para>
         </dev:remarks>
       </command:example>
     </command:examples>
@@ -517,7 +526,7 @@
       </maml:description>
     </command:details>
     <maml:description>
-      <maml:para>The New-odsc function creates a shortcut in a user's OneDrive that points to a SharePoint/Teams document library or sub-folder.</maml:para>
+      <maml:para>The New-odsc function creates a shortcut in a user's OneDrive that points to a SharePoint/Teams document library or subfolder.</maml:para>
     </maml:description>
     <command:syntax>
       <command:syntaxItem>
@@ -642,6 +651,18 @@
           </dev:type>
           <dev:defaultValue>None</dev:defaultValue>
         </command:parameter>
+         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+          <maml:name>RelativePath</maml:name>
+          <maml:description>
+            <maml:para>Specifies a string that contains the folder path inside of the user's OneDrive where the shortcut will be placed.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
           <maml:name>ShortcutName</maml:name>
           <maml:description>
@@ -657,7 +678,7 @@
         <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
           <maml:name>Uri</maml:name>
           <maml:description>
-            <maml:para>Specifeis a string that contains the URL of the SharePoint site.</maml:para>
+            <maml:para>Specifies a string that contains the URL of the SharePoint site.</maml:para>
           </maml:description>
           <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
           <dev:type>
@@ -729,6 +750,18 @@
         <dev:defaultValue>None</dev:defaultValue>
       </command:parameter>
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+        <maml:name>RelativePath</maml:name>
+        <maml:description>
+          <maml:para>Specifies a string that contains the folder path inside of the user's OneDrive where the shortcut will be placed.</maml:para>
+        </maml:description>
+        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
         <maml:name>ShortcutName</maml:name>
         <maml:description>
           <maml:para>Specifies a string that contains the name of the shortcut to be placed in the user's OneDrive.</maml:para>
@@ -743,7 +776,7 @@
       <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
         <maml:name>Uri</maml:name>
         <maml:description>
-          <maml:para>Specifeis a string that contains the URL of the SharePoint site.</maml:para>
+          <maml:para>Specifies a string that contains the URL of the SharePoint site.</maml:para>
         </maml:description>
         <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
         <dev:type>
@@ -830,17 +863,24 @@
         </dev:remarks>
       </command:example>
       <command:example>
-        <maml:title>Example 3: Create a shortcut to a sub-folder of a document library</maml:title>
+        <maml:title>Example 3: Create a shortcut to a subfolder of a document library</maml:title>
         <dev:code>PS C:\&gt; New-odsc -SiteUrl "https://contoso.sharepoint.com/site/WorkingSite" -DocumentLibrary "Working Document Library" -FolderPath "Working Folder" -UserPrincipalName "user@contoso.com"</dev:code>
         <dev:remarks>
-          <maml:para>This command creates a shortcut called "Working Folder" for the user "user@contoso.com" that points to the sub-folder "Working Folder" of the Document Library called "Working Document Library" on the SharePoint site "https://contoso.sharepoint.com/site/WorkingSite".</maml:para>
+          <maml:para>This command creates a shortcut called "Working Folder" for the user "user@contoso.com" that points to the subfolder "Working Folder" of the Document Library called "Working Document Library" on the SharePoint site "https://contoso.sharepoint.com/site/WorkingSite".</maml:para>
         </dev:remarks>
       </command:example>
       <command:example>
-        <maml:title>Example 4: Create a shortcut to a sub-folder of a document library with a custom name</maml:title>
-        <dev:code>PS C:\&gt; New-odsc -SiteUrl "https://contoso.sharepoint.com/site/WorkingSite" -DocumentLibrary "Working Document Library" -FolderPath "Working Folder" -UserPrincipalName "user@contoso.com" -ShortcutName "Working"</dev:code>
+        <maml:title>Example 4: Create a shortcut to a subfolder of a document library with a custom name</maml:title>
+        <dev:code>PS C:\&gt; New-odsc -SiteUrl "https://contoso.sharepoint.com/site/WorkingSite" -DocumentLibrary "Working Document Library" -FolderPath "Working Folder"  -ShortcutName "Working" -UserPrincipalName "user@contoso.com"</dev:code>
         <dev:remarks>
-          <maml:para>This command creates a shortcut called "Working" for the user "user@contoso.com" that points to the sub-folder "Working Folder" of the Document Library called "Working Document Library" on the SharePoint site "https://contoso.sharepoint.com/site/WorkingSite".</maml:para>
+          <maml:para>This command creates a shortcut called "Working" for the user "user@contoso.com" that points to the subfolder "Working Folder" of the Document Library called "Working Document Library" on the SharePoint site "https://contoso.sharepoint.com/site/WorkingSite".</maml:para>
+        </dev:remarks>
+      </command:example>
+      <command:example>
+        <maml:title>Example 5: Create a shortcut to the root of a document library in a subfolder of the user's OneDrive</maml:title>
+        <dev:code>PS C:\&gt; New-odsc -SiteUrl "https://contoso.sharepoint.com/site/WorkingSite" -DocumentLibrary "Working Document Library" -RelativePath "subfolder1/subfolder2" -UserPrincipalName "user@contoso.com"</dev:code>
+        <dev:remarks>
+          <maml:para>This command creates a shortcut in the subfolder "subfolder1/subfolder2" for the user "user@contoso.com" that points to the Document Library called "Working Document Library" on the SharePoint site "https://contoso.sharepoint.com/site/WorkingSite".</maml:para>
         </dev:remarks>
       </command:example>
     </command:examples>
@@ -861,7 +901,7 @@
       </maml:description>
     </command:details>
     <maml:description>
-      <maml:para>The Remove-odsc function removes a shortcut in a user's OneDrive that points to a SharePoint/Teams document library or sub-folder.</maml:para>
+      <maml:para>The Remove-odsc function removes a shortcut in a user's OneDrive that points to a SharePoint/Teams document library or subfolder.</maml:para>
     </maml:description>
     <command:syntax>
       <command:syntaxItem>
@@ -876,6 +916,18 @@
             <maml:uri />
           </dev:type>
           <dev:defaultValue>False</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+          <maml:name>RelativePath</maml:name>
+          <maml:description>
+            <maml:para>Specifies a string that contains the folder path inside of the user's OneDrive where the shortcut is placed.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
         </command:parameter>
         <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
           <maml:name>ShortcutName</maml:name>
@@ -926,6 +978,18 @@
           </dev:type>
           <dev:defaultValue>False</dev:defaultValue>
         </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+          <maml:name>RelativePath</maml:name>
+          <maml:description>
+            <maml:para>Specifies a string that contains the folder path inside of the user's OneDrive where the shortcut is placed.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
         <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
           <maml:name>ShortcutName</maml:name>
           <maml:description>
@@ -975,6 +1039,18 @@
           <maml:uri />
         </dev:type>
         <dev:defaultValue>False</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+        <maml:name>RelativePath</maml:name>
+        <maml:description>
+          <maml:para>Specifies a string that contains the folder path inside of the user's OneDrive where the shortcut is placed.</maml:para>
+        </maml:description>
+        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
       </command:parameter>
       <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
         <maml:name>ShortcutName</maml:name>
@@ -1052,10 +1128,19 @@
     </maml:alertSet>
     <command:examples>
       <command:example>
-        <maml:title>Example 1: Remove shortcut with ShortcutName and UserPrincipalName</maml:title>
-        <dev:code>PS C:\&gt; Remove-Shortcut -ShortcutName "Working Folder" -UserPrincipalName "user@contoso.com"</dev:code>
+        <maml:title>Example 1: Remove a OneDrive shortcut</maml:title>
+        <dev:code>PS C:\&gt; Remove-odsc -ShortcutName "Working Folder" -UserPrincipalName "user@contoso.com"</dev:code>
         <dev:remarks>
           <maml:para>This command removes the shortcut called "Working Folder" for the user "user@contoso.com".</maml:para>
+        </dev:remarks>
+      </command:example>
+    </command:examples>
+    <command:examples>
+      <command:example>
+        <maml:title>Example 2: Remove a OneDrive shortcut in subfolder</maml:title>
+        <dev:code>PS C:\&gt; Remove-odsc -ShortcutName "Working Folder" -RelativePath "subfolder1/subfolder2" -UserPrincipalName "user@contoso.com"</dev:code>
+        <dev:remarks>
+          <maml:para>This command removes the shortcut called "Working Folder" under "subfolder1/subfolder2" for the user "user@contoso.com".</maml:para>
         </dev:remarks>
       </command:example>
     </command:examples>

@@ -68,16 +68,21 @@ New-odsc -Uri "https://contoso.sharepoint.com/sites/WorkingSite" -DocumentLibrar
 New-odsc -Uri "https://contoso.sharepoint.com/sites/WorkingSite" -DocumentLibrary "Working Document Library" -UserPrincipalName "user@contoso.com" -ShortcutName "Working DL"
 ```
 
-### Creating a new Shortcut to a Sub-Folder in a Document Library
+### Creating a new Shortcut to a Subfolder in a Document Library
 
 ```powershell
 New-odsc -Uri "https://contoso.sharepoint.com/sites/WorkingSite" -DocumentLibrary "Working Document Library" -FolderPath "Working Folder" -UserPrincipalName "user@contoso.com"
 ```
 
-### Creating a new Shortcut to a Sub-Folder in a Document Library with a custom Name
+### Creating a new Shortcut to a Subfolder in a Document Library with a custom Name
 
 ```powershell
 New-odsc -Uri "https://contoso.sharepoint.com/sites/WorkingSite" -DocumentLibrary "Working Document Library" -FolderPath "Working Folder" -UserPrincipalName "user@contoso.com" -ShortcutName "Working"
+```
+
+### Creating a new Shortcut to the root of a document library in a subfolder of the user's OneDrive
+```powershell
+New-odsc -Uri "https://contoso.sharepoint.com/sites/WorkingSite" -DocumentLibrary "Working Document Library" -RelativePath "subfolder1/subfolder2" -UserPrincipalName "user@contoso.com"
 ```
 
 ### Getting an existing Shortcut by Name
@@ -86,8 +91,20 @@ New-odsc -Uri "https://contoso.sharepoint.com/sites/WorkingSite" -DocumentLibrar
 Get-odsc -ShortcutName "Working Folder" -UserPrincipalName "user@contoso.com"
 ```
 
+### Getting an existing Shortcut in a subfolder by Name
+
+```powershell
+Get-odsc -ShortcutName "Working Folder" -RelativePath "subfolder1/subfolder2" -UserPrincipalName "user@contoso.com"
+```
+
 ### Removing an existing Shortcut by Name
 
 ```powershell
 Remove-odsc -ShortcutName "Working Folder" -UserPrincipalName "user@contoso.com"
+```
+
+### Removing an existing Shortcut placed in a subfolder by Name
+
+```powershell
+Remove-odsc -ShortcutName "Working Folder" -RelativePath "subfolder1/subfolder2" -UserPrincipalName "user@contoso.com"
 ```
