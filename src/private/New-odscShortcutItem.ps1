@@ -34,7 +34,16 @@ function New-odscShortcutItem {
         }
     }
 
-    $ShortcutResponse = Invoke-odscApiRequest @CreateRequest -ErrorAction Stop
+    try {
+        $ShortcutResponse = Invoke-odscApiRequest @CreateRequest -ErrorAction Stop
+    } catch {
+        # Name clashes are renamed by Graph, so a conflict here means OneDrive already has a shortcut to this target.
+        if ((Get-odscGraphStatusCode -ErrorRecord $_) -eq 409) {
+            Write-Error "${User}'s OneDrive already has a shortcut to this target, possibly with another name or in another folder. OneDrive allows only one shortcut per target. $($_.Exception.Message)" -ErrorAction Stop
+        }
+
+        throw
+    }
     if (!($ShortcutResponse) -or [string]::IsNullOrWhiteSpace($ShortcutResponse.id)) {
         Write-Error "Error creating OneDrive shortcut '$ShortcutName' for ${User}. Microsoft Graph did not return an item id." -ErrorAction Stop
     }

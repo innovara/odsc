@@ -141,3 +141,19 @@ Describe 'Pipeline input' {
         Should -Invoke Invoke-odscApiRequest -ModuleName odsc -Times 1 -Exactly -ParameterFilter { $Resource -eq 'users/a@contoso.com/drive' }
     }
 }
+
+Describe 'New-odscShortcutItem' {
+    It 'explains a 409 on create as an existing shortcut to the same target' {
+        InModuleScope odsc {
+            Mock Invoke-odscApiRequest { throw 'Microsoft Graph request failed. Method: Post. StatusCode: 409. Error: Conflict' } -ParameterFilter { $Method -eq 'Post' }
+            { New-odscShortcutItem -User 'u@contoso.com' -RemoteItem @{} -ShortcutName 'Lib' } | Should -Throw "*already has a shortcut to this target*StatusCode: 409*"
+        }
+    }
+
+    It 'passes other errors through unchanged' {
+        InModuleScope odsc {
+            Mock Invoke-odscApiRequest { throw 'Microsoft Graph request failed. Method: Post. StatusCode: 403.' } -ParameterFilter { $Method -eq 'Post' }
+            { New-odscShortcutItem -User 'u@contoso.com' -RemoteItem @{} -ShortcutName 'Lib' } | Should -Throw 'Microsoft Graph request failed. Method: Post. StatusCode: 403.'
+        }
+    }
+}
