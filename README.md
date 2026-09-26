@@ -20,6 +20,9 @@
 odsc is a [PowerShell](https://microsoft.com/powershell) [module](https://technet.microsoft.com/en-us/library/dd901839.aspx)
 that provides CLI access to managing SharePoint shortcuts in OneDrive.
 
+It can create, get and remove shortcuts for individual users, keep shortcuts in a desired state, and assign them to many users at once
+from a group, a CSV file, a user filter or a plan file. It works with the global Microsoft cloud and with national clouds (GCC, GCC High, DoD and China).
+
 ## What's New
 
 Check out [CHANGELOG.md](CHANGELOG.md) to review the details of all releases.
@@ -41,6 +44,8 @@ $Shortcut = Get-odsc -ShortcutName "Working Folder" -UserPrincipalName "user@con
 ```
 
 For more example commands, please refer to [USAGE.md](USAGE.md).
+
+If something does not work as expected, see [docs/troubleshooting.md](docs/troubleshooting.md).
 
 ## Licensing
 

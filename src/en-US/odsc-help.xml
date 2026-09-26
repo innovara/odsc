@@ -15,6 +15,18 @@
     <command:syntax>
       <command:syntaxItem>
         <maml:name>Connect-odsc</maml:name>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+          <maml:name>AzureCloudInstance</maml:name>
+          <maml:description>
+            <maml:para>Species an integer that corresponds to an Azure Cloud Instance type (None = 0, AzurePublic = 1, AzureChina = 2, AzureGermany = 3, AzureUsGovernment = 4). When used without -Cloud, 2 selects the China Microsoft Graph endpoint and 4 the US Government (GCC High) endpoint. Prefer -Cloud.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">Int32</command:parameterValue>
+          <dev:type>
+            <maml:name>Int32</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>1</dev:defaultValue>
+        </command:parameter>
         <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
           <maml:name>ClientCertificate</maml:name>
           <maml:description>
@@ -39,6 +51,37 @@
           </dev:type>
           <dev:defaultValue>None</dev:defaultValue>
         </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+          <maml:name>Cloud</maml:name>
+          <maml:description>
+            <maml:para>Specifies the Microsoft cloud to connect to: Global (default), GCC, GCCHigh, DoD or China. It selects both the sign-in authority and the Microsoft Graph endpoint.</maml:para>
+          </maml:description>
+          <command:parameterValueGroup>
+            <command:parameterValue required="false" command:variableLength="false">Global</command:parameterValue>
+            <command:parameterValue required="false" command:variableLength="false">GCC</command:parameterValue>
+            <command:parameterValue required="false" command:variableLength="false">GCCHigh</command:parameterValue>
+            <command:parameterValue required="false" command:variableLength="false">DoD</command:parameterValue>
+            <command:parameterValue required="false" command:variableLength="false">China</command:parameterValue>
+          </command:parameterValueGroup>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>Global</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+          <maml:name>GraphEndpoint</maml:name>
+          <maml:description>
+            <maml:para>Overrides the Microsoft Graph endpoint, for example https://graph.microsoft.us. Use it only for custom or new national cloud endpoints.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
         <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
           <maml:name>TenantId</maml:name>
           <maml:description>
@@ -54,6 +97,18 @@
       </command:syntaxItem>
       <command:syntaxItem>
         <maml:name>Connect-odsc</maml:name>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+          <maml:name>AzureCloudInstance</maml:name>
+          <maml:description>
+            <maml:para>Species an integer that corresponds to an Azure Cloud Instance type (None = 0, AzurePublic = 1, AzureChina = 2, AzureGermany = 3, AzureUsGovernment = 4). When used without -Cloud, 2 selects the China Microsoft Graph endpoint and 4 the US Government (GCC High) endpoint. Prefer -Cloud.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">Int32</command:parameterValue>
+          <dev:type>
+            <maml:name>Int32</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>1</dev:defaultValue>
+        </command:parameter>
         <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
           <maml:name>ClientId</maml:name>
           <maml:description>
@@ -78,6 +133,37 @@
           </dev:type>
           <dev:defaultValue>None</dev:defaultValue>
         </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+          <maml:name>Cloud</maml:name>
+          <maml:description>
+            <maml:para>Specifies the Microsoft cloud to connect to: Global (default), GCC, GCCHigh, DoD or China. It selects both the sign-in authority and the Microsoft Graph endpoint.</maml:para>
+          </maml:description>
+          <command:parameterValueGroup>
+            <command:parameterValue required="false" command:variableLength="false">Global</command:parameterValue>
+            <command:parameterValue required="false" command:variableLength="false">GCC</command:parameterValue>
+            <command:parameterValue required="false" command:variableLength="false">GCCHigh</command:parameterValue>
+            <command:parameterValue required="false" command:variableLength="false">DoD</command:parameterValue>
+            <command:parameterValue required="false" command:variableLength="false">China</command:parameterValue>
+          </command:parameterValueGroup>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>Global</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+          <maml:name>GraphEndpoint</maml:name>
+          <maml:description>
+            <maml:para>Overrides the Microsoft Graph endpoint, for example https://graph.microsoft.us. Use it only for custom or new national cloud endpoints.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
         <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
           <maml:name>TenantId</maml:name>
           <maml:description>
@@ -93,6 +179,18 @@
       </command:syntaxItem>
     </command:syntax>
     <command:parameters>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+        <maml:name>AzureCloudInstance</maml:name>
+        <maml:description>
+          <maml:para>Species an integer that corresponds to an Azure Cloud Instance type (None = 0, AzurePublic = 1, AzureChina = 2, AzureGermany = 3, AzureUsGovernment = 4). When used without -Cloud, 2 selects the China Microsoft Graph endpoint and 4 the US Government (GCC High) endpoint. Prefer -Cloud.</maml:para>
+        </maml:description>
+        <command:parameterValue required="true" variableLength="false">Int32</command:parameterValue>
+        <dev:type>
+          <maml:name>Int32</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>1</dev:defaultValue>
+      </command:parameter>
       <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
         <maml:name>ClientCertificate</maml:name>
         <maml:description>
@@ -125,6 +223,30 @@
         <command:parameterValue required="true" variableLength="false">SecureString</command:parameterValue>
         <dev:type>
           <maml:name>SecureString</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+        <maml:name>Cloud</maml:name>
+        <maml:description>
+          <maml:para>Specifies the Microsoft cloud to connect to: Global (default), GCC, GCCHigh, DoD or China. It selects both the sign-in authority and the Microsoft Graph endpoint.</maml:para>
+        </maml:description>
+        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>Global</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+        <maml:name>GraphEndpoint</maml:name>
+        <maml:description>
+          <maml:para>Overrides the Microsoft Graph endpoint, for example https://graph.microsoft.us. Use it only for custom or new national cloud endpoints.</maml:para>
+        </maml:description>
+        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
           <maml:uri />
         </dev:type>
         <dev:defaultValue>None</dev:defaultValue>
@@ -164,22 +286,29 @@
     </command:returnValues>
     <maml:alertSet>
       <maml:alert>
-        <maml:para></maml:para>
+        <maml:para>Connection errors are always terminating: if the token request fails, the script stops unless the call is wrapped in try/catch.</maml:para>
       </maml:alert>
     </maml:alertSet>
     <command:examples>
       <command:example>
-        <maml:title>Example 1: Connect using a client secret</maml:title>
-        <dev:code>PS C:\&gt; Connect-odsc -TenantId "00000000-0000-0000-0000-000000000000" -ClientId "00000000-0000-0000-0000-000000000000" 000-0000-000000000000" -ClientSecret (ConvertTo-SecureString -String "000000000000000000000000000" -Force)</dev:code>
+        <maml:title>----------- Example 1: Connect using a client secret -----------</maml:title>
+        <dev:code>PS C:\&gt; Connect-odsc -TenantId "00000000-0000-0000-0000-000000000000" -ClientId "00000000-0000-0000-0000-000000000000" -ClientSecret (ConvertTo-SecureString -String "000000000000000000000000000" -AsPlainText -Force)</dev:code>
         <dev:remarks>
           <maml:para>This command connects to the Microsoft Graph API using a client secret configured in the Azure AD application.</maml:para>
         </dev:remarks>
       </command:example>
       <command:example>
-        <maml:title>Example 2: Connect using a client certificate</maml:title>
+        <maml:title>-------- Example 2: Connect using a client certificate --------</maml:title>
         <dev:code>PS C:\&gt; Connect-odsc -TenantId "00000000-0000-0000-0000-000000000000" -ClientId "00000000-0000-0000-0000-000000000000" -ClientCertificate (Get-Item -Path 'Cert:\CurrentUser\My\0000000000000000000000000000000000000000')</dev:code>
         <dev:remarks>
           <maml:para>This command connects to the Microsoft Graph API using a client certificate configured in the Azure AD application.</maml:para>
+        </dev:remarks>
+      </command:example>
+      <command:example>
+        <maml:title>--- Example 3: Connect to a US Government (GCC High) tenant ---</maml:title>
+        <dev:code>PS C:\&gt; Connect-odsc -TenantId "00000000-0000-0000-0000-000000000000" -ClientId "00000000-0000-0000-0000-000000000000" -ClientCertificate $Certificate -Cloud GCCHigh</dev:code>
+        <dev:remarks>
+          <maml:para>This command connects to Microsoft Graph for US Government (https://graph.microsoft.us) using a client certificate.</maml:para>
         </dev:remarks>
       </command:example>
     </command:examples>
@@ -235,7 +364,7 @@
     </maml:alertSet>
     <command:examples>
       <command:example>
-        <maml:title>Example 1: Disconnect</maml:title>
+        <maml:title>-------------------- Example 1: Disconnect --------------------</maml:title>
         <dev:code>PS C:\&gt; Disconnect-odsc</dev:code>
         <dev:remarks>
           <maml:para>This command clears the saved session.</maml:para>
@@ -246,117 +375,6 @@
       <maml:navigationLink>
         <maml:linkText>Online Version:</maml:linkText>
         <maml:uri>https://github.com/innovara/odsc/blob/main/docs/Disconnect-odsc.md</maml:uri>
-      </maml:navigationLink>
-    </command:relatedLinks>
-  </command:command>
-  <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
-    <command:details>
-      <command:name>Get-odscDrive</command:name>
-      <command:verb>Get</command:verb>
-      <command:noun>odscDrive</command:noun>
-      <maml:description>
-        <maml:para>Retrieve the properties and relationships of a Drive resource.</maml:para>
-      </maml:description>
-    </command:details>
-    <maml:description>
-      <maml:para>The Get-odscDrive function gets the metadata for a a user's OneDrive drive.</maml:para>
-    </maml:description>
-    <command:syntax>
-      <command:syntaxItem>
-        <maml:name>Get-odscDrive</maml:name>
-        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
-          <maml:name>UserObjectId</maml:name>
-          <maml:description>
-            <maml:para>Specifies a string that contains the ID of a OneDrive user.</maml:para>
-          </maml:description>
-          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
-          <dev:type>
-            <maml:name>String</maml:name>
-            <maml:uri />
-          </dev:type>
-          <dev:defaultValue>None</dev:defaultValue>
-        </command:parameter>
-      </command:syntaxItem>
-      <command:syntaxItem>
-        <maml:name>Get-odscDrive</maml:name>
-        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
-          <maml:name>UserPrincipalName</maml:name>
-          <maml:description>
-            <maml:para>Specifies a string that contains the user principal name of a OneDrive user.</maml:para>
-          </maml:description>
-          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
-          <dev:type>
-            <maml:name>String</maml:name>
-            <maml:uri />
-          </dev:type>
-          <dev:defaultValue>None</dev:defaultValue>
-        </command:parameter>
-      </command:syntaxItem>
-    </command:syntax>
-    <command:parameters>
-      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
-        <maml:name>UserObjectId</maml:name>
-        <maml:description>
-          <maml:para>Specifies a string that contains the ID of a OneDrive user.</maml:para>
-        </maml:description>
-        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
-        <dev:type>
-          <maml:name>String</maml:name>
-          <maml:uri />
-        </dev:type>
-        <dev:defaultValue>None</dev:defaultValue>
-      </command:parameter>
-      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
-        <maml:name>UserPrincipalName</maml:name>
-        <maml:description>
-          <maml:para>Specifies a string that contains the user principal name of a OneDrive user.</maml:para>
-        </maml:description>
-        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
-        <dev:type>
-          <maml:name>String</maml:name>
-          <maml:uri />
-        </dev:type>
-        <dev:defaultValue>None</dev:defaultValue>
-      </command:parameter>
-    </command:parameters>
-    <command:inputTypes>
-      <command:inputType>
-        <dev:type>
-          <maml:name>None</maml:name>
-        </dev:type>
-        <maml:description>
-          <maml:para></maml:para>
-        </maml:description>
-      </command:inputType>
-    </command:inputTypes>
-    <command:returnValues>
-      <command:returnValue>
-        <dev:type>
-          <maml:name>System.Object</maml:name>
-        </dev:type>
-        <maml:description>
-          <maml:para></maml:para>
-        </maml:description>
-      </command:returnValue>
-    </command:returnValues>
-    <maml:alertSet>
-      <maml:alert>
-        <maml:para></maml:para>
-      </maml:alert>
-    </maml:alertSet>
-    <command:examples>
-      <command:example>
-        <maml:title>-------------- Example 1: Get a OneDrive drive --------------</maml:title>
-        <dev:code>PS C:\&gt;Get-odscDrive -UserPrincipalName "user@contoso.com"</dev:code>
-        <dev:remarks>
-          <maml:para>This command gets the OneDrive drive for the user "user@contoso.com".</maml:para>
-        </dev:remarks>
-      </command:example>
-    </command:examples>
-    <command:relatedLinks>
-      <maml:navigationLink>
-        <maml:linkText>Online Version:</maml:linkText>
-        <maml:uri>https://github.com/innovara/odsc/blob/main/docs/Get-odscDrive.md</maml:uri>
       </maml:navigationLink>
     </command:relatedLinks>
   </command:command>
@@ -375,6 +393,18 @@
     <command:syntax>
       <command:syntaxItem>
         <maml:name>Get-odsc</maml:name>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+          <maml:name>RelativePath</maml:name>
+          <maml:description>
+            <maml:para>Specifies a string that contains the folder path inside of the user's OneDrive where the shortcut is placed.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
         <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
           <maml:name>ShortcutName</maml:name>
           <maml:description>
@@ -387,7 +417,7 @@
           </dev:type>
           <dev:defaultValue>None</dev:defaultValue>
         </command:parameter>
-        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="named" aliases="UserId">
           <maml:name>UserObjectId</maml:name>
           <maml:description>
             <maml:para>Specifies a string that contains the ID of a OneDrive user.</maml:para>
@@ -402,6 +432,18 @@
       </command:syntaxItem>
       <command:syntaxItem>
         <maml:name>Get-odsc</maml:name>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+          <maml:name>RelativePath</maml:name>
+          <maml:description>
+            <maml:para>Specifies a string that contains the folder path inside of the user's OneDrive where the shortcut is placed.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
         <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
           <maml:name>ShortcutName</maml:name>
           <maml:description>
@@ -414,7 +456,7 @@
           </dev:type>
           <dev:defaultValue>None</dev:defaultValue>
         </command:parameter>
-        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="named" aliases="none">
           <maml:name>UserPrincipalName</maml:name>
           <maml:description>
             <maml:para>Specifies a string that contains the user principal name of a OneDrive user.</maml:para>
@@ -429,6 +471,18 @@
       </command:syntaxItem>
     </command:syntax>
     <command:parameters>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+        <maml:name>RelativePath</maml:name>
+        <maml:description>
+          <maml:para>Specifies a string that contains the folder path inside of the user's OneDrive where the shortcut is placed.</maml:para>
+        </maml:description>
+        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
       <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
         <maml:name>ShortcutName</maml:name>
         <maml:description>
@@ -441,7 +495,7 @@
         </dev:type>
         <dev:defaultValue>None</dev:defaultValue>
       </command:parameter>
-      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="named" aliases="UserId">
         <maml:name>UserObjectId</maml:name>
         <maml:description>
           <maml:para>Specifies a string that contains the ID of a OneDrive user.</maml:para>
@@ -453,7 +507,7 @@
         </dev:type>
         <dev:defaultValue>None</dev:defaultValue>
       </command:parameter>
-      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="named" aliases="none">
         <maml:name>UserPrincipalName</maml:name>
         <maml:description>
           <maml:para>Specifies a string that contains the user principal name of a OneDrive user.</maml:para>
@@ -488,21 +542,19 @@
     </command:returnValues>
     <maml:alertSet>
       <maml:alert>
-        <maml:para></maml:para>
+        <maml:para>Errors are non-terminating: the command writes an error and your script continues with the next statement. To stop on an error instead, add -ErrorAction Stop (or set $ErrorActionPreference = 'Stop' for the whole script) and handle the error with try/catch. See the "Error handling" section of USAGE.md.</maml:para>
       </maml:alert>
     </maml:alertSet>
     <command:examples>
       <command:example>
-        <maml:title>Example 1: Get a OneDrive shortcut</maml:title>
+        <maml:title>-------------- Example 1: Get a OneDrive shortcut --------------</maml:title>
         <dev:code>PS C:\&gt; Get-odsc -ShortcutName "Working Folder" -UserPrincipalName "user@contoso.com"</dev:code>
         <dev:remarks>
           <maml:para>This command gets the shortcut called "Working Folder" for the user "user@contoso.com".</maml:para>
         </dev:remarks>
       </command:example>
-    </command:examples>
-    <command:examples>
       <command:example>
-        <maml:title>Example 2: Get a OneDrive shortcut placed in subfolder</maml:title>
+        <maml:title>---- Example 2: Get a OneDrive shortcut placed in subfolder ----</maml:title>
         <dev:code>PS C:\&gt; Get-odsc -ShortcutName "Working Folder" -RelativePath "subfolder1/subfolder2" -UserPrincipalName "user@contoso.com"</dev:code>
         <dev:remarks>
           <maml:para>This command gets the shortcut called "Working Folder" under "subfolder1/subfolder2" for the user "user@contoso.com".</maml:para>
@@ -513,6 +565,1060 @@
       <maml:navigationLink>
         <maml:linkText>Online Version:</maml:linkText>
         <maml:uri>https://github.com/innovara/odsc/blob/main/docs/Get-odsc.md</maml:uri>
+      </maml:navigationLink>
+    </command:relatedLinks>
+  </command:command>
+  <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
+    <command:details>
+      <command:name>Get-odscDrive</command:name>
+      <command:verb>Get</command:verb>
+      <command:noun>odscDrive</command:noun>
+      <maml:description>
+        <maml:para>Retrieve the properties and relationships of a Drive resource.</maml:para>
+      </maml:description>
+    </command:details>
+    <maml:description>
+      <maml:para>The Get-odscDrive function gets the metadata for a a user's OneDrive drive.</maml:para>
+    </maml:description>
+    <command:syntax>
+      <command:syntaxItem>
+        <maml:name>Get-odscDrive</maml:name>
+        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="named" aliases="UserId">
+          <maml:name>UserObjectId</maml:name>
+          <maml:description>
+            <maml:para>Specifies a string that contains the ID of a OneDrive user.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+      </command:syntaxItem>
+      <command:syntaxItem>
+        <maml:name>Get-odscDrive</maml:name>
+        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="named" aliases="none">
+          <maml:name>UserPrincipalName</maml:name>
+          <maml:description>
+            <maml:para>Specifies a string that contains the user principal name of a OneDrive user.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+      </command:syntaxItem>
+    </command:syntax>
+    <command:parameters>
+      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="named" aliases="UserId">
+        <maml:name>UserObjectId</maml:name>
+        <maml:description>
+          <maml:para>Specifies a string that contains the ID of a OneDrive user.</maml:para>
+        </maml:description>
+        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="named" aliases="none">
+        <maml:name>UserPrincipalName</maml:name>
+        <maml:description>
+          <maml:para>Specifies a string that contains the user principal name of a OneDrive user.</maml:para>
+        </maml:description>
+        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+    </command:parameters>
+    <command:inputTypes>
+      <command:inputType>
+        <dev:type>
+          <maml:name>None</maml:name>
+        </dev:type>
+        <maml:description>
+          <maml:para></maml:para>
+        </maml:description>
+      </command:inputType>
+    </command:inputTypes>
+    <command:returnValues>
+      <command:returnValue>
+        <dev:type>
+          <maml:name>System.Object</maml:name>
+        </dev:type>
+        <maml:description>
+          <maml:para></maml:para>
+        </maml:description>
+      </command:returnValue>
+    </command:returnValues>
+    <maml:alertSet>
+      <maml:alert>
+        <maml:para>Errors are non-terminating: the command writes an error and your script continues with the next statement. To stop on an error instead, add -ErrorAction Stop (or set $ErrorActionPreference = 'Stop' for the whole script) and handle the error with try/catch. See the "Error handling" section of USAGE.md.</maml:para>
+      </maml:alert>
+    </maml:alertSet>
+    <command:examples>
+      <command:example>
+        <maml:title>--------------- Example 1: Get a OneDrive drive ---------------</maml:title>
+        <dev:code>PS C:\&gt; Get-odscDrive -UserPrincipalName "user@contoso.com"</dev:code>
+        <dev:remarks>
+          <maml:para>This command gets the OneDrive drive for the user "user@contoso.com".</maml:para>
+        </dev:remarks>
+      </command:example>
+    </command:examples>
+    <command:relatedLinks>
+      <maml:navigationLink>
+        <maml:linkText>Online Version:</maml:linkText>
+        <maml:uri>https://github.com/innovara/odsc/blob/main/docs/Get-odscDrive.md</maml:uri>
+      </maml:navigationLink>
+    </command:relatedLinks>
+  </command:command>
+  <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
+    <command:details>
+      <command:name>Get-odscTargetUser</command:name>
+      <command:verb>Get</command:verb>
+      <command:noun>odscTargetUser</command:noun>
+      <maml:description>
+        <maml:para>Gets the users to target with a shortcut assignment.</maml:para>
+      </maml:description>
+    </command:details>
+    <maml:description>
+      <maml:para>The Get-odscTargetUser function returns user objects with the properties UserPrincipalName, UserObjectId, Mail, AccountEnabled and Source, read from a CSV file, from the transitive members of a group, from an OData filter, or from all users in the tenant. The output can be piped to Invoke-odscShortcutAssignment.</maml:para>
+      <maml:para>Group and filter queries require the GroupMember.Read.All (or broader) and User.Read.All application permissions.</maml:para>
+    </maml:description>
+    <command:syntax>
+      <command:syntaxItem>
+        <maml:name>Get-odscTargetUser</maml:name>
+        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+          <maml:name>AllUsers</maml:name>
+          <maml:description>
+            <maml:para>Returns all users in the tenant.</maml:para>
+          </maml:description>
+          <dev:type>
+            <maml:name>SwitchParameter</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>False</dev:defaultValue>
+        </command:parameter>
+      </command:syntaxItem>
+      <command:syntaxItem>
+        <maml:name>Get-odscTargetUser</maml:name>
+        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+          <maml:name>CsvPath</maml:name>
+          <maml:description>
+            <maml:para>Specifies a CSV file with a UserPrincipalName and/or UserObjectId (or Id) column. A Mail column is also read. Rows without an identifier are skipped with a warning.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+      </command:syntaxItem>
+      <command:syntaxItem>
+        <maml:name>Get-odscTargetUser</maml:name>
+        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+          <maml:name>Filter</maml:name>
+          <maml:description>
+            <maml:para>Specifies an OData filter for users, for example "department eq 'Sales'". Advanced queries are supported.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+      </command:syntaxItem>
+      <command:syntaxItem>
+        <maml:name>Get-odscTargetUser</maml:name>
+        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+          <maml:name>GroupId</maml:name>
+          <maml:description>
+            <maml:para>Specifies the ID of a group. All users that are direct or nested members of the group are returned.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+      </command:syntaxItem>
+    </command:syntax>
+    <command:parameters>
+      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+        <maml:name>AllUsers</maml:name>
+        <maml:description>
+          <maml:para>Returns all users in the tenant.</maml:para>
+        </maml:description>
+        <command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
+        <dev:type>
+          <maml:name>SwitchParameter</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>False</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+        <maml:name>CsvPath</maml:name>
+        <maml:description>
+          <maml:para>Specifies a CSV file with a UserPrincipalName and/or UserObjectId (or Id) column. A Mail column is also read. Rows without an identifier are skipped with a warning.</maml:para>
+        </maml:description>
+        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+        <maml:name>Filter</maml:name>
+        <maml:description>
+          <maml:para>Specifies an OData filter for users, for example "department eq 'Sales'". Advanced queries are supported.</maml:para>
+        </maml:description>
+        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+        <maml:name>GroupId</maml:name>
+        <maml:description>
+          <maml:para>Specifies the ID of a group. All users that are direct or nested members of the group are returned.</maml:para>
+        </maml:description>
+        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+    </command:parameters>
+    <command:inputTypes>
+      <command:inputType>
+        <dev:type>
+          <maml:name>None</maml:name>
+        </dev:type>
+        <maml:description>
+          <maml:para></maml:para>
+        </maml:description>
+      </command:inputType>
+    </command:inputTypes>
+    <command:returnValues>
+      <command:returnValue>
+        <dev:type>
+          <maml:name>System.Object</maml:name>
+        </dev:type>
+        <maml:description>
+          <maml:para></maml:para>
+        </maml:description>
+      </command:returnValue>
+    </command:returnValues>
+    <maml:alertSet>
+      <maml:alert>
+        <maml:para>Errors are non-terminating: the command writes an error and your script continues with the next statement. To stop on an error instead, add -ErrorAction Stop (or set $ErrorActionPreference = 'Stop' for the whole script) and handle the error with try/catch. See the "Error handling" section of USAGE.md.</maml:para>
+      </maml:alert>
+    </maml:alertSet>
+    <command:examples>
+      <command:example>
+        <maml:title>------------ Example 1: Get the members of a group ------------</maml:title>
+        <dev:code>PS C:\&gt; Get-odscTargetUser -GroupId "00000000-0000-0000-0000-000000000000"</dev:code>
+        <dev:remarks>
+          <maml:para>This command returns all users that are direct or nested members of the group.</maml:para>
+        </dev:remarks>
+      </command:example>
+      <command:example>
+        <maml:title>------------- Example 2: Get users from a CSV file -------------</maml:title>
+        <dev:code>PS C:\&gt; Get-odscTargetUser -CsvPath ".\users.csv"</dev:code>
+        <dev:remarks>
+          <maml:para>This command returns the users listed in users.csv.</maml:para>
+        </dev:remarks>
+      </command:example>
+      <command:example>
+        <maml:title>--------- Example 3: Get enabled users in a department ---------</maml:title>
+        <dev:code>PS C:\&gt; Get-odscTargetUser -Filter "department eq 'Sales' and accountEnabled eq true"</dev:code>
+        <dev:remarks>
+          <maml:para>This command returns the enabled users of the Sales department.</maml:para>
+        </dev:remarks>
+      </command:example>
+    </command:examples>
+    <command:relatedLinks>
+      <maml:navigationLink>
+        <maml:linkText>Online Version:</maml:linkText>
+        <maml:uri>https://github.com/innovara/odsc/blob/main/docs/Get-odscTargetUser.md</maml:uri>
+      </maml:navigationLink>
+    </command:relatedLinks>
+  </command:command>
+  <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
+    <command:details>
+      <command:name>Invoke-odscApply</command:name>
+      <command:verb>Invoke</command:verb>
+      <command:noun>odscApply</command:noun>
+      <maml:description>
+        <maml:para>Applies a shortcut plan file.</maml:para>
+      </maml:description>
+    </command:details>
+    <maml:description>
+      <maml:para>The Invoke-odscApply function reads a plan file with Invoke-odscPlan, resolves the target users of each shortcut with Get-odscTargetUser and runs Invoke-odscShortcutAssignment. See Invoke-odscPlan for the plan format.</maml:para>
+    </maml:description>
+    <command:syntax>
+      <command:syntaxItem>
+        <maml:name>Invoke-odscApply</maml:name>
+        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="0" aliases="none">
+          <maml:name>Path</maml:name>
+          <maml:description>
+            <maml:para>Specifies the path to a .json or .psd1 plan file.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="1" aliases="none">
+          <maml:name>ReportPath</maml:name>
+          <maml:description>
+            <maml:para>Specifies a file path where a report of all results is written.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="2" aliases="none">
+          <maml:name>OutputFormat</maml:name>
+          <maml:description>
+            <maml:para>Specifies the report format: Csv (default), Json or Clixml.</maml:para>
+          </maml:description>
+          <command:parameterValueGroup>
+            <command:parameterValue required="false" command:variableLength="false">Csv</command:parameterValue>
+            <command:parameterValue required="false" command:variableLength="false">Json</command:parameterValue>
+            <command:parameterValue required="false" command:variableLength="false">Clixml</command:parameterValue>
+          </command:parameterValueGroup>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+          <maml:name>StopOnError</maml:name>
+          <maml:description>
+            <maml:para>Stops the run at the first problem: a target whose users cannot be resolved, or a user that fails. Without it, the problem is reported and the run continues.</maml:para>
+          </maml:description>
+          <dev:type>
+            <maml:name>SwitchParameter</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>False</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="cf">
+          <maml:name>Confirm</maml:name>
+          <maml:description>
+            <maml:para>Prompts you for confirmation before running the cmdlet.</maml:para>
+          </maml:description>
+          <dev:type>
+            <maml:name>SwitchParameter</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>False</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="wi">
+          <maml:name>WhatIf</maml:name>
+          <maml:description>
+            <maml:para>Shows what would happen if the cmdlet runs. The cmdlet is not run.</maml:para>
+          </maml:description>
+          <dev:type>
+            <maml:name>SwitchParameter</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>False</dev:defaultValue>
+        </command:parameter>
+      </command:syntaxItem>
+    </command:syntax>
+    <command:parameters>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="2" aliases="none">
+        <maml:name>OutputFormat</maml:name>
+        <maml:description>
+          <maml:para>Specifies the report format: Csv (default), Json or Clixml.</maml:para>
+        </maml:description>
+        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="0" aliases="none">
+        <maml:name>Path</maml:name>
+        <maml:description>
+          <maml:para>Specifies the path to a .json or .psd1 plan file.</maml:para>
+        </maml:description>
+        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="1" aliases="none">
+        <maml:name>ReportPath</maml:name>
+        <maml:description>
+          <maml:para>Specifies a file path where a report of all results is written.</maml:para>
+        </maml:description>
+        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+        <maml:name>StopOnError</maml:name>
+        <maml:description>
+          <maml:para>Stops the run at the first problem: a target whose users cannot be resolved, or a user that fails. Without it, the problem is reported and the run continues.</maml:para>
+        </maml:description>
+        <command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
+        <dev:type>
+          <maml:name>SwitchParameter</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>False</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="cf">
+        <maml:name>Confirm</maml:name>
+        <maml:description>
+          <maml:para>Prompts you for confirmation before running the cmdlet.</maml:para>
+        </maml:description>
+        <command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
+        <dev:type>
+          <maml:name>SwitchParameter</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>False</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="wi">
+        <maml:name>WhatIf</maml:name>
+        <maml:description>
+          <maml:para>Shows what would happen if the cmdlet runs. The cmdlet is not run.</maml:para>
+        </maml:description>
+        <command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
+        <dev:type>
+          <maml:name>SwitchParameter</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>False</dev:defaultValue>
+      </command:parameter>
+    </command:parameters>
+    <command:inputTypes>
+      <command:inputType>
+        <dev:type>
+          <maml:name>None</maml:name>
+        </dev:type>
+        <maml:description>
+          <maml:para></maml:para>
+        </maml:description>
+      </command:inputType>
+    </command:inputTypes>
+    <command:returnValues>
+      <command:returnValue>
+        <dev:type>
+          <maml:name>System.Object</maml:name>
+        </dev:type>
+        <maml:description>
+          <maml:para></maml:para>
+        </maml:description>
+      </command:returnValue>
+    </command:returnValues>
+    <maml:alertSet>
+      <maml:alert>
+        <maml:para>A shortcut whose target users cannot be resolved is reported as an error and the next shortcut in the plan is processed; failures for individual users are returned as results with Status Failed. To stop at the first problem instead, use -StopOnError. A plan file that cannot be read always ends the command with an error. The report is written even when the run stops. See the "Error handling" section of USAGE.md.</maml:para>
+      </maml:alert>
+    </maml:alertSet>
+    <command:examples>
+      <command:example>
+        <maml:title>---------- Example 1: Apply a plan and write a report ----------</maml:title>
+        <dev:code>PS C:\&gt; Invoke-odscApply -Path ".\shortcuts.json" -ReportPath ".\report.json" -OutputFormat Json</dev:code>
+        <dev:remarks>
+          <maml:para>This command applies every shortcut in shortcuts.json and writes the results to report.json.</maml:para>
+        </dev:remarks>
+      </command:example>
+      <command:example>
+        <maml:title>------------------ Example 2: Preview a plan ------------------</maml:title>
+        <dev:code>PS C:\&gt; Invoke-odscApply -Path ".\shortcuts.json" -WhatIf</dev:code>
+        <dev:remarks>
+          <maml:para>This command shows which shortcuts would be applied to which targets without making changes.</maml:para>
+        </dev:remarks>
+      </command:example>
+      <command:example>
+        <maml:title>------------- Example 3: Stop at the first problem -------------</maml:title>
+        <dev:code>PS C:\&gt; Invoke-odscApply -Path ".\shortcuts.json" -ReportPath ".\report.csv" -StopOnError</dev:code>
+        <dev:remarks>
+          <maml:para>This command stops the run at the first target that cannot be resolved or user that fails, and still writes report.csv.</maml:para>
+        </dev:remarks>
+      </command:example>
+    </command:examples>
+    <command:relatedLinks>
+      <maml:navigationLink>
+        <maml:linkText>Online Version:</maml:linkText>
+        <maml:uri>https://github.com/innovara/odsc/blob/main/docs/Invoke-odscApply.md</maml:uri>
+      </maml:navigationLink>
+    </command:relatedLinks>
+  </command:command>
+  <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
+    <command:details>
+      <command:name>Invoke-odscPlan</command:name>
+      <command:verb>Invoke</command:verb>
+      <command:noun>odscPlan</command:noun>
+      <maml:description>
+        <maml:para>Reads a shortcut plan file.</maml:para>
+      </maml:description>
+    </command:details>
+    <maml:description>
+      <maml:para>The Invoke-odscPlan function reads a .json or .psd1 plan file and returns one object per shortcut, without making any changes. Use it to validate a plan before running Invoke-odscApply.</maml:para>
+      <maml:para>A plan contains a "shortcuts" list. Each entry supports name, siteUrl, library or libraryId, folderPath, oneDrivePath, state (Present or Absent), conflictAction (Skip, Replace, Rename or Error) and a target with one of groupId, csvPath, filter or allUsers. A relative csvPath is resolved from the folder of the plan file.</maml:para>
+    </maml:description>
+    <command:syntax>
+      <command:syntaxItem>
+        <maml:name>Invoke-odscPlan</maml:name>
+        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="0" aliases="none">
+          <maml:name>Path</maml:name>
+          <maml:description>
+            <maml:para>Specifies the path to a .json or .psd1 plan file.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+      </command:syntaxItem>
+    </command:syntax>
+    <command:parameters>
+      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="0" aliases="none">
+        <maml:name>Path</maml:name>
+        <maml:description>
+          <maml:para>Specifies the path to a .json or .psd1 plan file.</maml:para>
+        </maml:description>
+        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+    </command:parameters>
+    <command:inputTypes>
+      <command:inputType>
+        <dev:type>
+          <maml:name>None</maml:name>
+        </dev:type>
+        <maml:description>
+          <maml:para></maml:para>
+        </maml:description>
+      </command:inputType>
+    </command:inputTypes>
+    <command:returnValues>
+      <command:returnValue>
+        <dev:type>
+          <maml:name>System.Object</maml:name>
+        </dev:type>
+        <maml:description>
+          <maml:para></maml:para>
+        </maml:description>
+      </command:returnValue>
+    </command:returnValues>
+    <maml:alertSet>
+      <maml:alert>
+        <maml:para>Errors are non-terminating: the command writes an error and your script continues with the next statement. To stop on an error instead, add -ErrorAction Stop (or set $ErrorActionPreference = 'Stop' for the whole script) and handle the error with try/catch. See the "Error handling" section of USAGE.md.</maml:para>
+      </maml:alert>
+    </maml:alertSet>
+    <command:examples>
+      <command:example>
+        <maml:title>-------------------- Example 1: Read a plan --------------------</maml:title>
+        <dev:code>PS C:\&gt; Invoke-odscPlan -Path ".\shortcuts.json"</dev:code>
+        <dev:remarks>
+          <maml:para>This command returns the shortcuts defined in shortcuts.json.</maml:para>
+        </dev:remarks>
+      </command:example>
+    </command:examples>
+    <command:relatedLinks>
+      <maml:navigationLink>
+        <maml:linkText>Online Version:</maml:linkText>
+        <maml:uri>https://github.com/innovara/odsc/blob/main/docs/Invoke-odscPlan.md</maml:uri>
+      </maml:navigationLink>
+    </command:relatedLinks>
+  </command:command>
+  <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
+    <command:details>
+      <command:name>Invoke-odscShortcutAssignment</command:name>
+      <command:verb>Invoke</command:verb>
+      <command:noun>odscShortcutAssignment</command:noun>
+      <maml:description>
+        <maml:para>Sets a shortcut state for many users.</maml:para>
+      </maml:description>
+    </command:details>
+    <maml:description>
+      <maml:para>The Invoke-odscShortcutAssignment function runs Set-odscShortcutState for each user. A failure for one user does not stop the run: it is returned as a result with Status Failed and the error in Message. Each result has an Index property that can be used with -ResumeFrom.</maml:para>
+      <maml:para>Users are processed sequentially. Microsoft Graph throttling is handled by retrying with the delay requested by Graph.</maml:para>
+    </maml:description>
+    <command:syntax>
+      <command:syntaxItem>
+        <maml:name>Invoke-odscShortcutAssignment</maml:name>
+        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByValue)" position="0" aliases="none">
+          <maml:name>User</maml:name>
+          <maml:description>
+            <maml:para>Specifies the users to process, as objects with a UserPrincipalName and/or UserObjectId (or Id) property, such as the output of Get-odscTargetUser, or as user principal name strings. Accepts pipeline input.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">Object[]</command:parameterValue>
+          <dev:type>
+            <maml:name>Object[]</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="1" aliases="none">
+          <maml:name>Uri</maml:name>
+          <maml:description>
+            <maml:para>Specifies a string that contains the URL of the SharePoint site.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="10" aliases="none">
+          <maml:name>ReportPath</maml:name>
+          <maml:description>
+            <maml:para>Specifies a file path where a report of all results is written.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="11" aliases="none">
+          <maml:name>OutputFormat</maml:name>
+          <maml:description>
+            <maml:para>Specifies the report format: Csv (default), Json or Clixml.</maml:para>
+          </maml:description>
+          <command:parameterValueGroup>
+            <command:parameterValue required="false" command:variableLength="false">Csv</command:parameterValue>
+            <command:parameterValue required="false" command:variableLength="false">Json</command:parameterValue>
+            <command:parameterValue required="false" command:variableLength="false">Clixml</command:parameterValue>
+          </command:parameterValueGroup>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="2" aliases="none">
+          <maml:name>DocumentLibrary</maml:name>
+          <maml:description>
+            <maml:para>Specifies a string that contains the document library display name. An exact match is preferred; otherwise the first library whose name starts with this value is used. Either -DocumentLibrary or -DocumentLibraryId is required.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="3" aliases="none">
+          <maml:name>DocumentLibraryId</maml:name>
+          <maml:description>
+            <maml:para>Specifies the list ID (GUID) of the document library. Use it instead of -DocumentLibrary to avoid ambiguous name matches.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="4" aliases="none">
+          <maml:name>FolderPath</maml:name>
+          <maml:description>
+            <maml:para>Specifies a string that contains the folder path inside of the document library, relative to the library root (for example "Projects/2026").</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="5" aliases="none">
+          <maml:name>RelativePath</maml:name>
+          <maml:description>
+            <maml:para>Specifies a string that contains the folder path inside of the user's OneDrive where the shortcut will be placed. Missing folders are created.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="6" aliases="none">
+          <maml:name>ShortcutName</maml:name>
+          <maml:description>
+            <maml:para>Specifies a string that contains the name of the shortcut to be placed in the user's OneDrive. Defaults to the document library name, or the folder name when -FolderPath is used.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="7" aliases="none">
+          <maml:name>State</maml:name>
+          <maml:description>
+            <maml:para>Specifies the desired state of the shortcut: Present (default) or Absent. Absent only removes a shortcut that points to the requested target.</maml:para>
+          </maml:description>
+          <command:parameterValueGroup>
+            <command:parameterValue required="false" command:variableLength="false">Present</command:parameterValue>
+            <command:parameterValue required="false" command:variableLength="false">Absent</command:parameterValue>
+          </command:parameterValueGroup>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="8" aliases="none">
+          <maml:name>ConflictAction</maml:name>
+          <maml:description>
+            <maml:para>Specifies what to do when an item with the shortcut name already exists and does not point to the requested target: Skip (default) returns a SkippedConflict result, Error stops with an error, Replace deletes the existing shortcut and creates a new one (items that are not shortcuts are never deleted), and Rename creates the shortcut with a UTC timestamp appended to its name.</maml:para>
+          </maml:description>
+          <command:parameterValueGroup>
+            <command:parameterValue required="false" command:variableLength="false">Skip</command:parameterValue>
+            <command:parameterValue required="false" command:variableLength="false">Replace</command:parameterValue>
+            <command:parameterValue required="false" command:variableLength="false">Rename</command:parameterValue>
+            <command:parameterValue required="false" command:variableLength="false">Error</command:parameterValue>
+          </command:parameterValueGroup>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="9" aliases="none">
+          <maml:name>ResumeFrom</maml:name>
+          <maml:description>
+            <maml:para>Specifies the zero-based index of the first user to process. Every result includes an Index property, so a run that was interrupted can be resumed from the index after the last result.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">Int32</command:parameterValue>
+          <dev:type>
+            <maml:name>Int32</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+          <maml:name>StopOnError</maml:name>
+          <maml:description>
+            <maml:para>Stops the run at the first user that fails, with a terminating error that includes the index to use with -ResumeFrom. Without it, failures are returned as results with Status Failed and the run continues.</maml:para>
+          </maml:description>
+          <dev:type>
+            <maml:name>SwitchParameter</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>False</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="cf">
+          <maml:name>Confirm</maml:name>
+          <maml:description>
+            <maml:para>Prompts you for confirmation before running the cmdlet.</maml:para>
+          </maml:description>
+          <dev:type>
+            <maml:name>SwitchParameter</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>False</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="wi">
+          <maml:name>WhatIf</maml:name>
+          <maml:description>
+            <maml:para>Shows what would happen if the cmdlet runs. The cmdlet is not run.</maml:para>
+          </maml:description>
+          <dev:type>
+            <maml:name>SwitchParameter</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>False</dev:defaultValue>
+        </command:parameter>
+      </command:syntaxItem>
+    </command:syntax>
+    <command:parameters>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="8" aliases="none">
+        <maml:name>ConflictAction</maml:name>
+        <maml:description>
+          <maml:para>Specifies what to do when an item with the shortcut name already exists and does not point to the requested target: Skip (default) returns a SkippedConflict result, Error stops with an error, Replace deletes the existing shortcut and creates a new one (items that are not shortcuts are never deleted), and Rename creates the shortcut with a UTC timestamp appended to its name.</maml:para>
+        </maml:description>
+        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="2" aliases="none">
+        <maml:name>DocumentLibrary</maml:name>
+        <maml:description>
+          <maml:para>Specifies a string that contains the document library display name. An exact match is preferred; otherwise the first library whose name starts with this value is used. Either -DocumentLibrary or -DocumentLibraryId is required.</maml:para>
+        </maml:description>
+        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="3" aliases="none">
+        <maml:name>DocumentLibraryId</maml:name>
+        <maml:description>
+          <maml:para>Specifies the list ID (GUID) of the document library. Use it instead of -DocumentLibrary to avoid ambiguous name matches.</maml:para>
+        </maml:description>
+        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="4" aliases="none">
+        <maml:name>FolderPath</maml:name>
+        <maml:description>
+          <maml:para>Specifies a string that contains the folder path inside of the document library, relative to the library root (for example "Projects/2026").</maml:para>
+        </maml:description>
+        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="11" aliases="none">
+        <maml:name>OutputFormat</maml:name>
+        <maml:description>
+          <maml:para>Specifies the report format: Csv (default), Json or Clixml.</maml:para>
+        </maml:description>
+        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="5" aliases="none">
+        <maml:name>RelativePath</maml:name>
+        <maml:description>
+          <maml:para>Specifies a string that contains the folder path inside of the user's OneDrive where the shortcut will be placed. Missing folders are created.</maml:para>
+        </maml:description>
+        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="10" aliases="none">
+        <maml:name>ReportPath</maml:name>
+        <maml:description>
+          <maml:para>Specifies a file path where a report of all results is written.</maml:para>
+        </maml:description>
+        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="9" aliases="none">
+        <maml:name>ResumeFrom</maml:name>
+        <maml:description>
+          <maml:para>Specifies the zero-based index of the first user to process. Every result includes an Index property, so a run that was interrupted can be resumed from the index after the last result.</maml:para>
+        </maml:description>
+        <command:parameterValue required="true" variableLength="false">Int32</command:parameterValue>
+        <dev:type>
+          <maml:name>Int32</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="6" aliases="none">
+        <maml:name>ShortcutName</maml:name>
+        <maml:description>
+          <maml:para>Specifies a string that contains the name of the shortcut to be placed in the user's OneDrive. Defaults to the document library name, or the folder name when -FolderPath is used.</maml:para>
+        </maml:description>
+        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="7" aliases="none">
+        <maml:name>State</maml:name>
+        <maml:description>
+          <maml:para>Specifies the desired state of the shortcut: Present (default) or Absent. Absent only removes a shortcut that points to the requested target.</maml:para>
+        </maml:description>
+        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+        <maml:name>StopOnError</maml:name>
+        <maml:description>
+          <maml:para>Stops the run at the first user that fails, with a terminating error that includes the index to use with -ResumeFrom. Without it, failures are returned as results with Status Failed and the run continues.</maml:para>
+        </maml:description>
+        <command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
+        <dev:type>
+          <maml:name>SwitchParameter</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>False</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="1" aliases="none">
+        <maml:name>Uri</maml:name>
+        <maml:description>
+          <maml:para>Specifies a string that contains the URL of the SharePoint site.</maml:para>
+        </maml:description>
+        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByValue)" position="0" aliases="none">
+        <maml:name>User</maml:name>
+        <maml:description>
+          <maml:para>Specifies the users to process, as objects with a UserPrincipalName and/or UserObjectId (or Id) property, such as the output of Get-odscTargetUser, or as user principal name strings. Accepts pipeline input.</maml:para>
+        </maml:description>
+        <command:parameterValue required="true" variableLength="false">Object[]</command:parameterValue>
+        <dev:type>
+          <maml:name>Object[]</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="cf">
+        <maml:name>Confirm</maml:name>
+        <maml:description>
+          <maml:para>Prompts you for confirmation before running the cmdlet.</maml:para>
+        </maml:description>
+        <command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
+        <dev:type>
+          <maml:name>SwitchParameter</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>False</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="wi">
+        <maml:name>WhatIf</maml:name>
+        <maml:description>
+          <maml:para>Shows what would happen if the cmdlet runs. The cmdlet is not run.</maml:para>
+        </maml:description>
+        <command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
+        <dev:type>
+          <maml:name>SwitchParameter</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>False</dev:defaultValue>
+      </command:parameter>
+    </command:parameters>
+    <command:inputTypes>
+      <command:inputType>
+        <dev:type>
+          <maml:name>System.Object[]</maml:name>
+        </dev:type>
+        <maml:description>
+          <maml:para></maml:para>
+        </maml:description>
+      </command:inputType>
+    </command:inputTypes>
+    <command:returnValues>
+      <command:returnValue>
+        <dev:type>
+          <maml:name>System.Object</maml:name>
+        </dev:type>
+        <maml:description>
+          <maml:para></maml:para>
+        </maml:description>
+      </command:returnValue>
+    </command:returnValues>
+    <maml:alertSet>
+      <maml:alert>
+        <maml:para>A failure for one user does not stop the run: it is returned as a result with Status Failed and the next user is processed. To stop at the first failed user instead, use -StopOnError. The error message includes the index to use with -ResumeFrom once the cause has been fixed, and the report is still written. -ErrorAction does not change this behaviour, because per-user failures are returned as results rather than written as errors. See the "Error handling" section of USAGE.md.</maml:para>
+      </maml:alert>
+    </maml:alertSet>
+    <command:examples>
+      <command:example>
+        <maml:title>---- Example 1: Assign a shortcut to the members of a group ----</maml:title>
+        <dev:code>PS C:\&gt; Get-odscTargetUser -GroupId "00000000-0000-0000-0000-000000000000" | Invoke-odscShortcutAssignment -Uri "https://contoso.sharepoint.com/sites/WorkingSite" -DocumentLibrary "Working Document Library" -ReportPath ".\report.csv"</dev:code>
+        <dev:remarks>
+          <maml:para>This command creates the shortcut for every member of the group and writes the results to report.csv.</maml:para>
+        </dev:remarks>
+      </command:example>
+      <command:example>
+        <maml:title>------------- Example 2: Resume an interrupted run -------------</maml:title>
+        <dev:code>PS C:\&gt; $Users = Get-odscTargetUser -CsvPath ".\users.csv"
+Invoke-odscShortcutAssignment -User $Users -Uri "https://contoso.sharepoint.com/sites/WorkingSite" -DocumentLibrary "Working Document Library" -ResumeFrom 250</dev:code>
+        <dev:remarks>
+          <maml:para>This command processes the users from index 250 onwards.</maml:para>
+        </dev:remarks>
+      </command:example>
+      <command:example>
+        <maml:title>------------------ Example 3: Preview changes ------------------</maml:title>
+        <dev:code>PS C:\&gt; Get-odscTargetUser -CsvPath ".\users.csv" | Invoke-odscShortcutAssignment -Uri "https://contoso.sharepoint.com/sites/WorkingSite" -DocumentLibrary "Working Document Library" -WhatIf</dev:code>
+        <dev:remarks>
+          <maml:para>This command shows which users would be processed without making changes.</maml:para>
+        </dev:remarks>
+      </command:example>
+      <command:example>
+        <maml:title>------------- Example 4: Stop at the first failure -------------</maml:title>
+        <dev:code>PS C:\&gt; try {
+    Get-odscTargetUser -CsvPath ".\users.csv" | Invoke-odscShortcutAssignment -Uri "https://contoso.sharepoint.com/sites/WorkingSite" -DocumentLibrary "Working Document Library" -ReportPath ".\report.csv" -StopOnError
+} catch {
+    Write-Warning $_.Exception.Message
+}</dev:code>
+        <dev:remarks>
+          <maml:para>This command stops at the first user that fails. The warning shows the index to pass to -ResumeFrom after fixing the cause, and report.csv contains the results up to that user.</maml:para>
+        </dev:remarks>
+      </command:example>
+    </command:examples>
+    <command:relatedLinks>
+      <maml:navigationLink>
+        <maml:linkText>Online Version:</maml:linkText>
+        <maml:uri>https://github.com/innovara/odsc/blob/main/docs/Invoke-odscShortcutAssignment.md</maml:uri>
       </maml:navigationLink>
     </command:relatedLinks>
   </command:command>
@@ -531,21 +1637,22 @@
     <command:syntax>
       <command:syntaxItem>
         <maml:name>New-odsc</maml:name>
-        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="cf">
-          <maml:name>Confirm</maml:name>
-          <maml:description>
-            <maml:para>Prompts you for confirmation before running the cmdlet.</maml:para>
-          </maml:description>
-          <dev:type>
-            <maml:name>SwitchParameter</maml:name>
-            <maml:uri />
-          </dev:type>
-          <dev:defaultValue>False</dev:defaultValue>
-        </command:parameter>
-        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
           <maml:name>DocumentLibrary</maml:name>
           <maml:description>
-            <maml:para>Specifies a string that contains the document library name.</maml:para>
+            <maml:para>Specifies a string that contains the document library name. An exact match is preferred; otherwise the first library whose name starts with this value is used. Either -DocumentLibrary or -DocumentLibraryId is required.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+          <maml:name>DocumentLibraryId</maml:name>
+          <maml:description>
+            <maml:para>Specifies the list ID (GUID) of the document library. Use it instead of -DocumentLibrary to avoid ambiguous name matches.</maml:para>
           </maml:description>
           <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
           <dev:type>
@@ -567,91 +1674,6 @@
           <dev:defaultValue>None</dev:defaultValue>
         </command:parameter>
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
-          <maml:name>ShortcutName</maml:name>
-          <maml:description>
-            <maml:para>Specifies a string that contains the name of the shortcut to be placed in the user's OneDrive.</maml:para>
-          </maml:description>
-          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
-          <dev:type>
-            <maml:name>String</maml:name>
-            <maml:uri />
-          </dev:type>
-          <dev:defaultValue>None</dev:defaultValue>
-        </command:parameter>
-        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
-          <maml:name>Uri</maml:name>
-          <maml:description>
-            <maml:para>Specifeis a string that contains the URL of the SharePoint site.</maml:para>
-          </maml:description>
-          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
-          <dev:type>
-            <maml:name>String</maml:name>
-            <maml:uri />
-          </dev:type>
-          <dev:defaultValue>None</dev:defaultValue>
-        </command:parameter>
-        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
-          <maml:name>UserObjectId</maml:name>
-          <maml:description>
-            <maml:para>Specifies a string that contains the ID of a OneDrive user.</maml:para>
-          </maml:description>
-          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
-          <dev:type>
-            <maml:name>String</maml:name>
-            <maml:uri />
-          </dev:type>
-          <dev:defaultValue>None</dev:defaultValue>
-        </command:parameter>
-        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="wi">
-          <maml:name>WhatIf</maml:name>
-          <maml:description>
-            <maml:para>Shows what would happen if the cmdlet runs. The cmdlet is not run.</maml:para>
-          </maml:description>
-          <dev:type>
-            <maml:name>SwitchParameter</maml:name>
-            <maml:uri />
-          </dev:type>
-          <dev:defaultValue>False</dev:defaultValue>
-        </command:parameter>
-      </command:syntaxItem>
-      <command:syntaxItem>
-        <maml:name>New-odsc</maml:name>
-        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="cf">
-          <maml:name>Confirm</maml:name>
-          <maml:description>
-            <maml:para>Prompts you for confirmation before running the cmdlet.</maml:para>
-          </maml:description>
-          <dev:type>
-            <maml:name>SwitchParameter</maml:name>
-            <maml:uri />
-          </dev:type>
-          <dev:defaultValue>False</dev:defaultValue>
-        </command:parameter>
-        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
-          <maml:name>DocumentLibrary</maml:name>
-          <maml:description>
-            <maml:para>Specifies a string that contains the document library name.</maml:para>
-          </maml:description>
-          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
-          <dev:type>
-            <maml:name>String</maml:name>
-            <maml:uri />
-          </dev:type>
-          <dev:defaultValue>None</dev:defaultValue>
-        </command:parameter>
-        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
-          <maml:name>FolderPath</maml:name>
-          <maml:description>
-            <maml:para>Specifies a string that contains the folder path inside of the document library.</maml:para>
-          </maml:description>
-          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
-          <dev:type>
-            <maml:name>String</maml:name>
-            <maml:uri />
-          </dev:type>
-          <dev:defaultValue>None</dev:defaultValue>
-        </command:parameter>
-         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
           <maml:name>RelativePath</maml:name>
           <maml:description>
             <maml:para>Specifies a string that contains the folder path inside of the user's OneDrive where the shortcut will be placed.</maml:para>
@@ -687,7 +1709,116 @@
           </dev:type>
           <dev:defaultValue>None</dev:defaultValue>
         </command:parameter>
+        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="named" aliases="UserId">
+          <maml:name>UserObjectId</maml:name>
+          <maml:description>
+            <maml:para>Specifies a string that contains the ID of a OneDrive user.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="cf">
+          <maml:name>Confirm</maml:name>
+          <maml:description>
+            <maml:para>Prompts you for confirmation before running the cmdlet.</maml:para>
+          </maml:description>
+          <dev:type>
+            <maml:name>SwitchParameter</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>False</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="wi">
+          <maml:name>WhatIf</maml:name>
+          <maml:description>
+            <maml:para>Shows what would happen if the cmdlet runs. The cmdlet is not run.</maml:para>
+          </maml:description>
+          <dev:type>
+            <maml:name>SwitchParameter</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>False</dev:defaultValue>
+        </command:parameter>
+      </command:syntaxItem>
+      <command:syntaxItem>
+        <maml:name>New-odsc</maml:name>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+          <maml:name>DocumentLibrary</maml:name>
+          <maml:description>
+            <maml:para>Specifies a string that contains the document library name. An exact match is preferred; otherwise the first library whose name starts with this value is used. Either -DocumentLibrary or -DocumentLibraryId is required.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+          <maml:name>DocumentLibraryId</maml:name>
+          <maml:description>
+            <maml:para>Specifies the list ID (GUID) of the document library. Use it instead of -DocumentLibrary to avoid ambiguous name matches.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+          <maml:name>FolderPath</maml:name>
+          <maml:description>
+            <maml:para>Specifies a string that contains the folder path inside of the document library.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+          <maml:name>RelativePath</maml:name>
+          <maml:description>
+            <maml:para>Specifies a string that contains the folder path inside of the user's OneDrive where the shortcut will be placed.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+          <maml:name>ShortcutName</maml:name>
+          <maml:description>
+            <maml:para>Specifies a string that contains the name of the shortcut to be placed in the user's OneDrive.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
         <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+          <maml:name>Uri</maml:name>
+          <maml:description>
+            <maml:para>Specifies a string that contains the URL of the SharePoint site.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="named" aliases="none">
           <maml:name>UserPrincipalName</maml:name>
           <maml:description>
             <maml:para>Specifies a string that contains the user principal name of a OneDrive user.</maml:para>
@@ -698,6 +1829,17 @@
             <maml:uri />
           </dev:type>
           <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="cf">
+          <maml:name>Confirm</maml:name>
+          <maml:description>
+            <maml:para>Prompts you for confirmation before running the cmdlet.</maml:para>
+          </maml:description>
+          <dev:type>
+            <maml:name>SwitchParameter</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>False</dev:defaultValue>
         </command:parameter>
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="wi">
           <maml:name>WhatIf</maml:name>
@@ -713,22 +1855,22 @@
       </command:syntaxItem>
     </command:syntax>
     <command:parameters>
-      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="cf">
-        <maml:name>Confirm</maml:name>
-        <maml:description>
-          <maml:para>Prompts you for confirmation before running the cmdlet.</maml:para>
-        </maml:description>
-        <command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
-        <dev:type>
-          <maml:name>SwitchParameter</maml:name>
-          <maml:uri />
-        </dev:type>
-        <dev:defaultValue>False</dev:defaultValue>
-      </command:parameter>
-      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
         <maml:name>DocumentLibrary</maml:name>
         <maml:description>
-          <maml:para>Specifies a string that contains the document library name.</maml:para>
+          <maml:para>Specifies a string that contains the document library name. An exact match is preferred; otherwise the first library whose name starts with this value is used. Either -DocumentLibrary or -DocumentLibraryId is required.</maml:para>
+        </maml:description>
+        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+        <maml:name>DocumentLibraryId</maml:name>
+        <maml:description>
+          <maml:para>Specifies the list ID (GUID) of the document library. Use it instead of -DocumentLibrary to avoid ambiguous name matches.</maml:para>
         </maml:description>
         <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
         <dev:type>
@@ -785,7 +1927,7 @@
         </dev:type>
         <dev:defaultValue>None</dev:defaultValue>
       </command:parameter>
-      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="named" aliases="UserId">
         <maml:name>UserObjectId</maml:name>
         <maml:description>
           <maml:para>Specifies a string that contains the ID of a OneDrive user.</maml:para>
@@ -797,7 +1939,7 @@
         </dev:type>
         <dev:defaultValue>None</dev:defaultValue>
       </command:parameter>
-      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="named" aliases="none">
         <maml:name>UserPrincipalName</maml:name>
         <maml:description>
           <maml:para>Specifies a string that contains the user principal name of a OneDrive user.</maml:para>
@@ -808,6 +1950,18 @@
           <maml:uri />
         </dev:type>
         <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="cf">
+        <maml:name>Confirm</maml:name>
+        <maml:description>
+          <maml:para>Prompts you for confirmation before running the cmdlet.</maml:para>
+        </maml:description>
+        <command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
+        <dev:type>
+          <maml:name>SwitchParameter</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>False</dev:defaultValue>
       </command:parameter>
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="wi">
         <maml:name>WhatIf</maml:name>
@@ -844,43 +1998,62 @@
     </command:returnValues>
     <maml:alertSet>
       <maml:alert>
-        <maml:para></maml:para>
+        <maml:para>Errors are non-terminating: the command writes an error and your script continues with the next statement. To stop on an error instead, add -ErrorAction Stop (or set $ErrorActionPreference = 'Stop' for the whole script) and handle the error with try/catch. See the "Error handling" section of USAGE.md.</maml:para>
       </maml:alert>
     </maml:alertSet>
     <command:examples>
       <command:example>
         <maml:title>Example 1: Create a shortcut to the root of a document library</maml:title>
-        <dev:code>PS C:\&gt; New-odsc -SiteUrl "https://contoso.sharepoint.com/sites/WorkingSite" -DocumentLibrary "Working Document Library" -UserPrincipalName "user@contoso.com"</dev:code>
+        <dev:code>PS C:\&gt; New-odsc -Uri "https://contoso.sharepoint.com/sites/WorkingSite" -DocumentLibrary "Working Document Library" -UserPrincipalName "user@contoso.com"</dev:code>
         <dev:remarks>
           <maml:para>This command creates a shortcut called "Working Document Library" for the user "user@contoso.com" that points to the Document Library called "Working Document Library" on the SharePoint site "https://contoso.sharepoint.com/sites/WorkingSite".</maml:para>
         </dev:remarks>
       </command:example>
       <command:example>
         <maml:title>Example 2: Create a shortcut to the root of a document library with a custom name</maml:title>
-        <dev:code>PS C:\&gt; New-odsc -SiteUrl "https://contoso.sharepoint.com/sites/WorkingSite" -DocumentLibrary "Working Document Library" -UserPrincipalName "user@contoso.com" -ShortcutName "Working DL"</dev:code>
+        <dev:code>PS C:\&gt; New-odsc -Uri "https://contoso.sharepoint.com/sites/WorkingSite" -DocumentLibrary "Working Document Library"  -ShortcutName "Working DL" -UserPrincipalName "user@contoso.com"</dev:code>
         <dev:remarks>
           <maml:para>This command creates a shortcut called "Working DL" for the user "user@contoso.com" that points to the Document Library called "Working Document Library" on the SharePoint site "https://contoso.sharepoint.com/sites/WorkingSite".</maml:para>
         </dev:remarks>
       </command:example>
       <command:example>
         <maml:title>Example 3: Create a shortcut to a subfolder of a document library</maml:title>
-        <dev:code>PS C:\&gt; New-odsc -SiteUrl "https://contoso.sharepoint.com/sites/WorkingSite" -DocumentLibrary "Working Document Library" -FolderPath "Working Folder" -UserPrincipalName "user@contoso.com"</dev:code>
+        <dev:code>PS C:\&gt; New-odsc -Uri "https://contoso.sharepoint.com/sites/WorkingSite" -DocumentLibrary "Working Document Library" -FolderPath "Working Folder" -UserPrincipalName "user@contoso.com"</dev:code>
         <dev:remarks>
           <maml:para>This command creates a shortcut called "Working Folder" for the user "user@contoso.com" that points to the subfolder "Working Folder" of the Document Library called "Working Document Library" on the SharePoint site "https://contoso.sharepoint.com/sites/WorkingSite".</maml:para>
         </dev:remarks>
       </command:example>
       <command:example>
         <maml:title>Example 4: Create a shortcut to a subfolder of a document library with a custom name</maml:title>
-        <dev:code>PS C:\&gt; New-odsc -SiteUrl "https://contoso.sharepoint.com/sites/WorkingSite" -DocumentLibrary "Working Document Library" -FolderPath "Working Folder"  -ShortcutName "Working" -UserPrincipalName "user@contoso.com"</dev:code>
+        <dev:code>PS C:\&gt; New-odsc -Uri "https://contoso.sharepoint.com/sites/WorkingSite" -DocumentLibrary "Working Document Library" -FolderPath "Working Folder"  -ShortcutName "Working" -UserPrincipalName "user@contoso.com"</dev:code>
         <dev:remarks>
           <maml:para>This command creates a shortcut called "Working" for the user "user@contoso.com" that points to the subfolder "Working Folder" of the Document Library called "Working Document Library" on the SharePoint site "https://contoso.sharepoint.com/sites/WorkingSite".</maml:para>
         </dev:remarks>
       </command:example>
       <command:example>
         <maml:title>Example 5: Create a shortcut to the root of a document library in a subfolder of the user's OneDrive</maml:title>
-        <dev:code>PS C:\&gt; New-odsc -SiteUrl "https://contoso.sharepoint.com/sites/WorkingSite" -DocumentLibrary "Working Document Library" -RelativePath "subfolder1/subfolder2" -UserPrincipalName "user@contoso.com"</dev:code>
+        <dev:code>PS C:\&gt; New-odsc -Uri "https://contoso.sharepoint.com/sites/WorkingSite" -DocumentLibrary "Working Document Library" -RelativePath "subfolder1/subfolder2" -UserPrincipalName "user@contoso.com"</dev:code>
         <dev:remarks>
           <maml:para>This command creates a shortcut in the subfolder "subfolder1/subfolder2" for the user "user@contoso.com" that points to the Document Library called "Working Document Library" on the SharePoint site "https://contoso.sharepoint.com/sites/WorkingSite".</maml:para>
+        </dev:remarks>
+      </command:example>
+      <command:example>
+        <maml:title>-- Example 6: Create a shortcut using the document library ID --</maml:title>
+        <dev:code>PS C:\&gt; New-odsc -Uri "https://contoso.sharepoint.com/sites/WorkingSite" -DocumentLibraryId "00000000-0000-0000-0000-000000000000" -UserPrincipalName "user@contoso.com"</dev:code>
+        <dev:remarks>
+          <maml:para>This command creates a shortcut for the user "user@contoso.com" that points to the Document Library with the given ID. The shortcut is named after the library's display name.</maml:para>
+        </dev:remarks>
+      </command:example>
+      <command:example>
+        <maml:title>- Example 7: Stop the script if the shortcut cannot be created -</maml:title>
+        <dev:code>PS C:\&gt; try {
+    New-odsc -Uri "https://contoso.sharepoint.com/sites/WorkingSite" -DocumentLibrary "Working Document Library" -UserPrincipalName "user@contoso.com" -ErrorAction Stop
+} catch {
+    Write-Warning "Shortcut not created: $($_.Exception.Message)"
+    exit 1
+}</dev:code>
+        <dev:remarks>
+          <maml:para>By default an error is written and the script continues. With -ErrorAction Stop the error can be handled with try/catch, here by ending the script.</maml:para>
         </dev:remarks>
       </command:example>
     </command:examples>
@@ -906,10 +2079,10 @@
     <command:syntax>
       <command:syntaxItem>
         <maml:name>Remove-odsc</maml:name>
-        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="cf">
-          <maml:name>Confirm</maml:name>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+          <maml:name>PassThru</maml:name>
           <maml:description>
-            <maml:para>Prompts you for confirmation before running the cmdlet.</maml:para>
+            <maml:para>Returns an odsc.ShortcutResult object describing the removed shortcut instead of the Microsoft Graph response.</maml:para>
           </maml:description>
           <dev:type>
             <maml:name>SwitchParameter</maml:name>
@@ -941,7 +2114,7 @@
           </dev:type>
           <dev:defaultValue>None</dev:defaultValue>
         </command:parameter>
-        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="named" aliases="UserId">
           <maml:name>UserObjectId</maml:name>
           <maml:description>
             <maml:para>Specifies a string that contains the ID of a OneDrive user.</maml:para>
@@ -952,6 +2125,17 @@
             <maml:uri />
           </dev:type>
           <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="cf">
+          <maml:name>Confirm</maml:name>
+          <maml:description>
+            <maml:para>Prompts you for confirmation before running the cmdlet.</maml:para>
+          </maml:description>
+          <dev:type>
+            <maml:name>SwitchParameter</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>False</dev:defaultValue>
         </command:parameter>
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="wi">
           <maml:name>WhatIf</maml:name>
@@ -967,10 +2151,10 @@
       </command:syntaxItem>
       <command:syntaxItem>
         <maml:name>Remove-odsc</maml:name>
-        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="cf">
-          <maml:name>Confirm</maml:name>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+          <maml:name>PassThru</maml:name>
           <maml:description>
-            <maml:para>Prompts you for confirmation before running the cmdlet.</maml:para>
+            <maml:para>Returns an odsc.ShortcutResult object describing the removed shortcut instead of the Microsoft Graph response.</maml:para>
           </maml:description>
           <dev:type>
             <maml:name>SwitchParameter</maml:name>
@@ -1002,7 +2186,7 @@
           </dev:type>
           <dev:defaultValue>None</dev:defaultValue>
         </command:parameter>
-        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="named" aliases="none">
           <maml:name>UserPrincipalName</maml:name>
           <maml:description>
             <maml:para>Specifies a string that contains the user principal name of a OneDrive user.</maml:para>
@@ -1013,6 +2197,17 @@
             <maml:uri />
           </dev:type>
           <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="cf">
+          <maml:name>Confirm</maml:name>
+          <maml:description>
+            <maml:para>Prompts you for confirmation before running the cmdlet.</maml:para>
+          </maml:description>
+          <dev:type>
+            <maml:name>SwitchParameter</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>False</dev:defaultValue>
         </command:parameter>
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="wi">
           <maml:name>WhatIf</maml:name>
@@ -1028,10 +2223,10 @@
       </command:syntaxItem>
     </command:syntax>
     <command:parameters>
-      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="cf">
-        <maml:name>Confirm</maml:name>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+        <maml:name>PassThru</maml:name>
         <maml:description>
-          <maml:para>Prompts you for confirmation before running the cmdlet.</maml:para>
+          <maml:para>Returns an odsc.ShortcutResult object describing the removed shortcut instead of the Microsoft Graph response.</maml:para>
         </maml:description>
         <command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
         <dev:type>
@@ -1064,7 +2259,7 @@
         </dev:type>
         <dev:defaultValue>None</dev:defaultValue>
       </command:parameter>
-      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="named" aliases="UserId">
         <maml:name>UserObjectId</maml:name>
         <maml:description>
           <maml:para>Specifies a string that contains the ID of a OneDrive user.</maml:para>
@@ -1076,7 +2271,7 @@
         </dev:type>
         <dev:defaultValue>None</dev:defaultValue>
       </command:parameter>
-      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="named" aliases="none">
         <maml:name>UserPrincipalName</maml:name>
         <maml:description>
           <maml:para>Specifies a string that contains the user principal name of a OneDrive user.</maml:para>
@@ -1087,6 +2282,18 @@
           <maml:uri />
         </dev:type>
         <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="cf">
+        <maml:name>Confirm</maml:name>
+        <maml:description>
+          <maml:para>Prompts you for confirmation before running the cmdlet.</maml:para>
+        </maml:description>
+        <command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
+        <dev:type>
+          <maml:name>SwitchParameter</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>False</dev:defaultValue>
       </command:parameter>
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="wi">
         <maml:name>WhatIf</maml:name>
@@ -1123,21 +2330,19 @@
     </command:returnValues>
     <maml:alertSet>
       <maml:alert>
-        <maml:para></maml:para>
+        <maml:para>Errors are non-terminating: the command writes an error and your script continues with the next statement. To stop on an error instead, add -ErrorAction Stop (or set $ErrorActionPreference = 'Stop' for the whole script) and handle the error with try/catch. See the "Error handling" section of USAGE.md.</maml:para>
       </maml:alert>
     </maml:alertSet>
     <command:examples>
       <command:example>
-        <maml:title>Example 1: Remove a OneDrive shortcut</maml:title>
+        <maml:title>------------ Example 1: Remove a OneDrive shortcut ------------</maml:title>
         <dev:code>PS C:\&gt; Remove-odsc -ShortcutName "Working Folder" -UserPrincipalName "user@contoso.com"</dev:code>
         <dev:remarks>
           <maml:para>This command removes the shortcut called "Working Folder" for the user "user@contoso.com".</maml:para>
         </dev:remarks>
       </command:example>
-    </command:examples>
-    <command:examples>
       <command:example>
-        <maml:title>Example 2: Remove a OneDrive shortcut in subfolder</maml:title>
+        <maml:title>------ Example 2: Remove a OneDrive shortcut in subfolder ------</maml:title>
         <dev:code>PS C:\&gt; Remove-odsc -ShortcutName "Working Folder" -RelativePath "subfolder1/subfolder2" -UserPrincipalName "user@contoso.com"</dev:code>
         <dev:remarks>
           <maml:para>This command removes the shortcut called "Working Folder" under "subfolder1/subfolder2" for the user "user@contoso.com".</maml:para>
@@ -1148,6 +2353,770 @@
       <maml:navigationLink>
         <maml:linkText>Online Version:</maml:linkText>
         <maml:uri>https://github.com/innovara/odsc/blob/main/docs/Remove-odsc.md</maml:uri>
+      </maml:navigationLink>
+    </command:relatedLinks>
+  </command:command>
+  <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
+    <command:details>
+      <command:name>Set-odscShortcutState</command:name>
+      <command:verb>Set</command:verb>
+      <command:noun>odscShortcutState</command:noun>
+      <maml:description>
+        <maml:para>Ensures a OneDrive shortcut to SharePoint is present or absent.</maml:para>
+      </maml:description>
+    </command:details>
+    <maml:description>
+      <maml:para>The Set-odscShortcutState function makes sure that a user's OneDrive contains (or does not contain) a shortcut pointing to a SharePoint/Teams document library or subfolder. It can be run repeatedly: when a shortcut with the requested name already points to the requested target, nothing is changed and a Compliant result is returned.</maml:para>
+      <maml:para>It returns an odsc.ShortcutResult object with the properties User, ShortcutName, Action, Status (Created, Compliant, SkippedConflict, Removed or AlreadyAbsent), TargetSite, TargetLibrary, TargetFolderPath, DriveItemId, WebUrl, Message, Response and Timestamp.</maml:para>
+    </maml:description>
+    <command:syntax>
+      <command:syntaxItem>
+        <maml:name>Set-odscShortcutState</maml:name>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+          <maml:name>ConflictAction</maml:name>
+          <maml:description>
+            <maml:para>Specifies what to do when an item with the shortcut name already exists and does not point to the requested target: Skip (default) returns a SkippedConflict result, Error stops with an error, Replace deletes the existing shortcut and creates a new one (items that are not shortcuts are never deleted), and Rename creates the shortcut with a UTC timestamp appended to its name.</maml:para>
+          </maml:description>
+          <command:parameterValueGroup>
+            <command:parameterValue required="false" command:variableLength="false">Skip</command:parameterValue>
+            <command:parameterValue required="false" command:variableLength="false">Replace</command:parameterValue>
+            <command:parameterValue required="false" command:variableLength="false">Rename</command:parameterValue>
+            <command:parameterValue required="false" command:variableLength="false">Error</command:parameterValue>
+          </command:parameterValueGroup>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+          <maml:name>DocumentLibrary</maml:name>
+          <maml:description>
+            <maml:para>Specifies a string that contains the document library display name. An exact match is preferred; otherwise the first library whose name starts with this value is used. Either -DocumentLibrary or -DocumentLibraryId is required.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+          <maml:name>DocumentLibraryId</maml:name>
+          <maml:description>
+            <maml:para>Specifies the list ID (GUID) of the document library. Use it instead of -DocumentLibrary to avoid ambiguous name matches.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+          <maml:name>FolderPath</maml:name>
+          <maml:description>
+            <maml:para>Specifies a string that contains the folder path inside of the document library, relative to the library root (for example "Projects/2026").</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+          <maml:name>PassThru</maml:name>
+          <maml:description>
+            <maml:para>Returns the Microsoft Graph drive item of the created or already compliant shortcut instead of an odsc.ShortcutResult object.</maml:para>
+          </maml:description>
+          <dev:type>
+            <maml:name>SwitchParameter</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>False</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+          <maml:name>RelativePath</maml:name>
+          <maml:description>
+            <maml:para>Specifies a string that contains the folder path inside of the user's OneDrive where the shortcut will be placed. Missing folders are created.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+          <maml:name>ShortcutName</maml:name>
+          <maml:description>
+            <maml:para>Specifies a string that contains the name of the shortcut to be placed in the user's OneDrive. Defaults to the document library name, or the folder name when -FolderPath is used.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+          <maml:name>State</maml:name>
+          <maml:description>
+            <maml:para>Specifies the desired state of the shortcut: Present (default) or Absent. Absent only removes a shortcut that points to the requested target.</maml:para>
+          </maml:description>
+          <command:parameterValueGroup>
+            <command:parameterValue required="false" command:variableLength="false">Present</command:parameterValue>
+            <command:parameterValue required="false" command:variableLength="false">Absent</command:parameterValue>
+          </command:parameterValueGroup>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+          <maml:name>Uri</maml:name>
+          <maml:description>
+            <maml:para>Specifies a string that contains the URL of the SharePoint site.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="named" aliases="UserId">
+          <maml:name>UserObjectId</maml:name>
+          <maml:description>
+            <maml:para>Specifies a string that contains the ID of a OneDrive user. Accepts pipeline input by property name, including from a property named UserId.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="cf">
+          <maml:name>Confirm</maml:name>
+          <maml:description>
+            <maml:para>Prompts you for confirmation before running the cmdlet.</maml:para>
+          </maml:description>
+          <dev:type>
+            <maml:name>SwitchParameter</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>False</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="wi">
+          <maml:name>WhatIf</maml:name>
+          <maml:description>
+            <maml:para>Shows what would happen if the cmdlet runs. The cmdlet is not run.</maml:para>
+          </maml:description>
+          <dev:type>
+            <maml:name>SwitchParameter</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>False</dev:defaultValue>
+        </command:parameter>
+      </command:syntaxItem>
+      <command:syntaxItem>
+        <maml:name>Set-odscShortcutState</maml:name>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+          <maml:name>ConflictAction</maml:name>
+          <maml:description>
+            <maml:para>Specifies what to do when an item with the shortcut name already exists and does not point to the requested target: Skip (default) returns a SkippedConflict result, Error stops with an error, Replace deletes the existing shortcut and creates a new one (items that are not shortcuts are never deleted), and Rename creates the shortcut with a UTC timestamp appended to its name.</maml:para>
+          </maml:description>
+          <command:parameterValueGroup>
+            <command:parameterValue required="false" command:variableLength="false">Skip</command:parameterValue>
+            <command:parameterValue required="false" command:variableLength="false">Replace</command:parameterValue>
+            <command:parameterValue required="false" command:variableLength="false">Rename</command:parameterValue>
+            <command:parameterValue required="false" command:variableLength="false">Error</command:parameterValue>
+          </command:parameterValueGroup>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+          <maml:name>DocumentLibrary</maml:name>
+          <maml:description>
+            <maml:para>Specifies a string that contains the document library display name. An exact match is preferred; otherwise the first library whose name starts with this value is used. Either -DocumentLibrary or -DocumentLibraryId is required.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+          <maml:name>DocumentLibraryId</maml:name>
+          <maml:description>
+            <maml:para>Specifies the list ID (GUID) of the document library. Use it instead of -DocumentLibrary to avoid ambiguous name matches.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+          <maml:name>FolderPath</maml:name>
+          <maml:description>
+            <maml:para>Specifies a string that contains the folder path inside of the document library, relative to the library root (for example "Projects/2026").</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+          <maml:name>PassThru</maml:name>
+          <maml:description>
+            <maml:para>Returns the Microsoft Graph drive item of the created or already compliant shortcut instead of an odsc.ShortcutResult object.</maml:para>
+          </maml:description>
+          <dev:type>
+            <maml:name>SwitchParameter</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>False</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+          <maml:name>RelativePath</maml:name>
+          <maml:description>
+            <maml:para>Specifies a string that contains the folder path inside of the user's OneDrive where the shortcut will be placed. Missing folders are created.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+          <maml:name>ShortcutName</maml:name>
+          <maml:description>
+            <maml:para>Specifies a string that contains the name of the shortcut to be placed in the user's OneDrive. Defaults to the document library name, or the folder name when -FolderPath is used.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+          <maml:name>State</maml:name>
+          <maml:description>
+            <maml:para>Specifies the desired state of the shortcut: Present (default) or Absent. Absent only removes a shortcut that points to the requested target.</maml:para>
+          </maml:description>
+          <command:parameterValueGroup>
+            <command:parameterValue required="false" command:variableLength="false">Present</command:parameterValue>
+            <command:parameterValue required="false" command:variableLength="false">Absent</command:parameterValue>
+          </command:parameterValueGroup>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+          <maml:name>Uri</maml:name>
+          <maml:description>
+            <maml:para>Specifies a string that contains the URL of the SharePoint site.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="named" aliases="none">
+          <maml:name>UserPrincipalName</maml:name>
+          <maml:description>
+            <maml:para>Specifies a string that contains the user principal name of a OneDrive user. Accepts pipeline input by property name.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="cf">
+          <maml:name>Confirm</maml:name>
+          <maml:description>
+            <maml:para>Prompts you for confirmation before running the cmdlet.</maml:para>
+          </maml:description>
+          <dev:type>
+            <maml:name>SwitchParameter</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>False</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="wi">
+          <maml:name>WhatIf</maml:name>
+          <maml:description>
+            <maml:para>Shows what would happen if the cmdlet runs. The cmdlet is not run.</maml:para>
+          </maml:description>
+          <dev:type>
+            <maml:name>SwitchParameter</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>False</dev:defaultValue>
+        </command:parameter>
+      </command:syntaxItem>
+    </command:syntax>
+    <command:parameters>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+        <maml:name>ConflictAction</maml:name>
+        <maml:description>
+          <maml:para>Specifies what to do when an item with the shortcut name already exists and does not point to the requested target: Skip (default) returns a SkippedConflict result, Error stops with an error, Replace deletes the existing shortcut and creates a new one (items that are not shortcuts are never deleted), and Rename creates the shortcut with a UTC timestamp appended to its name.</maml:para>
+        </maml:description>
+        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+        <maml:name>DocumentLibrary</maml:name>
+        <maml:description>
+          <maml:para>Specifies a string that contains the document library display name. An exact match is preferred; otherwise the first library whose name starts with this value is used. Either -DocumentLibrary or -DocumentLibraryId is required.</maml:para>
+        </maml:description>
+        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+        <maml:name>DocumentLibraryId</maml:name>
+        <maml:description>
+          <maml:para>Specifies the list ID (GUID) of the document library. Use it instead of -DocumentLibrary to avoid ambiguous name matches.</maml:para>
+        </maml:description>
+        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+        <maml:name>FolderPath</maml:name>
+        <maml:description>
+          <maml:para>Specifies a string that contains the folder path inside of the document library, relative to the library root (for example "Projects/2026").</maml:para>
+        </maml:description>
+        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+        <maml:name>PassThru</maml:name>
+        <maml:description>
+          <maml:para>Returns the Microsoft Graph drive item of the created or already compliant shortcut instead of an odsc.ShortcutResult object.</maml:para>
+        </maml:description>
+        <command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
+        <dev:type>
+          <maml:name>SwitchParameter</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>False</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+        <maml:name>RelativePath</maml:name>
+        <maml:description>
+          <maml:para>Specifies a string that contains the folder path inside of the user's OneDrive where the shortcut will be placed. Missing folders are created.</maml:para>
+        </maml:description>
+        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+        <maml:name>ShortcutName</maml:name>
+        <maml:description>
+          <maml:para>Specifies a string that contains the name of the shortcut to be placed in the user's OneDrive. Defaults to the document library name, or the folder name when -FolderPath is used.</maml:para>
+        </maml:description>
+        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+        <maml:name>State</maml:name>
+        <maml:description>
+          <maml:para>Specifies the desired state of the shortcut: Present (default) or Absent. Absent only removes a shortcut that points to the requested target.</maml:para>
+        </maml:description>
+        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+        <maml:name>Uri</maml:name>
+        <maml:description>
+          <maml:para>Specifies a string that contains the URL of the SharePoint site.</maml:para>
+        </maml:description>
+        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="named" aliases="UserId">
+        <maml:name>UserObjectId</maml:name>
+        <maml:description>
+          <maml:para>Specifies a string that contains the ID of a OneDrive user. Accepts pipeline input by property name, including from a property named UserId.</maml:para>
+        </maml:description>
+        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="named" aliases="none">
+        <maml:name>UserPrincipalName</maml:name>
+        <maml:description>
+          <maml:para>Specifies a string that contains the user principal name of a OneDrive user. Accepts pipeline input by property name.</maml:para>
+        </maml:description>
+        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="cf">
+        <maml:name>Confirm</maml:name>
+        <maml:description>
+          <maml:para>Prompts you for confirmation before running the cmdlet.</maml:para>
+        </maml:description>
+        <command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
+        <dev:type>
+          <maml:name>SwitchParameter</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>False</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="wi">
+        <maml:name>WhatIf</maml:name>
+        <maml:description>
+          <maml:para>Shows what would happen if the cmdlet runs. The cmdlet is not run.</maml:para>
+        </maml:description>
+        <command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
+        <dev:type>
+          <maml:name>SwitchParameter</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>False</dev:defaultValue>
+      </command:parameter>
+    </command:parameters>
+    <command:inputTypes>
+      <command:inputType>
+        <dev:type>
+          <maml:name>System.String</maml:name>
+        </dev:type>
+        <maml:description>
+          <maml:para></maml:para>
+        </maml:description>
+      </command:inputType>
+    </command:inputTypes>
+    <command:returnValues>
+      <command:returnValue>
+        <dev:type>
+          <maml:name>System.Object</maml:name>
+        </dev:type>
+        <maml:description>
+          <maml:para></maml:para>
+        </maml:description>
+      </command:returnValue>
+    </command:returnValues>
+    <maml:alertSet>
+      <maml:alert>
+        <maml:para>Errors are non-terminating: the command writes an error and your script continues with the next statement. To stop on an error instead, add -ErrorAction Stop (or set $ErrorActionPreference = 'Stop' for the whole script) and handle the error with try/catch. See the "Error handling" section of USAGE.md.</maml:para>
+      </maml:alert>
+    </maml:alertSet>
+    <command:examples>
+      <command:example>
+        <maml:title>------------- Example 1: Ensure a shortcut exists -------------</maml:title>
+        <dev:code>PS C:\&gt; Set-odscShortcutState -Uri "https://contoso.sharepoint.com/sites/WorkingSite" -DocumentLibrary "Working Document Library" -UserPrincipalName "user@contoso.com"</dev:code>
+        <dev:remarks>
+          <maml:para>This command creates the shortcut "Working Document Library" for the user "user@contoso.com" unless it already exists and points to the same library.</maml:para>
+        </dev:remarks>
+      </command:example>
+      <command:example>
+        <maml:title>----- Example 2: Replace a shortcut that points elsewhere -----</maml:title>
+        <dev:code>PS C:\&gt; Set-odscShortcutState -Uri "https://contoso.sharepoint.com/sites/WorkingSite" -DocumentLibrary "Working Document Library" -RelativePath "Shortcuts" -ConflictAction Replace -UserPrincipalName "user@contoso.com"</dev:code>
+        <dev:remarks>
+          <maml:para>This command makes sure the shortcut in the "Shortcuts" folder points to "Working Document Library", replacing an existing shortcut with the same name that points to another target.</maml:para>
+        </dev:remarks>
+      </command:example>
+      <command:example>
+        <maml:title>----------------- Example 3: Remove a shortcut -----------------</maml:title>
+        <dev:code>PS C:\&gt; Set-odscShortcutState -Uri "https://contoso.sharepoint.com/sites/WorkingSite" -DocumentLibrary "Working Document Library" -State Absent -UserPrincipalName "user@contoso.com"</dev:code>
+        <dev:remarks>
+          <maml:para>This command removes the shortcut "Working Document Library" if it points to that library.</maml:para>
+        </dev:remarks>
+      </command:example>
+    </command:examples>
+    <command:relatedLinks>
+      <maml:navigationLink>
+        <maml:linkText>Online Version:</maml:linkText>
+        <maml:uri>https://github.com/innovara/odsc/blob/main/docs/Set-odscShortcutState.md</maml:uri>
+      </maml:navigationLink>
+    </command:relatedLinks>
+  </command:command>
+  <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
+    <command:details>
+      <command:name>Test-odscPermission</command:name>
+      <command:verb>Test</command:verb>
+      <command:noun>odscPermission</command:noun>
+      <maml:description>
+        <maml:para>Checks that the connected application can perform shortcut operations.</maml:para>
+      </maml:description>
+    </command:details>
+    <maml:description>
+      <maml:para>The Test-odscPermission function runs read-only checks and returns one object per check with the properties Check, Status (Passed or Failed) and Message. It always checks that Microsoft Graph can be called, and optionally checks access to a group's members, a user's OneDrive, a SharePoint site and a document library or folder.</maml:para>
+    </maml:description>
+    <command:syntax>
+      <command:syntaxItem>
+        <maml:name>Test-odscPermission</maml:name>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="0" aliases="none">
+          <maml:name>Uri</maml:name>
+          <maml:description>
+            <maml:para>Specifies the URL of a SharePoint site that must be readable.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="1" aliases="none">
+          <maml:name>UserPrincipalName</maml:name>
+          <maml:description>
+            <maml:para>Specifies the user principal name of a user whose OneDrive must be readable.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="2" aliases="none">
+          <maml:name>UserObjectId</maml:name>
+          <maml:description>
+            <maml:para>Specifies the ID of a user whose OneDrive must be readable.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="3" aliases="none">
+          <maml:name>GroupId</maml:name>
+          <maml:description>
+            <maml:para>Specifies a group ID whose members must be readable.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="4" aliases="none">
+          <maml:name>DocumentLibrary</maml:name>
+          <maml:description>
+            <maml:para>Specifies a document library display name to resolve. Requires -Uri.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="5" aliases="none">
+          <maml:name>DocumentLibraryId</maml:name>
+          <maml:description>
+            <maml:para>Specifies a document library ID to resolve. Requires -Uri.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="6" aliases="none">
+          <maml:name>FolderPath</maml:name>
+          <maml:description>
+            <maml:para>Specifies a folder path inside the document library to resolve. Requires -Uri.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+      </command:syntaxItem>
+    </command:syntax>
+    <command:parameters>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="4" aliases="none">
+        <maml:name>DocumentLibrary</maml:name>
+        <maml:description>
+          <maml:para>Specifies a document library display name to resolve. Requires -Uri.</maml:para>
+        </maml:description>
+        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="5" aliases="none">
+        <maml:name>DocumentLibraryId</maml:name>
+        <maml:description>
+          <maml:para>Specifies a document library ID to resolve. Requires -Uri.</maml:para>
+        </maml:description>
+        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="6" aliases="none">
+        <maml:name>FolderPath</maml:name>
+        <maml:description>
+          <maml:para>Specifies a folder path inside the document library to resolve. Requires -Uri.</maml:para>
+        </maml:description>
+        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="3" aliases="none">
+        <maml:name>GroupId</maml:name>
+        <maml:description>
+          <maml:para>Specifies a group ID whose members must be readable.</maml:para>
+        </maml:description>
+        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="0" aliases="none">
+        <maml:name>Uri</maml:name>
+        <maml:description>
+          <maml:para>Specifies the URL of a SharePoint site that must be readable.</maml:para>
+        </maml:description>
+        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="2" aliases="none">
+        <maml:name>UserObjectId</maml:name>
+        <maml:description>
+          <maml:para>Specifies the ID of a user whose OneDrive must be readable.</maml:para>
+        </maml:description>
+        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="1" aliases="none">
+        <maml:name>UserPrincipalName</maml:name>
+        <maml:description>
+          <maml:para>Specifies the user principal name of a user whose OneDrive must be readable.</maml:para>
+        </maml:description>
+        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+    </command:parameters>
+    <command:inputTypes>
+      <command:inputType>
+        <dev:type>
+          <maml:name>None</maml:name>
+        </dev:type>
+        <maml:description>
+          <maml:para></maml:para>
+        </maml:description>
+      </command:inputType>
+    </command:inputTypes>
+    <command:returnValues>
+      <command:returnValue>
+        <dev:type>
+          <maml:name>System.Object</maml:name>
+        </dev:type>
+        <maml:description>
+          <maml:para></maml:para>
+        </maml:description>
+      </command:returnValue>
+    </command:returnValues>
+    <maml:alertSet>
+      <maml:alert>
+        <maml:para></maml:para>
+      </maml:alert>
+    </maml:alertSet>
+    <command:examples>
+      <command:example>
+        <maml:title>----------- Example 1: Check access before a rollout -----------</maml:title>
+        <dev:code>PS C:\&gt; Test-odscPermission -Uri "https://contoso.sharepoint.com/sites/WorkingSite" -DocumentLibrary "Working Document Library" -UserPrincipalName "user@contoso.com" -GroupId "00000000-0000-0000-0000-000000000000"</dev:code>
+        <dev:remarks>
+          <maml:para>This command checks access to Microsoft Graph, the group members, the user's OneDrive, the site and the document library.</maml:para>
+        </dev:remarks>
+      </command:example>
+    </command:examples>
+    <command:relatedLinks>
+      <maml:navigationLink>
+        <maml:linkText>Online Version:</maml:linkText>
+        <maml:uri>https://github.com/innovara/odsc/blob/main/docs/Test-odscPermission.md</maml:uri>
       </maml:navigationLink>
     </command:relatedLinks>
   </command:command>

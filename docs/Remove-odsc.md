@@ -14,13 +14,14 @@ Removes OneDrive shortcut to SharePoint.
 
 ### UserPrincipalName (Default)
 ```
-Remove-odsc -ShortcutName <String> [-RelativePath <String>] -UserPrincipalName <String> [-WhatIf] [-Confirm]
- [<CommonParameters>]
+Remove-odsc [-RelativePath <String>] -ShortcutName <String> -UserPrincipalName <String> [-PassThru]
+ [-WhatIf] [-Confirm] [<CommonParameters>]
 ```
 
 ### UserObjectId
 ```
-Remove-odsc -ShortcutName <String> [-RelativePath <String>] -UserObjectId <String> [-WhatIf] [-Confirm] [<CommonParameters>]
+Remove-odsc [-RelativePath <String>] -ShortcutName <String> -UserObjectId <String> [-PassThru]
+ [-WhatIf] [-Confirm] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -44,13 +45,13 @@ This command removes the shortcut called "Working Folder" under "subfolder1/subf
 
 ## PARAMETERS
 
-### -Confirm
-Prompts you for confirmation before running the cmdlet.
+### -PassThru
+Returns an odsc.ShortcutResult object describing the removed shortcut instead of the Microsoft Graph response.
 
 ```yaml
 Type: SwitchParameter
 Parameter Sets: (All)
-Aliases: cf
+Aliases:
 
 Required: False
 Position: Named
@@ -95,12 +96,12 @@ Specifies a string that contains the ID of a OneDrive user.
 ```yaml
 Type: String
 Parameter Sets: UserObjectId
-Aliases:
+Aliases: UserId
 
 Required: True
 Position: Named
 Default value: None
-Accept pipeline input: False
+Accept pipeline input: True (ByPropertyName)
 Accept wildcard characters: False
 ```
 
@@ -113,6 +114,21 @@ Parameter Sets: UserPrincipalName
 Aliases:
 
 Required: True
+Position: Named
+Default value: None
+Accept pipeline input: True (ByPropertyName)
+Accept wildcard characters: False
+```
+
+### -Confirm
+Prompts you for confirmation before running the cmdlet.
+
+```yaml
+Type: SwitchParameter
+Parameter Sets: (All)
+Aliases: cf
+
+Required: False
 Position: Named
 Default value: None
 Accept pipeline input: False
@@ -146,5 +162,6 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ### System.Object
 ## NOTES
+Errors are non-terminating: the command writes an error and your script continues with the next statement. To stop on an error instead, add -ErrorAction Stop (or set $ErrorActionPreference = 'Stop' for the whole script) and handle the error with try/catch. See the "Error handling" section of USAGE.md.
 
 ## RELATED LINKS

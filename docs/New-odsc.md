@@ -14,14 +14,16 @@ Create OneDrive shortcut to SharePoint.
 
 ### UserPrincipalName (Default)
 ```
-New-odsc -Uri <String> -DocumentLibrary <String> [-FolderPath <String>] [-RelativePath <String>] [-ShortcutName <String>]
- -UserPrincipalName <String> [-WhatIf] [-Confirm] [<CommonParameters>]
+New-odsc -Uri <String> [-DocumentLibrary <String>] [-DocumentLibraryId <String>] [-FolderPath <String>]
+ [-RelativePath <String>] [-ShortcutName <String>] -UserPrincipalName <String>
+ [-WhatIf] [-Confirm] [<CommonParameters>]
 ```
 
 ### UserObjectId
 ```
-New-odsc -Uri <String> -DocumentLibrary <String> [-FolderPath <String>] [-RelativePath <String>] [-ShortcutName <String>]
- -UserObjectId <String> [-WhatIf] [-Confirm] [<CommonParameters>]
+New-odsc -Uri <String> [-DocumentLibrary <String>] [-DocumentLibraryId <String>] [-FolderPath <String>]
+ [-RelativePath <String>] [-ShortcutName <String>] -UserObjectId <String>
+ [-WhatIf] [-Confirm] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -64,16 +66,34 @@ PS C:\> New-odsc -Uri "https://contoso.sharepoint.com/sites/WorkingSite" -Docume
 
 This command creates a shortcut in the subfolder "subfolder1/subfolder2" for the user "user@contoso.com" that points to the Document Library called "Working Document Library" on the SharePoint site "https://contoso.sharepoint.com/sites/WorkingSite".
 
+### Example 6: Create a shortcut using the document library ID
+```powershell
+PS C:\> New-odsc -Uri "https://contoso.sharepoint.com/sites/WorkingSite" -DocumentLibraryId "00000000-0000-0000-0000-000000000000" -UserPrincipalName "user@contoso.com"
+```
+
+This command creates a shortcut for the user "user@contoso.com" that points to the Document Library with the given ID. The shortcut is named after the library's display name.
+
+### Example 7: Stop the script if the shortcut cannot be created
+```powershell
+PS C:\> try {
+    New-odsc -Uri "https://contoso.sharepoint.com/sites/WorkingSite" -DocumentLibrary "Working Document Library" -UserPrincipalName "user@contoso.com" -ErrorAction Stop
+} catch {
+    Write-Warning "Shortcut not created: $($_.Exception.Message)"
+    exit 1
+}
+```
+
+By default an error is written and the script continues. With -ErrorAction Stop the error can be handled with try/catch, here by ending the script.
 
 ## PARAMETERS
 
-### -Confirm
-Prompts you for confirmation before running the cmdlet.
+### -DocumentLibrary
+Specifies a string that contains the document library name. An exact match is preferred; otherwise the first library whose name starts with this value is used. Either -DocumentLibrary or -DocumentLibraryId is required.
 
 ```yaml
-Type: SwitchParameter
+Type: String
 Parameter Sets: (All)
-Aliases: cf
+Aliases:
 
 Required: False
 Position: Named
@@ -82,15 +102,15 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -DocumentLibrary
-Specifies a string that contains the document library name.
+### -DocumentLibraryId
+Specifies the list ID (GUID) of the document library. Use it instead of -DocumentLibrary to avoid ambiguous name matches.
 
 ```yaml
 Type: String
 Parameter Sets: (All)
 Aliases:
 
-Required: True
+Required: False
 Position: Named
 Default value: None
 Accept pipeline input: False
@@ -163,12 +183,12 @@ Specifies a string that contains the ID of a OneDrive user.
 ```yaml
 Type: String
 Parameter Sets: UserObjectId
-Aliases:
+Aliases: UserId
 
 Required: True
 Position: Named
 Default value: None
-Accept pipeline input: False
+Accept pipeline input: True (ByPropertyName)
 Accept wildcard characters: False
 ```
 
@@ -181,6 +201,21 @@ Parameter Sets: UserPrincipalName
 Aliases:
 
 Required: True
+Position: Named
+Default value: None
+Accept pipeline input: True (ByPropertyName)
+Accept wildcard characters: False
+```
+
+### -Confirm
+Prompts you for confirmation before running the cmdlet.
+
+```yaml
+Type: SwitchParameter
+Parameter Sets: (All)
+Aliases: cf
+
+Required: False
 Position: Named
 Default value: None
 Accept pipeline input: False
@@ -214,5 +249,6 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ### System.Object
 ## NOTES
+Errors are non-terminating: the command writes an error and your script continues with the next statement. To stop on an error instead, add -ErrorAction Stop (or set $ErrorActionPreference = 'Stop' for the whole script) and handle the error with try/catch. See the "Error handling" section of USAGE.md.
 
 ## RELATED LINKS
