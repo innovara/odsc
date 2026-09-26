@@ -1,5 +1,10 @@
 # CHANGELOG
 
+## 0.5.1
+
+* The module manifest now lists the exported commands, so the PowerShell Gallery shows them and PowerShell can find them without loading the module
+* GitHub Actions workflows use `actions/checkout@v7` (Node.js 24)
+
 ## 0.5.0
 
 Existing scripts keep working: output types, error behavior and parameters of existing commands are unchanged, except for the additions listed below.
