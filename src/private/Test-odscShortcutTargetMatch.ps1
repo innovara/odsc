@@ -14,10 +14,17 @@ function Test-odscShortcutTargetMatch {
     }
 
     $ExistingIds = $Shortcut.remoteItem.sharepointIds
+    # A shortcut to a library is created with listItemUniqueId 'root', but Graph reports the root folder's
+    # real unique id and a 'root' facet, so the library root is matched by that facet instead.
+    $MatchesItem = if ($Target.ItemUniqueId -eq 'root') {
+        $null -ne $Shortcut.remoteItem.root
+    } else {
+        $ExistingIds.listItemUniqueId -eq $Target.ItemUniqueId
+    }
     $MatchesTargetSharePointIds = $Target.ItemUniqueId -and
         $ExistingIds -and
         ($ExistingIds.listId -eq $Target.DocumentLibraryId) -and
-        ($ExistingIds.listItemUniqueId -eq $Target.ItemUniqueId) -and
+        $MatchesItem -and
         ($ExistingIds.siteId -eq $Target.SiteId) -and
         ($ExistingIds.webId -eq $Target.WebId)
 

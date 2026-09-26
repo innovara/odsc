@@ -18,6 +18,14 @@ Describe 'Test-odscShortcutTargetMatch' {
             $Target.WebId = 'other'
             Test-odscShortcutTargetMatch -Shortcut $Shortcut -Target $Target | Should -BeFalse
 
+            # Library root: Graph returns the root folder's real unique id and a 'root' facet.
+            $LibraryTarget = [pscustomobject]@{ ItemUniqueId = 'root'; DocumentLibraryId = 'l'; SiteId = 's'; WebId = 'w' }
+            $LibraryShortcut = [pscustomobject]@{ remoteItem = [pscustomobject]@{ root = @{}; sharepointIds = [pscustomobject]@{ listId = 'l'; listItemUniqueId = 'a5aa8706-f471-4d6e-99de-9cc73fadcd63'; siteId = 's'; webId = 'w' } } }
+            Test-odscShortcutTargetMatch -Shortcut $LibraryShortcut -Target $LibraryTarget | Should -BeTrue
+
+            $FolderInLibrary = [pscustomobject]@{ remoteItem = [pscustomobject]@{ sharepointIds = [pscustomobject]@{ listId = 'l'; listItemUniqueId = 'f'; siteId = 's'; webId = 'w' } } }
+            Test-odscShortcutTargetMatch -Shortcut $FolderInLibrary -Target $LibraryTarget | Should -BeFalse
+
             $DriveTarget = [pscustomobject]@{ DriveId = 'd'; DriveItemId = 'i' }
             $DriveShortcut = [pscustomobject]@{ remoteItem = [pscustomobject]@{ id = 'i'; parentReference = [pscustomobject]@{ driveId = 'd' } } }
             Test-odscShortcutTargetMatch -Shortcut $DriveShortcut -Target $DriveTarget | Should -BeTrue
@@ -38,7 +46,8 @@ Describe 'Set-odscShortcutState' {
         Mock New-odscShortcutItem -ModuleName odsc { [pscustomobject]@{ id = 'new'; name = $ShortcutName; webUrl = 'https://x' } }
         Mock Invoke-odscApiRequest -ModuleName odsc { $null } -ParameterFilter { $Method -eq 'Delete' }
 
-        $script:Matching = [pscustomobject]@{ id = 'sc'; remoteItem = [pscustomobject]@{ sharepointIds = [pscustomobject]@{ listId = 'list'; listItemUniqueId = 'root'; siteId = 's'; webId = 'w' } } }
+        # A library-root shortcut as Graph returns it: the root folder's real unique id and a 'root' facet.
+        $script:Matching = [pscustomobject]@{ id = 'sc'; remoteItem = [pscustomobject]@{ root = @{}; sharepointIds = [pscustomobject]@{ listId = 'list'; listItemUniqueId = 'a5aa8706-f471-4d6e-99de-9cc73fadcd63'; siteId = 's'; webId = 'w' } } }
         $script:Different = [pscustomobject]@{ id = 'sc'; remoteItem = [pscustomobject]@{ sharepointIds = [pscustomobject]@{ listId = 'other'; listItemUniqueId = 'root'; siteId = 's'; webId = 'w' } } }
         $script:RealFolder = [pscustomobject]@{ id = 'folder'; folder = @{ childCount = 3 } }
         $Common = @{ Uri = $SiteUrl; DocumentLibrary = 'Documents'; UserPrincipalName = 'u@contoso.com'; Confirm = $false }
