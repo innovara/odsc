@@ -4,6 +4,8 @@ $Public = @(Get-ChildItem -Path (Join-Path -Path $PSScriptRoot -ChildPath 'publi
 $Private = @(Get-ChildItem -Path (Join-Path -Path $PSScriptRoot -ChildPath 'private/*.ps1') -ErrorAction SilentlyContinue)
 
 $script:ODSToken = $null
+$script:ODSCloudEnvironment = 'Global'
+$script:ODSGraphEndpoint = 'https://graph.microsoft.com'
 
 foreach ($Import in @($Private + $Public)) {
     try {
@@ -21,4 +23,6 @@ foreach ($File in $Public) {
 $MyInvocation.MyCommand.ScriptBlock.Module.OnRemove = {
     Write-Verbose "Clearing odsc authentication token"
     $script:ODSToken = $null
+    $script:ODSCloudEnvironment = 'Global'
+    $script:ODSGraphEndpoint = 'https://graph.microsoft.com'
 }
