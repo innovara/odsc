@@ -1,0 +1,76 @@
+name: Publish
+
+on:
+  release:
+    types:
+      - published
+
+permissions:
+  contents: read
+
+concurrency:
+  group: publish-powershell-gallery
+  cancel-in-progress: false
+
+jobs:
+  powershell-gallery:
+    name: PowerShell Gallery
+    if: github.event.release.prerelease == false
+    runs-on: ubuntu-latest
+    environment: powershell-gallery
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Install test dependencies
+        shell: pwsh
+        run: |
+          Set-PSRepository -Name PSGallery -InstallationPolicy Trusted
+          Install-Module -Name Pester -Scope CurrentUser -Force -SkipPublisherCheck -MinimumVersion 5.5.0
+          Install-Module -Name MSAL.PS -Scope CurrentUser -Force -SkipPublisherCheck
+
+      - name: Verify release tag matches module version
+        shell: pwsh
+        run: |
+          $Manifest = Test-ModuleManifest -Path 'src/odsc.psd1'
+          $ExpectedTag = "$($Manifest.Version)"
+
+          if ($env:GITHUB_REF_NAME -ne $ExpectedTag) {
+              throw "Release tag '$env:GITHUB_REF_NAME' does not match module version '$($Manifest.Version)'. Expected '$ExpectedTag'."
+          }
+
+      - name: Run Pester tests
+        shell: pwsh
+        run: |
+          $PesterConfiguration = New-PesterConfiguration
+          $PesterConfiguration.Run.Path = 'tests'
+          $PesterConfiguration.Run.Exit = $true
+          $PesterConfiguration.Output.Verbosity = 'Detailed'
+
+          Invoke-Pester -Configuration $PesterConfiguration
+
+      - name: Publish to PowerShell Gallery
+        shell: pwsh
+        env:
+          PSGALLERY_API_KEY: ${{ secrets.PSGALLERY_API_KEY }}
+        run: |
+          if ([string]::IsNullOrWhiteSpace($env:PSGALLERY_API_KEY)) {
+              throw 'PowerShell Gallery API key is missing. Add it as the PSGALLERY_API_KEY repository or environment secret.'
+          }
+
+          $ModuleName = 'odsc'
+          $SourcePath = 'src'
+          $PackageRoot = Join-Path $PWD 'dist'
+          $ModulePath = Join-Path $PackageRoot $ModuleName
+
+          if (Test-Path $PackageRoot) {
+              Remove-Item $PackageRoot -Recurse -Force
+          }
+
+          New-Item -ItemType Directory -Path $ModulePath -Force | Out-Null
+          Copy-Item -Path "$SourcePath/*" -Destination $ModulePath -Recurse -Force
+
+          Test-ModuleManifest -Path (Join-Path $ModulePath "$ModuleName.psd1") | Out-Null
+
+          Publish-Module -Path $ModulePath -Repository PSGallery -NuGetApiKey $env:PSGALLERY_API_KEY -Verbose

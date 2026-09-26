@@ -1,0 +1,50 @@
+name: CI
+
+on:
+  push:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    name: Pester (${{ matrix.name }})
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - name: PowerShell 7 on Ubuntu
+            os: ubuntu-latest
+            shell: pwsh
+          - name: PowerShell 7 on Windows
+            os: windows-latest
+            shell: pwsh
+          - name: Windows PowerShell 5.1
+            os: windows-latest
+            shell: powershell
+
+    defaults:
+      run:
+        shell: ${{ matrix.shell }}
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Install dependencies
+        run: |
+          Set-PSRepository -Name PSGallery -InstallationPolicy Trusted
+          Install-Module -Name Pester -Scope CurrentUser -Force -SkipPublisherCheck -MinimumVersion 5.5.0
+          Install-Module -Name MSAL.PS -Scope CurrentUser -Force -SkipPublisherCheck
+
+      - name: Run Pester tests
+        run: |
+          Import-Module Pester -MinimumVersion 5.5.0
+          $PesterConfiguration = New-PesterConfiguration
+          $PesterConfiguration.Run.Path = 'tests'
+          $PesterConfiguration.Run.Exit = $true
+          $PesterConfiguration.Output.Verbosity = 'Detailed'
+
+          Invoke-Pester -Configuration $PesterConfiguration
