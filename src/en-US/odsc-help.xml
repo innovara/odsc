@@ -690,6 +690,7 @@
     </command:details>
     <maml:description>
       <maml:para>The Get-odscTargetUser function returns user objects with the properties UserPrincipalName, UserObjectId, Mail, AccountEnabled and Source, read from a CSV file, from the transitive members of a group, from an OData filter, or from all users in the tenant. The output can be piped to Invoke-odscShortcutAssignment.</maml:para>
+      <maml:para>Disabled accounts are skipped for -GroupId, -Filter and -AllUsers unless -IncludeDisabled is used; run with -Verbose to see how many were skipped. Rows of a CSV file are always returned, because the file carries no account status.</maml:para>
       <maml:para>Group and filter queries require the GroupMember.Read.All (or broader) and User.Read.All application permissions.</maml:para>
     </maml:description>
     <command:syntax>
@@ -699,6 +700,17 @@
           <maml:name>AllUsers</maml:name>
           <maml:description>
             <maml:para>Returns all users in the tenant.</maml:para>
+          </maml:description>
+          <dev:type>
+            <maml:name>SwitchParameter</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>False</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+          <maml:name>IncludeDisabled</maml:name>
+          <maml:description>
+            <maml:para>Also returns disabled accounts. By default, users whose account is disabled are skipped for -GroupId, -Filter and -AllUsers. It does not apply to -CsvPath, whose rows are always returned.</maml:para>
           </maml:description>
           <dev:type>
             <maml:name>SwitchParameter</maml:name>
@@ -736,6 +748,17 @@
           </dev:type>
           <dev:defaultValue>None</dev:defaultValue>
         </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+          <maml:name>IncludeDisabled</maml:name>
+          <maml:description>
+            <maml:para>Also returns disabled accounts. By default, users whose account is disabled are skipped for -GroupId, -Filter and -AllUsers. It does not apply to -CsvPath, whose rows are always returned.</maml:para>
+          </maml:description>
+          <dev:type>
+            <maml:name>SwitchParameter</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>False</dev:defaultValue>
+        </command:parameter>
       </command:syntaxItem>
       <command:syntaxItem>
         <maml:name>Get-odscTargetUser</maml:name>
@@ -750,6 +773,17 @@
             <maml:uri />
           </dev:type>
           <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+          <maml:name>IncludeDisabled</maml:name>
+          <maml:description>
+            <maml:para>Also returns disabled accounts. By default, users whose account is disabled are skipped for -GroupId, -Filter and -AllUsers. It does not apply to -CsvPath, whose rows are always returned.</maml:para>
+          </maml:description>
+          <dev:type>
+            <maml:name>SwitchParameter</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>False</dev:defaultValue>
         </command:parameter>
       </command:syntaxItem>
     </command:syntax>
@@ -802,6 +836,18 @@
         </dev:type>
         <dev:defaultValue>None</dev:defaultValue>
       </command:parameter>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+        <maml:name>IncludeDisabled</maml:name>
+        <maml:description>
+          <maml:para>Also returns disabled accounts. By default, users whose account is disabled are skipped for -GroupId, -Filter and -AllUsers. It does not apply to -CsvPath, whose rows are always returned.</maml:para>
+        </maml:description>
+        <command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
+        <dev:type>
+          <maml:name>SwitchParameter</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>False</dev:defaultValue>
+      </command:parameter>
     </command:parameters>
     <command:inputTypes>
       <command:inputType>
@@ -844,10 +890,17 @@
         </dev:remarks>
       </command:example>
       <command:example>
-        <maml:title>--------- Example 3: Get enabled users in a department ---------</maml:title>
-        <dev:code>PS C:\&gt; Get-odscTargetUser -Filter "department eq 'Sales' and accountEnabled eq true"</dev:code>
+        <maml:title>----------- Example 3: Get the users of a department -----------</maml:title>
+        <dev:code>PS C:\&gt; Get-odscTargetUser -Filter "department eq 'Sales'"</dev:code>
         <dev:remarks>
           <maml:para>This command returns the enabled users of the Sales department.</maml:para>
+        </dev:remarks>
+      </command:example>
+      <command:example>
+        <maml:title>------------- Example 4: Include disabled accounts -------------</maml:title>
+        <dev:code>PS C:\&gt; Get-odscTargetUser -GroupId "00000000-0000-0000-0000-000000000000" -IncludeDisabled</dev:code>
+        <dev:remarks>
+          <maml:para>This command returns all members of the group, including those whose account is disabled.</maml:para>
         </dev:remarks>
       </command:example>
     </command:examples>
@@ -1089,7 +1142,7 @@
     </command:details>
     <maml:description>
       <maml:para>The Invoke-odscPlan function reads a .json or .psd1 plan file and returns one object per shortcut, without making any changes. Use it to validate a plan before running Invoke-odscApply.</maml:para>
-      <maml:para>A plan contains a "shortcuts" list. Each entry supports name, siteUrl, library or libraryId, folderPath, oneDrivePath, state (Present or Absent), conflictAction (Skip, Replace, Rename or Error) and a target with one of groupId, csvPath, filter or allUsers. A relative csvPath is resolved from the folder of the plan file.</maml:para>
+      <maml:para>A plan contains a "shortcuts" list. Each entry supports name, siteUrl, library or libraryId, folderPath, oneDrivePath, state (Present or Absent), conflictAction (Skip, Replace, Rename or Error) and a target with one of groupId, csvPath, filter or allUsers. Add includeDisabled: true to a groupId, filter or allUsers target to include disabled accounts. A relative csvPath is resolved from the folder of the plan file.</maml:para>
     </maml:description>
     <command:syntax>
       <command:syntaxItem>

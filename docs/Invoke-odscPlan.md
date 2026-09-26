@@ -19,7 +19,7 @@ Invoke-odscPlan [-Path] <String> [<CommonParameters>]
 ## DESCRIPTION
 The **Invoke-odscPlan** function reads a .json or .psd1 plan file and returns one object per shortcut, without making any changes. Use it to validate a plan before running Invoke-odscApply.
 
-A plan contains a "shortcuts" list. Each entry supports name, siteUrl, library or libraryId, folderPath, oneDrivePath, state (Present or Absent), conflictAction (Skip, Replace, Rename or Error) and a target with one of groupId, csvPath, filter or allUsers. A relative csvPath is resolved from the folder of the plan file.
+A plan contains a "shortcuts" list. Each entry supports name, siteUrl, library or libraryId, folderPath, oneDrivePath, state (Present or Absent), conflictAction (Skip, Replace, Rename or Error) and a target with one of groupId, csvPath, filter or allUsers. Add includeDisabled: true to a groupId, filter or allUsers target to include disabled accounts. A relative csvPath is resolved from the folder of the plan file.
 
 ## EXAMPLES
 

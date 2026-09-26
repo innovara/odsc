@@ -158,6 +158,8 @@ Test-odscPermission -Uri "https://contoso.sharepoint.com/sites/WorkingSite" -Doc
 Get-odscTargetUser -GroupId "00000000-0000-0000-0000-000000000000" | Invoke-odscShortcutAssignment -Uri "https://contoso.sharepoint.com/sites/WorkingSite" -DocumentLibrary "Working Document Library" -ReportPath ".\report.csv"
 ```
 
+Disabled accounts are skipped when targeting a group, a filter or all users. Add `-IncludeDisabled` to `Get-odscTargetUser` to include them.
+
 ### Assigning a Shortcut to users from a CSV file
 
 The CSV file needs a `UserPrincipalName` and/or `UserObjectId` (or `Id`) column.
@@ -169,7 +171,7 @@ Get-odscTargetUser -CsvPath ".\users.csv" | Invoke-odscShortcutAssignment -Uri "
 ### Assigning a Shortcut to users matching a filter
 
 ```powershell
-Get-odscTargetUser -Filter "department eq 'Sales' and accountEnabled eq true" | Invoke-odscShortcutAssignment -Uri "https://contoso.sharepoint.com/sites/WorkingSite" -DocumentLibrary "Working Document Library"
+Get-odscTargetUser -Filter "department eq 'Sales'" | Invoke-odscShortcutAssignment -Uri "https://contoso.sharepoint.com/sites/WorkingSite" -DocumentLibrary "Working Document Library"
 ```
 
 ### Previewing and resuming a run
@@ -213,7 +215,7 @@ A plan file (`.json` or `.psd1`) describes several shortcuts and who should get 
 }
 ```
 
-A target is one of `groupId`, `csvPath`, `filter` or `allUsers` (`true`).
+A target is one of `groupId`, `csvPath`, `filter` or `allUsers` (`true`). Disabled accounts are skipped unless the target has `"includeDisabled": true` (not available for `csvPath`).
 
 ```powershell
 Invoke-odscPlan -Path ".\shortcuts.json"

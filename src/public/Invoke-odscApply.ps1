@@ -47,15 +47,23 @@ function Invoke-odscApply {
             }
 
             try {
+                $TargetParameters = @{ ErrorAction = 'Stop' }
                 if ($Target.groupId) {
-                    $Users = @(Get-odscTargetUser -GroupId $Target.groupId -ErrorAction Stop)
+                    $TargetParameters.GroupId = $Target.groupId
                 } elseif ($Target.csvPath) {
-                    $Users = @(Get-odscTargetUser -CsvPath $Target.csvPath -ErrorAction Stop)
+                    $TargetParameters.CsvPath = $Target.csvPath
                 } elseif ($Target.filter) {
-                    $Users = @(Get-odscTargetUser -Filter $Target.filter -ErrorAction Stop)
+                    $TargetParameters.Filter = $Target.filter
                 } else {
-                    $Users = @(Get-odscTargetUser -AllUsers -ErrorAction Stop)
+                    $TargetParameters.AllUsers = $true
                 }
+
+                # CSV files carry no account status, so includeDisabled only applies to the other targets.
+                if ($Target.includeDisabled -and -not $Target.csvPath) {
+                    $TargetParameters.IncludeDisabled = $true
+                }
+
+                $Users = @(Get-odscTargetUser @TargetParameters)
             } catch {
                 Write-Error "Plan '$($Plan.Name)': unable to resolve $TargetDescription. $($_.Exception.Message)" @StopParameters
                 continue

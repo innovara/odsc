@@ -11,7 +11,12 @@ function Get-odscTargetUser {
         [string] $Filter,
 
         [Parameter(Mandatory = $true, ParameterSetName = 'AllUsers')]
-        [switch] $AllUsers
+        [switch] $AllUsers,
+
+        [Parameter(Mandatory = $false, ParameterSetName = 'Group')]
+        [Parameter(Mandatory = $false, ParameterSetName = 'Filter')]
+        [Parameter(Mandatory = $false, ParameterSetName = 'AllUsers')]
+        [switch] $IncludeDisabled
     )
 
     process {
@@ -51,16 +56,7 @@ function Get-odscTargetUser {
                             -ForbiddenMessage "Unable to read transitive user members for group '$GroupId'. Microsoft Graph returned 403. Grant admin consent for GroupMember.Read.All, or use a broader equivalent such as Group.Read.All or Directory.Read.All. Hidden membership groups also require Member.Read.Hidden." `
                             -FallbackMessage "Unable to resolve users from group '$GroupId'."
                     }
-
-                    $Users | ForEach-Object {
-                        [pscustomobject]@{
-                            UserPrincipalName = $_.userPrincipalName
-                            UserObjectId = $_.id
-                            Mail = $_.mail
-                            AccountEnabled = $_.accountEnabled
-                            Source = $GroupId
-                        }
-                    }
+                    $Source = $GroupId
                 }
                 'Filter' {
                     $EncodedFilter = [uri]::EscapeDataString($Filter)
@@ -69,16 +65,7 @@ function Get-odscTargetUser {
                     } catch {
                         Stop-odscGraphError -ErrorRecord $_ -FallbackMessage "Unable to resolve users with filter '$Filter'."
                     }
-
-                    $Users | ForEach-Object {
-                        [pscustomobject]@{
-                            UserPrincipalName = $_.userPrincipalName
-                            UserObjectId = $_.id
-                            Mail = $_.mail
-                            AccountEnabled = $_.accountEnabled
-                            Source = $Filter
-                        }
-                    }
+                    $Source = $Filter
                 }
                 'AllUsers' {
                     $null = $AllUsers
@@ -87,16 +74,28 @@ function Get-odscTargetUser {
                     } catch {
                         Stop-odscGraphError -ErrorRecord $_ -FallbackMessage 'Unable to list users.'
                     }
+                    $Source = 'AllUsers'
+                }
+            }
 
-                    $Users | ForEach-Object {
-                        [pscustomobject]@{
-                            UserPrincipalName = $_.userPrincipalName
-                            UserObjectId = $_.id
-                            Mail = $_.mail
-                            AccountEnabled = $_.accountEnabled
-                            Source = 'AllUsers'
-                        }
-                    }
+            if ($PsCmdlet.ParameterSetName -eq 'Csv') {
+                return
+            }
+
+            # Disabled accounts are skipped unless requested. Users without the property are kept.
+            $Disabled = @($Users | Where-Object { $_.accountEnabled -eq $false })
+            if ($Disabled.Count -gt 0 -and -not $IncludeDisabled) {
+                Write-Verbose "Skipping $($Disabled.Count) disabled account(s) from '$Source'. Use -IncludeDisabled to include them."
+                $Users = @($Users | Where-Object { $_.accountEnabled -ne $false })
+            }
+
+            $Users | ForEach-Object {
+                [pscustomobject]@{
+                    UserPrincipalName = $_.userPrincipalName
+                    UserObjectId = $_.id
+                    Mail = $_.mail
+                    AccountEnabled = $_.accountEnabled
+                    Source = $Source
                 }
             }
         } catch {

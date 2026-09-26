@@ -107,6 +107,20 @@ Describe 'Invoke-odscApply error handling' {
         Should -Invoke Set-odscShortcutState -ModuleName odsc -Times 0
     }
 
+    It 'passes includeDisabled from the plan, except for CSV targets' {
+        @{
+            shortcuts = @(
+                @{ name = 'Group'; siteUrl = $SiteUrl; library = 'Documents'; target = @{ groupId = 'ok'; includeDisabled = $true } },
+                @{ name = 'Csv'; siteUrl = $SiteUrl; library = 'Documents'; target = @{ csvPath = 'users.csv'; includeDisabled = $true } }
+            )
+        } | ConvertTo-Json -Depth 5 | Set-Content $script:PlanPath
+
+        Invoke-odscApply -Path $script:PlanPath -Confirm:$false | Out-Null
+
+        Should -Invoke Get-odscTargetUser -ModuleName odsc -Times 1 -Exactly -ParameterFilter { $GroupId -eq 'ok' -and $IncludeDisabled }
+        Should -Invoke Get-odscTargetUser -ModuleName odsc -Times 1 -Exactly -ParameterFilter { $CsvPath -and -not $IncludeDisabled }
+    }
+
     It 'writes a non-terminating error for an unreadable plan' {
         $Errors = @(Invoke-odscApply -Path (Join-Path $TestDrive 'missing.json') -ErrorAction Continue 2>&1)
         $Errors | Should -HaveCount 1
@@ -120,6 +134,19 @@ Describe 'Get-odscTargetUser' {
         $Errors = @(Get-odscTargetUser -GroupId 'g' -ErrorAction Continue 2>&1)
         $Errors | Should -HaveCount 1
         $Errors[0].Exception.Message | Should -BeLike '*GroupMember.Read.All*'
+    }
+
+    It 'skips disabled accounts unless -IncludeDisabled is used' {
+        Mock Invoke-odscApiRequest -ModuleName odsc {
+            @(
+                [pscustomobject]@{ id = '1'; userPrincipalName = 'on@contoso.com'; accountEnabled = $true },
+                [pscustomobject]@{ id = '2'; userPrincipalName = 'off@contoso.com'; accountEnabled = $false }
+            )
+        }
+
+        (Get-odscTargetUser -GroupId 'g').UserPrincipalName | Should -Be 'on@contoso.com'
+        (Get-odscTargetUser -AllUsers).UserPrincipalName | Should -Be 'on@contoso.com'
+        (Get-odscTargetUser -Filter "department eq 'Sales'" -IncludeDisabled).UserPrincipalName | Should -Be @('on@contoso.com', 'off@contoso.com')
     }
 
     It 'reads users from a CSV file' {

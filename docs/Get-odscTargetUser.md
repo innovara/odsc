@@ -14,7 +14,7 @@ Gets the users to target with a shortcut assignment.
 
 ### AllUsers (Default)
 ```
-Get-odscTargetUser [-AllUsers] [<CommonParameters>]
+Get-odscTargetUser [-AllUsers] [-IncludeDisabled] [<CommonParameters>]
 ```
 
 ### Csv
@@ -24,16 +24,20 @@ Get-odscTargetUser -CsvPath <String> [<CommonParameters>]
 
 ### Group
 ```
-Get-odscTargetUser -GroupId <String> [<CommonParameters>]
+Get-odscTargetUser -GroupId <String> [-IncludeDisabled]
+ [<CommonParameters>]
 ```
 
 ### Filter
 ```
-Get-odscTargetUser -Filter <String> [<CommonParameters>]
+Get-odscTargetUser -Filter <String> [-IncludeDisabled]
+ [<CommonParameters>]
 ```
 
 ## DESCRIPTION
 The **Get-odscTargetUser** function returns user objects with the properties UserPrincipalName, UserObjectId, Mail, AccountEnabled and Source, read from a CSV file, from the transitive members of a group, from an OData filter, or from all users in the tenant. The output can be piped to Invoke-odscShortcutAssignment.
+
+Disabled accounts are skipped for -GroupId, -Filter and -AllUsers unless -IncludeDisabled is used; run with -Verbose to see how many were skipped. Rows of a CSV file are always returned, because the file carries no account status.
 
 Group and filter queries require the GroupMember.Read.All (or broader) and User.Read.All application permissions.
 
@@ -53,12 +57,19 @@ PS C:\> Get-odscTargetUser -CsvPath ".\users.csv"
 
 This command returns the users listed in users.csv.
 
-### Example 3: Get enabled users in a department
+### Example 3: Get the users of a department
 ```powershell
-PS C:\> Get-odscTargetUser -Filter "department eq 'Sales' and accountEnabled eq true"
+PS C:\> Get-odscTargetUser -Filter "department eq 'Sales'"
 ```
 
 This command returns the enabled users of the Sales department.
+
+### Example 4: Include disabled accounts
+```powershell
+PS C:\> Get-odscTargetUser -GroupId "00000000-0000-0000-0000-000000000000" -IncludeDisabled
+```
+
+This command returns all members of the group, including those whose account is disabled.
 
 ## PARAMETERS
 
@@ -116,6 +127,21 @@ Parameter Sets: Group
 Aliases:
 
 Required: True
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -IncludeDisabled
+Also returns disabled accounts. By default, users whose account is disabled are skipped for -GroupId, -Filter and -AllUsers. It does not apply to -CsvPath, whose rows are always returned.
+
+```yaml
+Type: SwitchParameter
+Parameter Sets: AllUsers, Group, Filter
+Aliases:
+
+Required: False
 Position: Named
 Default value: None
 Accept pipeline input: False
