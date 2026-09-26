@@ -108,6 +108,19 @@ Describe 'Set-odscShortcutState' {
         (Set-odscShortcutState @Common -State Absent).Status | Should -Be 'AlreadyAbsent'
     }
 
+    It 'reports RenameFailed with the actual name when the shortcut cannot be renamed' {
+        Mock Invoke-odscApiRequest -ModuleName odsc { throw 'StatusCode: 404' } -ParameterFilter { $Method -eq 'Get' }
+        Mock New-odscShortcutItem -ModuleName odsc {
+            Write-Error -ErrorId 'odscShortcutNotRenamed' -TargetObject ([pscustomobject]@{ id = 'sc'; name = 'Site - Documents' }) -Message 'The shortcut was created as ...' -ErrorAction Stop
+        }
+
+        $Result = Set-odscShortcutState @Common
+        $Result.Status | Should -Be 'RenameFailed'
+        $Result.ShortcutName | Should -Be 'Site - Documents'
+        $Result.DriveItemId | Should -Be 'sc'
+        $Result.Message | Should -Be 'The shortcut was created as ...'
+    }
+
     It 'returns the Graph item with -PassThru' {
         Mock Invoke-odscApiRequest -ModuleName odsc { throw 'StatusCode: 404' } -ParameterFilter { $Method -eq 'Get' }
         (Set-odscShortcutState @Common -PassThru).id | Should -Be 'new'

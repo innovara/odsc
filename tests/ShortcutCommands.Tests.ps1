@@ -150,6 +150,34 @@ Describe 'New-odscShortcutItem' {
         }
     }
 
+    It 'keeps the shortcut and names it when the rename clashes' {
+        InModuleScope odsc {
+            Mock Invoke-odscApiRequest { [pscustomobject]@{ id = 'sc'; name = 'Site - Lib' } } -ParameterFilter { $Method -eq 'Post' }
+            Mock Invoke-odscApiRequest { throw 'Microsoft Graph request failed. Method: Patch. StatusCode: 409.' } -ParameterFilter { $Method -eq 'Patch' }
+            Mock Invoke-odscApiRequest { throw 'must not delete' } -ParameterFilter { $Method -eq 'Delete' }
+
+            $Caught = $null
+            try { New-odscShortcutItem -User 'u@contoso.com' -RemoteItem @{} -ShortcutName 'Lib' } catch { $Caught = $_ }
+
+            $Caught.Exception.Message | Should -BeLike "The shortcut was created as 'Site - Lib' in the root of u@contoso.com's OneDrive because the name 'Lib' is already used by another item there.*"
+            $Caught.FullyQualifiedErrorId | Should -BeLike 'odscShortcutNotRenamed*'
+            $Caught.TargetObject.id | Should -Be 'sc'
+            Should -Invoke Invoke-odscApiRequest -Times 0 -ParameterFilter { $Method -eq 'Delete' }
+        }
+    }
+
+    It 'keeps the shortcut at the root and names it when the move fails' {
+        InModuleScope odsc {
+            Mock Resolve-odscDriveFolderPath { [pscustomobject]@{ id = 'folder' } }
+            Mock Invoke-odscApiRequest { [pscustomobject]@{ id = 'sc'; name = 'Lib' } } -ParameterFilter { $Method -eq 'Post' }
+            Mock Invoke-odscApiRequest { throw 'Microsoft Graph request failed. Method: Patch. StatusCode: 400.' } -ParameterFilter { $Method -eq 'Patch' }
+
+            { New-odscShortcutItem -User 'u@contoso.com' -RemoteItem @{} -ShortcutName 'Lib' -RelativePath 'A/B' } |
+                Should -Throw "The shortcut was created as 'Lib' at the root of u@contoso.com's OneDrive but could not be moved to 'A/B'.*"
+            Should -Invoke Invoke-odscApiRequest -Times 1 -Exactly -ParameterFilter { $Method -eq 'Patch' }
+        }
+    }
+
     It 'passes other errors through unchanged' {
         InModuleScope odsc {
             Mock Invoke-odscApiRequest { throw 'Microsoft Graph request failed. Method: Post. StatusCode: 403.' } -ParameterFilter { $Method -eq 'Post' }

@@ -29,6 +29,8 @@ New-odsc -Uri <String> [-DocumentLibrary <String>] [-DocumentLibraryId <String>]
 ## DESCRIPTION
 The **New-odsc** function creates a shortcut in a user's OneDrive that points to a SharePoint/Teams document library or subfolder.
 
+OneDrive allows one shortcut per target, so the command fails if the user already has a shortcut to the same library or folder. If the shortcut name is already used by another item in the destination, OneDrive creates the shortcut under another name (usually "<site> - <name>") and the command writes an error giving that name, so it can be renamed by hand. The shortcut is kept so the user does not lose access.
+
 ## EXAMPLES
 
 ### Example 1: Create a shortcut to the root of a document library

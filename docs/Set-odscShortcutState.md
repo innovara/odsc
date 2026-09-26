@@ -31,7 +31,9 @@ Set-odscShortcutState -Uri <String> [-DocumentLibrary <String>] [-DocumentLibrar
 ## DESCRIPTION
 The **Set-odscShortcutState** function makes sure that a user's OneDrive contains (or does not contain) a shortcut pointing to a SharePoint/Teams document library or subfolder. It can be run repeatedly: when a shortcut with the requested name already points to the requested target, nothing is changed and a Compliant result is returned.
 
-It returns an odsc.ShortcutResult object with the properties User, ShortcutName, Action, Status (Created, Compliant, SkippedConflict, Removed or AlreadyAbsent), TargetSite, TargetLibrary, TargetFolderPath, DriveItemId, WebUrl, Message, Response and Timestamp.
+It returns an odsc.ShortcutResult object with the properties User, ShortcutName, Action, Status (Created, Compliant, SkippedConflict, RenameFailed, Removed or AlreadyAbsent), TargetSite, TargetLibrary, TargetFolderPath, DriveItemId, WebUrl, Message, Response and Timestamp.
+
+RenameFailed means the shortcut was created but could not be given the requested name or moved to -RelativePath. It is kept, so the user has access; ShortcutName holds its actual name and Message explains what to fix.
 
 ## EXAMPLES
 

@@ -44,12 +44,16 @@ function New-odscShortcutItem {
 
         throw
     }
+
     if (!($ShortcutResponse) -or [string]::IsNullOrWhiteSpace($ShortcutResponse.id)) {
         Write-Error "Error creating OneDrive shortcut '$ShortcutName' for ${User}. Microsoft Graph did not return an item id." -ErrorAction Stop
     }
 
     $ItemResource = Join-odscDriveItemResource -User $User -ItemId $ShortcutResponse.id
 
+    # From here on the shortcut exists. Graph may have given it another name (on a clash, '<site> - <name>').
+    # If it cannot be moved or renamed it is kept, so the user keeps access, and the error names it so an
+    # administrator can sort it out. Callers can recognise this error by its id and read the shortcut from TargetObject.
     if ($DestinationFolder) {
         $MoveRequest = @{
             Resource = $ItemResource
@@ -65,7 +69,9 @@ function New-odscShortcutItem {
         try {
             Invoke-odscApiRequest @MoveRequest -ErrorAction Stop | Out-Null
         } catch {
-            Write-Error "Shortcut '$($ShortcutResponse.name)' was created at the root of ${User}'s OneDrive but could not be moved to '$RelativePath'. $($_.Exception.Message)" -ErrorAction Stop
+            Write-Error -ErrorId 'odscShortcutNotRenamed' -TargetObject $ShortcutResponse -ErrorAction Stop -Message (
+                "The shortcut was created as '$($ShortcutResponse.name)' at the root of ${User}'s OneDrive but could not be moved to '$RelativePath'. " +
+                "Move and rename it to '$ShortcutName' by hand. $($_.Exception.Message)")
         }
     }
 
@@ -77,5 +83,17 @@ function New-odscShortcutItem {
         }
     }
 
-    return Invoke-odscApiRequest @RenameRequest -ErrorAction Stop
+    try {
+        return Invoke-odscApiRequest @RenameRequest -ErrorAction Stop
+    } catch {
+        $Location = if ($DestinationFolder) { "'$RelativePath'" } else { 'the root' }
+        $Reason = if ((Get-odscGraphStatusCode -ErrorRecord $_) -eq 409) {
+            "because the name '$ShortcutName' is already used by another item there. Rename that item, then rename the shortcut to '$ShortcutName'."
+        } else {
+            "because it could not be renamed to '$ShortcutName'."
+        }
+
+        Write-Error -ErrorId 'odscShortcutNotRenamed' -TargetObject $ShortcutResponse -ErrorAction Stop -Message (
+            "The shortcut was created as '$($ShortcutResponse.name)' in $Location of ${User}'s OneDrive $Reason $($_.Exception.Message)")
+    }
 }

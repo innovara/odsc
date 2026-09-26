@@ -176,6 +176,14 @@ Shortcuts are created at the root of the user's OneDrive, moved into `-RelativeP
 
 ## Existing shortcut conflicts
 
+### Symptom: error saying the user already has a shortcut to this target
+
+OneDrive allows one shortcut per library or folder, and none to a folder inside a library that already has one. The existing shortcut may have another name or be in another folder. Find it in the user's OneDrive, or use `Set-odscShortcutState`, which reports an existing matching shortcut as `Compliant`.
+
+### Symptom: shortcut created with another name, or status `RenameFailed`
+
+The requested name was already used by another item in the destination, so OneDrive created the shortcut as `<site> - <name>` and the rename failed. The shortcut is kept so the user has access. Rename or move the item that uses the name, then rename the shortcut. The error message and the result's `ShortcutName` give the actual name.
+
 ### Symptom: shortcut already exists or has the wrong target
 
 Use `Set-odscShortcutState` for idempotent convergence instead of only `New-odsc`. Pick a conflict action that matches your change policy:

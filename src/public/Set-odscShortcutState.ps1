@@ -144,7 +144,21 @@ function Set-odscShortcutState {
                 Resolve-odscOneDriveRoot -User $User | Out-Null
 
                 $RemoteItem = New-odscRemoteItemReference -Target $Target -ShortcutName $ShortcutName
-                $ShortcutResponse = New-odscShortcutItem -User $User -RemoteItem $RemoteItem -ShortcutName $ShortcutName -RelativePath $RelativePath
+                try {
+                    $ShortcutResponse = New-odscShortcutItem -User $User -RemoteItem $RemoteItem -ShortcutName $ShortcutName -RelativePath $RelativePath
+                } catch {
+                    # The shortcut exists under another name or at the root: report it rather than fail.
+                    if ($_.FullyQualifiedErrorId -notlike 'odscShortcutNotRenamed*') {
+                        throw
+                    }
+
+                    if ($PassThru) {
+                        Write-Warning $_.Exception.Message
+                        return $_.TargetObject
+                    }
+
+                    return Write-odscResult @ResultParameters -ShortcutName $_.TargetObject.name -Action 'Create' -Status 'RenameFailed' -Response $_.TargetObject -Message $_.Exception.Message
+                }
 
                 if ($PassThru) {
                     return $ShortcutResponse
