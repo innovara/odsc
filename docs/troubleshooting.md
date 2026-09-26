@@ -138,6 +138,10 @@ New-odsc `
 
 Use `-DocumentLibraryId` when display names are localized, duplicated, renamed, or ambiguous.
 
+### Symptom: selected target is a SharePoint list, not a document library
+
+OneDrive shortcuts can only point to document libraries and their folders. Lists that are not libraries are ignored when matching `-DocumentLibrary` by name, and a `-DocumentLibraryId` that belongs to one is rejected. Choose a document library, or check the id.
+
 ### Symptom: warning that a document library name matched multiple libraries
 
 An exact display name match is always preferred. When there is none, the first library whose name starts with `-DocumentLibrary` is used and a warning lists all the matches. Specify the exact name, or `-DocumentLibraryId`, for deterministic behavior in automation.

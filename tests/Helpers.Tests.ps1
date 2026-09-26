@@ -99,6 +99,38 @@ Describe 'Resolve-odscDocumentLibrary' {
         }
     }
 
+    It 'skips lists that are not libraries when matching by name' {
+        InModuleScope odsc {
+            Mock Invoke-odscApiRequest {
+                if ($Resource -like '*displayName eq*') { return @([pscustomobject]@{ id = 'list'; displayName = 'Doc'; list = @{ template = 'genericList' } }) }
+                return @(
+                    [pscustomobject]@{ id = 'list'; displayName = 'Doc'; list = @{ template = 'genericList' } },
+                    [pscustomobject]@{ id = 'library'; displayName = 'Documents'; list = @{ template = 'documentLibrary' } }
+                )
+            }
+
+            (Resolve-odscDocumentLibrary -SiteIdRaw 's' -Uri 'https://x' -DocumentLibrary 'Doc').id | Should -Be 'library'
+        }
+    }
+
+    It 'rejects a name that only matches lists that are not libraries' {
+        InModuleScope odsc {
+            Mock Invoke-odscApiRequest { @([pscustomobject]@{ id = 'list'; displayName = 'Tasks'; list = @{ template = 'genericList' } }) }
+
+            { Resolve-odscDocumentLibrary -SiteIdRaw 's' -Uri 'https://x' -DocumentLibrary 'Tasks' } | Should -Throw "*only matched SharePoint lists that are not document libraries: 'Tasks' (genericList)*"
+        }
+    }
+
+    It 'rejects a library id that belongs to a list, but accepts other library types' {
+        InModuleScope odsc {
+            Mock Invoke-odscApiRequest { [pscustomobject]@{ id = 'list'; displayName = 'Tasks'; list = @{ template = 'genericList' } } }
+            { Resolve-odscDocumentLibrary -SiteIdRaw 's' -Uri 'https://x' -DocumentLibraryId 'list' } | Should -Throw "*is a 'genericList' list, not a document library*"
+
+            Mock Invoke-odscApiRequest { [pscustomobject]@{ id = 'pics'; displayName = 'Pictures'; list = @{ template = 'pictureLibrary' } } }
+            (Resolve-odscDocumentLibrary -SiteIdRaw 's' -Uri 'https://x' -DocumentLibraryId 'pics').id | Should -Be 'pics'
+        }
+    }
+
     It "escapes single quotes in the library name" {
         InModuleScope odsc {
             Mock Invoke-odscApiRequest { @([pscustomobject]@{ id = 'x'; displayName = "Bob's" }) }

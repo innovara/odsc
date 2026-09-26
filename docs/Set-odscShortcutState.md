@@ -75,7 +75,7 @@ Accept wildcard characters: False
 ```
 
 ### -DocumentLibrary
-Specifies a string that contains the document library display name. An exact match is preferred; otherwise the first library whose name starts with this value is used. Either -DocumentLibrary or -DocumentLibraryId is required.
+Specifies a string that contains the document library display name. An exact match is preferred; otherwise the first library whose name starts with this value is used. SharePoint lists that are not libraries are ignored, because shortcuts can only point to document libraries. Either -DocumentLibrary or -DocumentLibraryId is required.
 
 ```yaml
 Type: String
@@ -90,7 +90,7 @@ Accept wildcard characters: False
 ```
 
 ### -DocumentLibraryId
-Specifies the list ID (GUID) of the document library. Use it instead of -DocumentLibrary to avoid ambiguous name matches.
+Specifies the list ID (GUID) of the document library. Use it instead of -DocumentLibrary to avoid ambiguous name matches. An ID that belongs to a SharePoint list that is not a library is rejected.
 
 ```yaml
 Type: String
