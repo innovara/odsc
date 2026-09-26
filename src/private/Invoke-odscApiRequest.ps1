@@ -8,54 +8,124 @@ function Invoke-odscApiRequest {
         [Microsoft.PowerShell.Commands.WebRequestMethod] $Method,
 
         [Parameter(Mandatory = $false)]
-        [string] $Body,
+        [object] $Body,
 
         [Parameter(Mandatory = $false)]
-        [switch] $DoNotUsePrefer
+        [hashtable] $Headers,
+
+        [Parameter(Mandatory = $false)]
+        [switch] $DoNotUsePrefer,
+
+        [Parameter(Mandatory = $false)]
+        [switch] $AllPages,
+
+        [Parameter(Mandatory = $false)]
+        [ValidateRange(0, 10)]
+        [int] $MaxRetryCount = 5,
+
+        [Parameter(Mandatory = $false)]
+        [ValidateRange(1, 300)]
+        [int] $RetryDelaySeconds = 2
     )
 
     begin {
         $Token = $script:ODSToken
 
-        if ((!$Token.ExpiresOn) -or 
+        if ((!$Token.ExpiresOn) -or
         (!$Token.AccessToken) -or
         ($Token.ExpiresOn -le (Get-Date))) {
-            Write-Verbose "Token: ${Token}"
-            Write-Error "Please run Connect-odsc first." -ErrorAction Stop
+            Write-Verbose 'No usable Microsoft Graph token is available.'
+            Write-Error 'Please run Connect-odsc first.' -ErrorAction Stop
         }
     }
 
     process {
-        $Request = @{
-            Uri = "https://graph.microsoft.com/v1.0/$($Resource)"
-            ContentType = "application/json"
-            Headers = @{
-                Authorization = "Bearer $($Token.AccessToken)"
-            }
-            Method = $Method
+        $RequestHeaders = @{
+            Authorization = "Bearer $($Token.AccessToken)"
         }
 
         if (!($DoNotUsePrefer.IsPresent)) {
-            $Request.Headers.Prefer = "apiversion=2.1"
+            $RequestHeaders.Prefer = 'apiversion=2.1'
         }
 
-        if ($Body) {
-            $Request.Body = $Body
+        if ($Headers) {
+            foreach ($Key in $Headers.Keys) {
+                $RequestHeaders[$Key] = $Headers[$Key]
+            }
         }
 
-        $Response = $null
+        $GraphEndpoint = if ($script:ODSGraphEndpoint) { $script:ODSGraphEndpoint.TrimEnd('/') } else { 'https://graph.microsoft.com' }
+        $Uri = if ($Resource -match '^https://') { $Resource } else { "$GraphEndpoint/v1.0/$($Resource)" }
+        $Results = New-Object System.Collections.Generic.List[object]
+        $NextUri = $Uri
 
-        try {
-            $Response = Invoke-WebRequest @Request -UseBasicParsing
-            $Response = ConvertFrom-Json $([string]::new($Response.Content))
-        } catch {
-            Write-Error $_
-        }
+        do {
+            $Attempt = 0
+            $Response = $null
+            $Succeeded = $false
 
-        return $Response
-    }
+            while (-not $Succeeded) {
+                $Request = @{
+                    Uri = $NextUri
+                    ContentType = 'application/json'
+                    Headers = $RequestHeaders
+                    Method = $Method
+                    UseBasicParsing = $true
+                }
 
-    end {
+                if ($Body -and $NextUri -eq $Uri) {
+                    $Request.Body = ConvertTo-odscJsonBody -Body $Body
+                }
 
+                try {
+                    $RawResponse = Invoke-WebRequest @Request
+                    $Content = $RawResponse.Content
+                    if ($Content -is [byte[]]) {
+                        $Content = [System.Text.Encoding]::UTF8.GetString($Content)
+                    }
+
+                    $Response = if ([string]::IsNullOrWhiteSpace($Content)) {
+                        $null
+                    } else {
+                        ConvertFrom-Json -InputObject $Content
+                    }
+                    $Succeeded = $true
+                } catch {
+                    $Attempt++
+                    $StatusCode = $null
+                    $RetryAfter = $null
+                    $GraphRequestId = $null
+
+                    if ($_.Exception.Response) {
+                        try { $StatusCode = [int]$_.Exception.Response.StatusCode } catch { $StatusCode = $null }
+                        $RetryAfter = Get-odscRetryAfterDelay -Response $_.Exception.Response
+                        $GraphRequestId = Get-odscResponseHeader -Response $_.Exception.Response -Name 'request-id'
+                    }
+
+                    $IsTransient = $StatusCode -in @(429, 500, 502, 503, 504)
+                    if (($Attempt -le $MaxRetryCount) -and $IsTransient) {
+                        $Delay = if ($null -ne $RetryAfter) { $RetryAfter } else { [Math]::Min(300, ($RetryDelaySeconds * [Math]::Pow(2, ($Attempt - 1)))) }
+                        Write-Verbose "Microsoft Graph request was throttled or transiently failed with HTTP $StatusCode. Retrying in $Delay seconds. RequestId: $GraphRequestId"
+                        Start-Sleep -Seconds $Delay
+                    } else {
+                        $Message = "Microsoft Graph request failed. Method: $Method. Resource: $Resource. StatusCode: $StatusCode. RequestId: $GraphRequestId. Error: $($_.Exception.Message)"
+                        Write-Error $Message -ErrorAction Stop
+                    }
+                }
+            }
+
+            if ($AllPages -and $Response -and ($null -ne $Response.value)) {
+                foreach ($Item in $Response.value) {
+                    $Results.Add($Item) | Out-Null
+                }
+                $NextUri = $Response.'@odata.nextLink'
+                $Method = [Microsoft.PowerShell.Commands.WebRequestMethod]::Get
+                $Body = $null
+            } else {
+                return $Response
+            }
+        } while ($AllPages -and $NextUri)
+
+        return $Results.ToArray()
     }
 }

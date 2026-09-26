@@ -1,10 +1,11 @@
 function Get-odscDrive {
     [CmdletBinding(DefaultParameterSetName = 'UserPrincipalName')]
     param(
-        [Parameter(Mandatory = $true, ParameterSetName = 'UserPrincipalName')]
+        [Parameter(Mandatory = $true, ParameterSetName = 'UserPrincipalName', ValueFromPipelineByPropertyName = $true)]
         [string] $UserPrincipalName,
 
-        [Parameter(Mandatory = $true, ParameterSetName = 'UserObjectId')]
+        [Parameter(Mandatory = $true, ParameterSetName = 'UserObjectId', ValueFromPipelineByPropertyName = $true)]
+        [Alias('UserId')]
         [string] $UserObjectId
     )
 
@@ -29,15 +30,12 @@ function Get-odscDrive {
             Method = [Microsoft.PowerShell.Commands.WebRequestMethod]::Get
         }
 
-        $DriveResponse = Invoke-odscApiRequest @DriveRequest
-
-        if (!($DriveResponse)) {
-            Write-Verbose "Request: ${DriveRequest}"
-            Write-Verbose "Response: ${DriveResponse}"
-            Write-Error "Error getting OneDrive drive for ${User}."
+        try {
+            return Invoke-odscApiRequest @DriveRequest -ErrorAction Stop
+        } catch {
+            Write-Verbose "Request: $($DriveRequest.Resource)"
+            Write-Error "Error getting OneDrive drive for ${User}. $($_.Exception.Message)"
         }
-
-        return $DriveResponse
     }
 
     end {

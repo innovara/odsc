@@ -1,11 +1,11 @@
 #Requires -Version 5.1
 #Requires -Modules MSAL.PS
-$Public = @(Get-ChildItem -Path (Join-Path -Path $PSScriptRoot -ChildPath "\public\*.ps1") -ErrorAction SilentlyContinue)
-$Private = @(Get-ChildItem -Path (Join-Path -Path $PSScriptRoot -ChildPath "\private\*.ps1") -ErrorAction SilentlyContinue)
+$Public = @(Get-ChildItem -Path (Join-Path -Path $PSScriptRoot -ChildPath 'public/*.ps1') -ErrorAction SilentlyContinue)
+$Private = @(Get-ChildItem -Path (Join-Path -Path $PSScriptRoot -ChildPath 'private/*.ps1') -ErrorAction SilentlyContinue)
 
 $script:ODSToken = $null
 
-foreach ($Import in @($Public + $Private)) {
+foreach ($Import in @($Private + $Public)) {
     try {
         Write-Verbose "Importing file: $($Import.FullName)"
         . $Import.FullName

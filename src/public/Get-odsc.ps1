@@ -9,10 +9,11 @@ function Get-odsc {
         [Parameter(Mandatory = $true, ParameterSetName = 'UserObjectId')]
         [string] $ShortcutName,
 
-        [Parameter(Mandatory = $true, ParameterSetName = 'UserPrincipalName')]
+        [Parameter(Mandatory = $true, ParameterSetName = 'UserPrincipalName', ValueFromPipelineByPropertyName = $true)]
         [string] $UserPrincipalName,
 
-        [Parameter(Mandatory = $true, ParameterSetName = 'UserObjectId')]
+        [Parameter(Mandatory = $true, ParameterSetName = 'UserObjectId', ValueFromPipelineByPropertyName = $true)]
+        [Alias('UserId')]
         [string] $UserObjectId
     )
 
@@ -33,19 +34,16 @@ function Get-odsc {
         }
 
         $ShortcutRequest = @{
-            Resource = "users/${User}/drive/root:/$([uri]::EscapeDataString($RelativePath))/$([uri]::EscapeDataString($ShortcutName))"
+            Resource = Join-odscDrivePathResource -User $User -RelativePath $RelativePath -Name $ShortcutName
             Method = [Microsoft.PowerShell.Commands.WebRequestMethod]::Get
         }
 
-        $ShortcutResponse = Invoke-odscApiRequest @ShortcutRequest
-
-        if (!($ShortcutResponse)) {
-            Write-Verbose "Request: ${ShortcutRequest}"
-            Write-Verbose "Response: ${ShortcutResponse}"
-            Write-Error "Error getting OneDrive Shortcut '$($ShortcutName)' for ${User}."
+        try {
+            return Invoke-odscApiRequest @ShortcutRequest -ErrorAction Stop
+        } catch {
+            Write-Verbose "Request: $($ShortcutRequest.Resource)"
+            Write-Error "Error getting OneDrive Shortcut '$($ShortcutName)' for ${User}. $($_.Exception.Message)"
         }
-
-        return $ShortcutResponse
     }
 
     end {
